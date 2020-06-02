@@ -26,7 +26,7 @@ const App: FC = () => {
       <div css={container}>
         <GitHubCorner url="https://github.com/wellyshen/use-web-animations" />
         <h1 css={title}>useWebAnimations</h1>
-        <p css={subtitle}>Blah blah.</p>
+        <p css={subtitle}>React hook for Web Animations API.</p>
         <div>
           <button
             onClick={() => {
