@@ -1,6 +1,6 @@
 import "web-animations-js";
 
-import { RefObject, useRef, useCallback } from "react";
+import { RefObject, useState, useRef, useCallback } from "react";
 import useDeepCompareEffect from "use-deep-compare-effect";
 
 interface Options<T> {
@@ -10,6 +10,7 @@ interface Options<T> {
 }
 interface Return<T> {
   readonly ref: RefObject<T>;
+  readonly animation: Animation;
   readonly play: () => void;
   readonly pause: () => void;
   readonly reverse: () => void;
@@ -21,25 +22,25 @@ const useWebAnimations = <T extends HTMLElement>({
   keyframes,
   timing,
 }: Options<T> = {}): Return<T> => {
+  const [animation, setAnimation] = useState<Animation>();
   const refVar = useRef<T>(null);
-  const animation = useRef<Animation>(null);
   const ref = refOpt || refVar;
 
   const play = useCallback(() => {
-    if (animation.current) animation.current.play();
+    if (animation) animation.play();
   }, [animation]);
 
   const pause = useCallback(() => {
-    if (animation.current) animation.current.pause();
+    if (animation) animation.pause();
   }, [animation]);
 
   const reverse = useCallback(() => {
-    if (animation.current) animation.current.reverse();
+    if (animation) animation.reverse();
   }, [animation]);
 
   const updatePlaybackRate = useCallback(
     (rate) => {
-      if (animation.current) animation.current.updatePlaybackRate(rate);
+      if (animation) animation.updatePlaybackRate(rate);
     },
     [animation]
   );
@@ -47,10 +48,17 @@ const useWebAnimations = <T extends HTMLElement>({
   useDeepCompareEffect(() => {
     if (!ref.current) return;
 
-    animation.current = ref.current.animate(keyframes, timing);
+    setAnimation(ref.current.animate(keyframes, timing));
   }, [ref, keyframes, timing]);
 
-  return { ref, play, pause, reverse, updatePlaybackRate };
+  return {
+    ref,
+    animation,
+    play,
+    pause,
+    reverse,
+    updatePlaybackRate,
+  };
 };
 
 export default useWebAnimations;
