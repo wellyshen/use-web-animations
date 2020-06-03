@@ -9,10 +9,17 @@ import useWebAnimations from "../../src";
 const App: FC = () => {
   // const ref = useRef();
 
-  const { ref, animation, play, pause } = useWebAnimations<HTMLDivElement>({
+  const {
+    ref,
+    animation,
+    play,
+    pause,
+    reverse,
+    finish,
+    cancel,
+  } = useWebAnimations<HTMLDivElement>({
     keyframes: [{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }],
-    // timing: 5000,
-    timing: { duration: 3000, iterations: Infinity },
+    timing: { duration: 5000, fill: "forwards" },
   });
 
   console.log("LGO ===> animation: ", animation);
@@ -45,6 +52,30 @@ const App: FC = () => {
             type="button"
           >
             Pause
+          </button>
+          <button
+            onClick={() => {
+              reverse();
+            }}
+            type="button"
+          >
+            Reverse
+          </button>
+          <button
+            onClick={() => {
+              finish();
+            }}
+            type="button"
+          >
+            Finish
+          </button>
+          <button
+            onClick={() => {
+              cancel();
+            }}
+            type="button"
+          >
+            Cancel
           </button>
         </div>
         <div
