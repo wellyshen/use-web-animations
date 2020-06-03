@@ -9,11 +9,13 @@ import useWebAnimations from "../../src";
 const App: FC = () => {
   // const ref = useRef();
 
-  const { ref, play, pause } = useWebAnimations<HTMLDivElement>({
+  const { ref, animation, play, pause } = useWebAnimations<HTMLDivElement>({
     keyframes: [{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }],
     // timing: 5000,
     timing: { duration: 3000, iterations: Infinity },
   });
+
+  console.log("LGO ===> animation: ", animation);
 
   return (
     <>
