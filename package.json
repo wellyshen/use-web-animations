@@ -1,5 +1,5 @@
 {
-  "name": "use-web-animations",
+  "name": "@welly/use-web-animations",
   "version": "0.0.0",
   "description": "React hook for Web Animations API.",
   "license": "MIT",
