@@ -14,6 +14,8 @@ interface Return<T> {
   readonly play: () => void;
   readonly pause: () => void;
   readonly reverse: () => void;
+  readonly finish: () => void;
+  readonly cancel: () => void;
   readonly updatePlaybackRate: (rate: number) => void;
 }
 
@@ -38,6 +40,14 @@ const useWebAnimations = <T extends HTMLElement>({
     if (animation) animation.reverse();
   }, [animation]);
 
+  const finish = useCallback(() => {
+    if (animation) animation.finish();
+  }, [animation]);
+
+  const cancel = useCallback(() => {
+    if (animation) animation.cancel();
+  }, [animation]);
+
   const updatePlaybackRate = useCallback(
     (rate) => {
       if (animation) animation.updatePlaybackRate(rate);
@@ -57,6 +67,8 @@ const useWebAnimations = <T extends HTMLElement>({
     play,
     pause,
     reverse,
+    finish,
+    cancel,
     updatePlaybackRate,
   };
 };
