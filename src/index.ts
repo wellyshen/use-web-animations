@@ -1,76 +1,54 @@
 import "web-animations-js";
 
-import { RefObject, useState, useRef, useCallback } from "react";
+import { RefObject, useState, useRef, useEffect } from "react";
 import useDeepCompareEffect from "use-deep-compare-effect";
 
+interface Callback {
+  (animation: Animation, event: AnimationPlaybackEvent): void;
+}
 interface Options<T> {
   ref?: RefObject<T>;
-  keyframes?: Keyframe[];
-  timing?: number | EffectTiming;
+  keyframes?: Keyframe[] | PropertyIndexedKeyframes;
+  timing?: number | KeyframeAnimationOptions;
+  onFinish?: Callback;
+  onCancel?: Callback;
 }
 interface Return<T> {
   readonly ref: RefObject<T>;
-  readonly animation: Animation;
-  readonly play: () => void;
-  readonly pause: () => void;
-  readonly reverse: () => void;
-  readonly finish: () => void;
-  readonly cancel: () => void;
-  readonly updatePlaybackRate: (rate: number) => void;
+  readonly animation?: Animation;
 }
 
 const useWebAnimations = <T extends HTMLElement>({
   ref: refOpt,
   keyframes,
   timing,
+  onFinish,
+  onCancel,
 }: Options<T> = {}): Return<T> => {
   const [animation, setAnimation] = useState<Animation>();
   const refVar = useRef<T>(null);
   const ref = refOpt || refVar;
 
-  const play = useCallback(() => {
-    if (animation) animation.play();
-  }, [animation]);
-
-  const pause = useCallback(() => {
-    if (animation) animation.pause();
-  }, [animation]);
-
-  const reverse = useCallback(() => {
-    if (animation) animation.reverse();
-  }, [animation]);
-
-  const finish = useCallback(() => {
-    if (animation) animation.finish();
-  }, [animation]);
-
-  const cancel = useCallback(() => {
-    if (animation) animation.cancel();
-  }, [animation]);
-
-  const updatePlaybackRate = useCallback(
-    (rate) => {
-      if (animation) animation.updatePlaybackRate(rate);
-    },
-    [animation]
-  );
-
   useDeepCompareEffect(() => {
-    if (!ref.current) return;
-
-    setAnimation(ref.current.animate(keyframes, timing));
+    if (ref.current && keyframes)
+      setAnimation(ref.current.animate(keyframes, timing));
   }, [ref, keyframes, timing]);
 
-  return {
-    ref,
-    animation,
-    play,
-    pause,
-    reverse,
-    finish,
-    cancel,
-    updatePlaybackRate,
-  };
+  useEffect(() => {
+    if (!animation) return;
+
+    if (onFinish)
+      animation.onfinish = (e) => {
+        onFinish(animation, e);
+      };
+
+    if (onCancel)
+      animation.oncancel = (e) => {
+        onCancel(animation, e);
+      };
+  }, [animation, onFinish, onCancel]);
+
+  return { ref, animation };
 };
 
 export default useWebAnimations;
