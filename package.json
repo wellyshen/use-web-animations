@@ -162,7 +162,7 @@
     "rollup-plugin-serve": "^1.0.1",
     "rollup-plugin-size-snapshot": "^0.12.0",
     "rollup-plugin-terser": "^6.1.0",
-    "stylelint": "^13.5.0",
+    "stylelint": "^13.6.0",
     "stylelint-config-prettier": "^8.0.1",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-prettier": "^1.1.2",
