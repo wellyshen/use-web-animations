@@ -8,8 +8,8 @@ Coming soon...
 
 - [x] Basic animation with key-frames and timing.
 - [x] Playback controller.
-- [ ] Animation event callbacks.
-- [ ] Compose animations.
+- [x] Animation event callbacks.
+- [x] Paused at start feature.
 - [ ] Server-side compatibility.
 - [ ] Unit testing.
 - [ ] TypeScript type definition.
