@@ -9,17 +9,16 @@ import useWebAnimations from "../../src";
 const App: FC = () => {
   // const ref = useRef();
 
-  const {
-    ref,
-    animation,
-    play,
-    pause,
-    reverse,
-    finish,
-    cancel,
-  } = useWebAnimations<HTMLDivElement>({
-    keyframes: [{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }],
-    timing: { duration: 5000, fill: "forwards" },
+  const { ref, animation } = useWebAnimations<HTMLDivElement>({
+    // ref,
+    keyframes: { transform: ["rotate(0deg)", "rotate(360deg)"] },
+    timing: { duration: 3000, fill: "forwards" },
+    onFinish: (arg1, arg2) => {
+      console.log("LOG ===> onFinish: ", arg1, arg2);
+    },
+    onCancel: (arg1, arg2) => {
+      console.log("LOG ===> onCancel: ", arg1, arg2);
+    },
   });
 
   console.log("LGO ===> animation: ", animation);
@@ -39,7 +38,7 @@ const App: FC = () => {
         <div>
           <button
             onClick={() => {
-              play();
+              animation.play();
             }}
             type="button"
           >
@@ -47,7 +46,7 @@ const App: FC = () => {
           </button>
           <button
             onClick={() => {
-              pause();
+              animation.pause();
             }}
             type="button"
           >
@@ -55,7 +54,7 @@ const App: FC = () => {
           </button>
           <button
             onClick={() => {
-              reverse();
+              animation.reverse();
             }}
             type="button"
           >
@@ -63,7 +62,7 @@ const App: FC = () => {
           </button>
           <button
             onClick={() => {
-              finish();
+              animation.finish();
             }}
             type="button"
           >
@@ -71,7 +70,7 @@ const App: FC = () => {
           </button>
           <button
             onClick={() => {
-              cancel();
+              animation.cancel();
             }}
             type="button"
           >
