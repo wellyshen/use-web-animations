@@ -15,7 +15,7 @@ export default ({ files }) => `
       <meta property="og:title" content="useWebAnimations" />
       <meta property="og:type" content="website" />
       <meta property="og:image" content="https://use-web-animations.netlify.app/assets/og_image.png" />
-      <meta property="og:description" content="React hook for Web Animations API." />
+      <meta property="og:description" content="React hook for highly-performant and manipulable animations using Web Animations API." />
       <meta property="og:url" content="https://use-web-animations.netlify.app" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@use-web-animations" />
