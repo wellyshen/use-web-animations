@@ -8,6 +8,7 @@ interface Callback {
 }
 interface Options<T> {
   ref?: RefObject<T>;
+  pausedAtStart?: boolean;
   keyframes?: Keyframe[] | PropertyIndexedKeyframes;
   timing?: number | KeyframeAnimationOptions;
   onFinish?: Callback;
@@ -20,6 +21,7 @@ interface Return<T> {
 
 const useWebAnimations = <T extends HTMLElement>({
   ref: refOpt,
+  pausedAtStart = false,
   keyframes,
   timing,
   onFinish,
@@ -30,9 +32,13 @@ const useWebAnimations = <T extends HTMLElement>({
   const ref = refOpt || refVar;
 
   useDeepCompareEffect(() => {
-    if (ref.current && keyframes)
-      setAnimation(ref.current.animate(keyframes, timing));
-  }, [ref, keyframes, timing]);
+    if (!ref.current) return;
+
+    const anim = ref.current.animate(keyframes, timing);
+
+    if (pausedAtStart) anim.cancel();
+    setAnimation(anim);
+  }, [ref, keyframes, timing, pausedAtStart]);
 
   useEffect(() => {
     if (!animation) return;
