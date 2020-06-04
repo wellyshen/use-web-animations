@@ -11,8 +11,9 @@ const App: FC = () => {
 
   const { ref, animation } = useWebAnimations<HTMLDivElement>({
     // ref,
+    pausedAtStart: true,
     keyframes: { transform: ["rotate(0deg)", "rotate(360deg)"] },
-    timing: { duration: 3000, fill: "forwards" },
+    timing: { duration: 5000, fill: "forwards" },
     onFinish: (arg1, arg2) => {
       console.log("LOG ===> onFinish: ", arg1, arg2);
     },
