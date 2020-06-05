@@ -11,9 +11,9 @@ const App: FC = () => {
 
   const { ref, animation } = useWebAnimations<HTMLDivElement>({
     // ref,
-    pausedAtStart: true,
+    // pausedAtStart: true,
     keyframes: { transform: ["rotate(0deg)", "rotate(360deg)"] },
-    timing: { duration: 5000, fill: "forwards" },
+    timing: { duration: 10000, fill: "forwards" },
     onFinish: (arg1, arg2) => {
       console.log("LOG ===> onFinish: ", arg1, arg2);
     },
@@ -35,7 +35,10 @@ const App: FC = () => {
       <div css={container}>
         <GitHubCorner url="https://github.com/wellyshen/use-web-animations" />
         <h1 css={title}>useWebAnimations</h1>
-        <p css={subtitle}>React hook for highly-performant and manipulable animations using Web Animations API.</p>
+        <p css={subtitle}>
+          React hook for highly-performant and manipulable animations using Web
+          Animations API.
+        </p>
         <div>
           <button
             onClick={() => {
