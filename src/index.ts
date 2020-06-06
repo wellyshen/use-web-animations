@@ -17,13 +17,13 @@ interface Options<T> {
   onFinish?: Callback;
   onCancel?: Callback;
 }
-interface SetAnimation {
+interface Animate {
   (keyframes: Keyframes, timing?: Timing, pausedAtStart?: PausedAtStart): void;
 }
 interface Return<T> {
   readonly ref: RefObject<T>;
   readonly animation?: Animation;
-  readonly setAnimation?: SetAnimation;
+  readonly animate?: Animate;
 }
 
 const useWebAnimations = <T extends HTMLElement>({
@@ -34,41 +34,41 @@ const useWebAnimations = <T extends HTMLElement>({
   onFinish,
   onCancel,
 }: Options<T> = {}): Return<T> => {
-  const [anim, setAnim] = useState<Animation>();
+  const [animation, setAnimation] = useState<Animation>();
   const refVar = useRef<T>(null);
   const ref = refOpt || refVar;
 
-  const setAnimation: SetAnimation = useCallback(
+  const animate: Animate = useCallback(
     (k, t, p) => {
       if (!ref.current || !k) return;
 
-      const a = ref.current.animate(k, t);
+      const anim = ref.current.animate(k, t);
 
-      if (p) a.cancel();
-      setAnim(a);
+      if (p) anim.cancel();
+      setAnimation(anim);
     },
     [ref]
   );
 
   useDeepCompareEffect(() => {
-    setAnimation(keyframes, timing, pausedAtStart);
+    animate(keyframes, timing, pausedAtStart);
   }, [keyframes, timing, pausedAtStart]);
 
   useEffect(() => {
-    if (!anim) return;
+    if (!animation) return;
 
     if (onFinish)
-      anim.onfinish = (e) => {
-        onFinish(anim, e);
+      animation.onfinish = (e) => {
+        onFinish(animation, e);
       };
 
     if (onCancel)
-      anim.oncancel = (e) => {
-        onCancel(anim, e);
+      animation.oncancel = (e) => {
+        onCancel(animation, e);
       };
-  }, [anim, onFinish, onCancel]);
+  }, [animation, onFinish, onCancel]);
 
-  return { ref, animation: anim, setAnimation };
+  return { ref, animation, animate };
 };
 
 export default useWebAnimations;
