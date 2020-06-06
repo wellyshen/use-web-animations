@@ -1,60 +1,74 @@
 import "web-animations-js";
 
-import { RefObject, useState, useRef, useEffect } from "react";
+import { RefObject, useState, useRef, useCallback, useEffect } from "react";
 import useDeepCompareEffect from "use-deep-compare-effect";
 
 interface Callback {
   (animation: Animation, event: AnimationPlaybackEvent): void;
 }
+type Keyframes = Keyframe[] | PropertyIndexedKeyframes;
+type Timing = number | KeyframeAnimationOptions;
+type PausedAtStart = boolean;
 interface Options<T> {
   ref?: RefObject<T>;
-  pausedAtStart?: boolean;
-  keyframes?: Keyframe[] | PropertyIndexedKeyframes;
-  timing?: number | KeyframeAnimationOptions;
+  keyframes?: Keyframes;
+  timing?: Timing;
+  pausedAtStart?: PausedAtStart;
   onFinish?: Callback;
   onCancel?: Callback;
+}
+interface SetAnimation {
+  (keyframes: Keyframes, timing?: Timing, pausedAtStart?: PausedAtStart): void;
 }
 interface Return<T> {
   readonly ref: RefObject<T>;
   readonly animation?: Animation;
+  readonly setAnimation?: SetAnimation;
 }
 
 const useWebAnimations = <T extends HTMLElement>({
   ref: refOpt,
-  pausedAtStart = false,
   keyframes,
   timing,
+  pausedAtStart = false,
   onFinish,
   onCancel,
 }: Options<T> = {}): Return<T> => {
-  const [animation, setAnimation] = useState<Animation>();
+  const [anim, setAnim] = useState<Animation>();
   const refVar = useRef<T>(null);
   const ref = refOpt || refVar;
 
+  const setAnimation: SetAnimation = useCallback(
+    (k, t, p) => {
+      if (!ref.current || !k) return;
+
+      const a = ref.current.animate(k, t);
+
+      if (p) a.cancel();
+      setAnim(a);
+    },
+    [ref]
+  );
+
   useDeepCompareEffect(() => {
-    if (!ref.current) return;
-
-    const anim = ref.current.animate(keyframes, timing);
-
-    if (pausedAtStart) anim.cancel();
-    setAnimation(anim);
-  }, [ref, keyframes, timing, pausedAtStart]);
+    setAnimation(keyframes, timing, pausedAtStart);
+  }, [keyframes, timing, pausedAtStart]);
 
   useEffect(() => {
-    if (!animation) return;
+    if (!anim) return;
 
     if (onFinish)
-      animation.onfinish = (e) => {
-        onFinish(animation, e);
+      anim.onfinish = (e) => {
+        onFinish(anim, e);
       };
 
     if (onCancel)
-      animation.oncancel = (e) => {
-        onCancel(animation, e);
+      anim.oncancel = (e) => {
+        onCancel(anim, e);
       };
-  }, [animation, onFinish, onCancel]);
+  }, [anim, onFinish, onCancel]);
 
-  return { ref, animation };
+  return { ref, animation: anim, setAnimation };
 };
 
 export default useWebAnimations;
