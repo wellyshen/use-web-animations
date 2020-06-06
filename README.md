@@ -2,7 +2,7 @@
 
 # useWebAnimations
 
-Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Using_the_Web_Animations_API) in the React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook) way. Let's create highly-performant, flexible and manipulable animations in the modern web world 🛸
+Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) (a.k.a WAAPI) in the React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook) way. Let's create highly-performant, flexible and manipulable animations in the modern web world 🛸
 
 ## Milestone
 
@@ -26,7 +26,7 @@ The features of [Web Animations API](https://developer.mozilla.org/en-US/docs/We
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |                                                                            56+                                                                            |                                                                              27+                                                                              |                                                                         IE10+, Edge                                                                         |                                                                            9+                                                                             |                                                                                   7.1+                                                                                    |
 
-<!-- ## Requirement
+## Requirement
 
 To use `use-web-animations`, you must use `react@16.8.0` or greater which includes hooks.
 
@@ -38,4 +38,56 @@ This package is distributed via [npm](https://www.npmjs.com/package/@welly/use-w
 $ yarn add @welly/use-web-animations
 # or
 $ npm install --save @welly/use-web-animations
-``` -->
+```
+
+## Before We Start
+
+With the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API), we can move interactive animations from stylesheets to JavaScript, separating presentation from behavior. The API was designed based on the concept of the [CSS Animations](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations) but there're still some differences between them. I strongly recommend you to read the [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Using_the_Web_Animations_API) before we dive into this hook.
+
+## Usage
+
+The [API](#api) design of the hook not only inherits the DX of the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) but also provides useful features and sugar events to us. Here are some examples to show you how does it work.
+
+### Basic Usage
+
+Create a spinning animation by the `keyframes` and `timing` options.
+
+```js
+import React from "react";
+import useWebAnimations from "@welly/use-web-animations";
+
+const App = () => {
+  const { ref, animation, animate } = useWebAnimations({
+    // Pause animation at start, default is false
+    pausedAtStart: false,
+    // Define the keyframes, rotate the target from 0 degree to 360 degree
+    keyframes: { transform: ["rotate(0deg)", "rotate(360deg)"] },
+    // Define the timing, the duration is in milliseconds
+    timing: { duration: 3000, iterations: Infinity },
+    onFinish: (animation, event) => {
+      // Triggered when the animation completes naturally, as well as
+      // when the animation.finish() method is called to immediately cause the animation to finish up
+    },
+    onCancel: (animation, event) => {
+      // Triggered when the animation.cancel() method is called
+    },
+  });
+
+  return (
+    <div className="container">
+      <div
+        style={{
+          width: "100px",
+          height: "100px",
+          background: "green",
+        }}
+        ref={ref}
+      />
+    </div>
+  );
+};
+```
+
+## API
+
+Coming soon...
