@@ -1,4 +1,4 @@
-import React, { FC, useRef } from "react";
+import React, { FC, useRef, useEffect } from "react";
 import { Global, css } from "@emotion/core";
 import normalize from "normalize.css";
 
@@ -9,11 +9,11 @@ import useWebAnimations from "../../src";
 const App: FC = () => {
   // const ref = useRef();
 
-  const { ref, animation } = useWebAnimations<HTMLDivElement>({
+  const { ref, animation, setAnimation } = useWebAnimations<HTMLDivElement>({
     // ref,
-    // pausedAtStart: true,
     keyframes: { transform: ["rotate(0deg)", "rotate(360deg)"] },
     timing: { duration: 10000, fill: "forwards" },
+    pausedAtStart: true,
     onFinish: (arg1, arg2) => {
       console.log("LOG ===> onFinish: ", arg1, arg2);
     },
@@ -23,6 +23,14 @@ const App: FC = () => {
   });
 
   console.log("LGO ===> animation: ", animation);
+
+  useEffect(() => {
+    setAnimation(
+      { transform: ["rotate(0deg)", "rotate(360deg)"] },
+      { duration: 10000, fill: "forwards" }
+      // true
+    );
+  }, [setAnimation]);
 
   return (
     <>
