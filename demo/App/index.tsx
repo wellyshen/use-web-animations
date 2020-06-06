@@ -9,7 +9,7 @@ import useWebAnimations from "../../src";
 const App: FC = () => {
   // const ref = useRef();
 
-  const { ref, animation, setAnimation } = useWebAnimations<HTMLDivElement>({
+  const { ref, animation, animate } = useWebAnimations<HTMLDivElement>({
     // ref,
     keyframes: { transform: ["rotate(0deg)", "rotate(360deg)"] },
     timing: { duration: 10000, fill: "forwards" },
@@ -25,12 +25,12 @@ const App: FC = () => {
   console.log("LGO ===> animation: ", animation);
 
   useEffect(() => {
-    setAnimation(
+    animate(
       { transform: ["rotate(0deg)", "rotate(360deg)"] },
       { duration: 10000, fill: "forwards" }
       // true
     );
-  }, [setAnimation]);
+  }, [animate]);
 
   return (
     <>
