@@ -9,20 +9,18 @@ import useWebAnimations from "../../src";
 const App: FC = () => {
   // const ref = useRef();
 
-  const { ref, animation, animate } = useWebAnimations<HTMLDivElement>({
+  const { ref, getAnimation, animate } = useWebAnimations<HTMLDivElement>({
     // ref,
     keyframes: { transform: ["rotate(0deg)", "rotate(360deg)"] },
     timing: { duration: 5000, fill: "forwards" },
     // pausedAtStart: true,
-    onFinish: (arg1, arg2) => {
-      console.log("LOG ===> onFinish: ", arg1, arg2);
+    onFinish: (anim, evt) => {
+      console.log("LOG ===> onFinish: ", anim, evt);
     },
-    onCancel: (arg1, arg2) => {
-      console.log("LOG ===> onCancel: ", arg1, arg2);
+    onCancel: (anim, evt) => {
+      console.log("LOG ===> onCancel: ", anim, evt);
     },
   });
-
-  console.log("LGO ===> animation: ", animation);
 
   useEffect(() => {
     /* animate(
@@ -50,7 +48,7 @@ const App: FC = () => {
         <div>
           <button
             onClick={() => {
-              animation.play();
+              getAnimation().play();
             }}
             type="button"
           >
@@ -58,7 +56,7 @@ const App: FC = () => {
           </button>
           <button
             onClick={() => {
-              animation.pause();
+              getAnimation().pause();
             }}
             type="button"
           >
@@ -66,7 +64,7 @@ const App: FC = () => {
           </button>
           <button
             onClick={() => {
-              animation.reverse();
+              getAnimation().reverse();
             }}
             type="button"
           >
@@ -74,7 +72,7 @@ const App: FC = () => {
           </button>
           <button
             onClick={() => {
-              animation.finish();
+              getAnimation().finish();
             }}
             type="button"
           >
@@ -82,7 +80,7 @@ const App: FC = () => {
           </button>
           <button
             onClick={() => {
-              animation.cancel();
+              getAnimation().cancel();
             }}
             type="button"
           >
