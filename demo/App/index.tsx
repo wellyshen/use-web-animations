@@ -12,8 +12,8 @@ const App: FC = () => {
   const { ref, animation, animate } = useWebAnimations<HTMLDivElement>({
     // ref,
     keyframes: { transform: ["rotate(0deg)", "rotate(360deg)"] },
-    timing: { duration: 10000, fill: "forwards" },
-    pausedAtStart: true,
+    timing: { duration: 5000, fill: "forwards" },
+    // pausedAtStart: true,
     onFinish: (arg1, arg2) => {
       console.log("LOG ===> onFinish: ", arg1, arg2);
     },
@@ -25,11 +25,11 @@ const App: FC = () => {
   console.log("LGO ===> animation: ", animation);
 
   useEffect(() => {
-    animate(
+    /* animate(
       { transform: ["rotate(0deg)", "rotate(360deg)"] },
-      { duration: 10000, fill: "forwards" }
+      { duration: 5000, fill: "forwards" }
       // true
-    );
+    ); */
   }, [animate]);
 
   return (
