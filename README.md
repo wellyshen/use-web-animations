@@ -78,14 +78,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <div
-        style={{
-          width: "100px",
-          height: "100px",
-          background: "red",
-        }}
-        ref={ref}
-      />
+      <div className="square" ref={ref} />
     </div>
   );
 };
