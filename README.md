@@ -7,7 +7,7 @@ Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_
 ## Milestone
 
 - [x] Basic animation with keyframes and timing.
-- [x] Animation event callbacks.
+- [ ] Animation event callbacks.
 - [x] Pause animation at start.
 - [x] Set animation whenever you want.
 - [ ] Server-side compatibility.
@@ -68,11 +68,11 @@ const App = () => {
       direction: "alternate", // Run the animation forwards and then backwards
       easing: "ease-in-out", // Use a fancy timing function
     },
-    onFinish: (animation, event) => {
-      // Triggered whenever the animation enters the finished play state
+    onReady: (animation) => {
+      // Triggered whenever the animation is ready to play
     },
-    onCancel: (animation, event) => {
-      // Triggered whenever the animation enters the canceled play state
+    onFinish: (animation) => {
+      // Triggered whenever the animation enters the finished play state
     },
   });
 
