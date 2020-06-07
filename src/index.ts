@@ -1,6 +1,6 @@
 import "web-animations-js";
 
-import { RefObject, useState, useRef, useCallback, useEffect } from "react";
+import { RefObject, useRef, useCallback } from "react";
 import useDeepCompareEffect from "use-deep-compare-effect";
 
 interface Callback {
@@ -22,8 +22,8 @@ interface Animate {
 }
 interface Return<T> {
   readonly ref: RefObject<T>;
-  readonly animation?: Animation;
-  readonly animate?: Animate;
+  readonly getAnimation: () => Animation;
+  readonly animate: Animate;
 }
 
 const useWebAnimations = <T extends HTMLElement>({
@@ -34,41 +34,41 @@ const useWebAnimations = <T extends HTMLElement>({
   onFinish,
   onCancel,
 }: Options<T> = {}): Return<T> => {
-  const [animation, setAnimation] = useState<Animation>();
-  const refVar = useRef<T>(null);
+  const animRef = useRef<Animation>();
+  const refVar = useRef<T>();
   const ref = refOpt || refVar;
+
+  const getAnimation = useCallback(() => animRef.current, []);
 
   const animate: Animate = useCallback(
     (k, t, p) => {
       if (!ref.current || !k) return;
 
-      const anim = ref.current.animate(k, t);
-
-      if (p) anim.pause();
-      setAnimation(anim);
+      animRef.current = ref.current.animate(k, t);
+      if (p) animRef.current.pause();
     },
     [ref]
   );
 
   useDeepCompareEffect(() => {
     animate(keyframes, timing, pausedAtStart);
-  }, [keyframes, timing, pausedAtStart]);
 
-  useEffect(() => {
-    if (!animation) return;
+    if (!animRef.current) return;
+
+    const { current: anim } = animRef;
 
     if (onFinish)
-      animation.onfinish = (e) => {
-        onFinish(animation, e);
+      anim.onfinish = (e) => {
+        onFinish(anim, e);
       };
 
     if (onCancel)
-      animation.oncancel = (e) => {
-        onCancel(animation, e);
+      anim.oncancel = (e) => {
+        onCancel(anim, e);
       };
-  }, [animation, onFinish, onCancel]);
+  }, [keyframes, timing, pausedAtStart, onFinish, onCancel]);
 
-  return { ref, animation, animate };
+  return { ref, getAnimation, animate };
 };
 
 export default useWebAnimations;

@@ -22,8 +22,8 @@ declare module "@welly/use-web-animations" {
 
   interface Return<T> {
     readonly ref: RefObject<T>;
-    readonly animation?: Animation;
-    readonly animate?: (
+    readonly getAnimation: () => Animation;
+    readonly animate: (
       keyframes: Keyframes,
       timing?: Timing,
       pausedAtStart?: PausedAtStart
