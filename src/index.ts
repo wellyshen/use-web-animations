@@ -53,10 +53,11 @@ const useWebAnimations = <T extends HTMLElement>({
   useDeepCompareEffect(() => {
     animate(keyframes, timing, pausedAtStart);
 
-    if (animRef.current) {
-      animRef.current.ready.then(onReady);
-      animRef.current.finished.then(onFinish);
-    }
+    const { current: anim } = animRef;
+
+    if (!anim) return;
+    if (anim.ready) anim.ready.then(onReady);
+    if (anim.finished) anim.finished.then(onFinish);
   }, [keyframes, timing, pausedAtStart, onReady, onFinish]);
 
   return { ref, getAnimation, animate };
