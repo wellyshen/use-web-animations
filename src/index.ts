@@ -44,7 +44,7 @@ const useWebAnimations = <T extends HTMLElement>({
 
       const anim = ref.current.animate(k, t);
 
-      if (p) anim.cancel();
+      if (p) anim.pause();
       setAnimation(anim);
     },
     [ref]
