@@ -57,19 +57,17 @@ import React from "react";
 import useWebAnimations from "@welly/use-web-animations";
 
 const App = () => {
-  const { ref, animation, animate } = useWebAnimations({
-    // Pause animation at start, default is false
-    pausedAtStart: false,
+  const { ref } = useWebAnimations({
     // Define the keyframes, rotate the target from 0 degree to 360 degree
     keyframes: { transform: ["rotate(0deg)", "rotate(360deg)"] },
     // Define the timing, the duration is in milliseconds
     timing: { duration: 3000, iterations: Infinity },
     onFinish: (animation, event) => {
-      // Triggered when the animation completes naturally, as well as
-      // when the animation.finish() method is called to immediately cause the animation to finish up
+      // Triggered when the animation completes naturally
+      // or finished by calling the animation.finish() method
     },
     onCancel: (animation, event) => {
-      // Triggered when the animation.cancel() method is called
+      // Triggered when the animation is called by calling the animation.cancel() method
     },
   });
 
