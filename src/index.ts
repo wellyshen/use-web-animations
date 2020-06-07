@@ -4,7 +4,7 @@ import { RefObject, useRef, useCallback } from "react";
 import useDeepCompareEffect from "use-deep-compare-effect";
 
 interface Callback {
-  (animation: Animation, event: AnimationPlaybackEvent): void;
+  (animation: Animation): void;
 }
 type Keyframes = Keyframe[] | PropertyIndexedKeyframes;
 type Timing = number | KeyframeAnimationOptions;
@@ -14,8 +14,8 @@ interface Options<T> {
   keyframes?: Keyframes;
   timing?: Timing;
   pausedAtStart?: PausedAtStart;
+  onReady?: Callback;
   onFinish?: Callback;
-  onCancel?: Callback;
 }
 interface Animate {
   (keyframes: Keyframes, timing?: Timing, pausedAtStart?: PausedAtStart): void;
@@ -31,8 +31,8 @@ const useWebAnimations = <T extends HTMLElement>({
   keyframes,
   timing,
   pausedAtStart = false,
+  onReady,
   onFinish,
-  onCancel,
 }: Options<T> = {}): Return<T> => {
   const animRef = useRef<Animation>();
   const refVar = useRef<T>();
@@ -53,20 +53,11 @@ const useWebAnimations = <T extends HTMLElement>({
   useDeepCompareEffect(() => {
     animate(keyframes, timing, pausedAtStart);
 
-    if (!animRef.current) return;
-
-    const { current: anim } = animRef;
-
-    if (onFinish)
-      anim.onfinish = (e) => {
-        onFinish(anim, e);
-      };
-
-    if (onCancel)
-      anim.oncancel = (e) => {
-        onCancel(anim, e);
-      };
-  }, [keyframes, timing, pausedAtStart, onFinish, onCancel]);
+    if (animRef.current) {
+      animRef.current.ready.then(onReady);
+      animRef.current.finished.then(onFinish);
+    }
+  }, [keyframes, timing, pausedAtStart, onReady, onFinish]);
 
   return { ref, getAnimation, animate };
 };

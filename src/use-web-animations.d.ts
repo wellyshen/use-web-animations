@@ -2,7 +2,7 @@ declare module "@welly/use-web-animations" {
   import { RefObject } from "react";
 
   export interface Callback {
-    (animation: Animation, event: AnimationPlaybackEvent): void;
+    (animation: Animation): void;
   }
 
   type Keyframes = Keyframe[] | PropertyIndexedKeyframes;
@@ -16,8 +16,8 @@ declare module "@welly/use-web-animations" {
     keyframes?: Keyframes;
     timing?: Timing;
     pausedAtStart?: PausedAtStart;
+    onReady?: Callback;
     onFinish?: Callback;
-    onCancel?: Callback;
   }
 
   interface Return<T> {
