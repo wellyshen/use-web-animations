@@ -24,6 +24,7 @@ const App: FC = () => {
   const { ref, getAnimation, animate } = useWebAnimations<HTMLDivElement>({
     // ref,
     keyframes,
+    // @ts-ignore
     timing,
     pausedAtStart: true,
     onFinish: (anim, evt) => {
