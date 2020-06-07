@@ -9,11 +9,23 @@ import useWebAnimations from "../../src";
 const App: FC = () => {
   // const ref = useRef();
 
+  const keyframes = {
+    transform: ["rotate(0deg)", "rotate(360deg)"],
+    background: ["red", "blue", "green"],
+  };
+  const timing = {
+    delay: 500,
+    duration: 1000,
+    iterations: 2,
+    direction: "alternate",
+    easing: "ease-in-out",
+  };
+
   const { ref, getAnimation, animate } = useWebAnimations<HTMLDivElement>({
     // ref,
-    keyframes: { transform: ["rotate(0deg)", "rotate(360deg)"] },
-    timing: { duration: 5000, fill: "forwards" },
-    // pausedAtStart: true,
+    keyframes,
+    timing,
+    pausedAtStart: true,
     onFinish: (anim, evt) => {
       console.log("LOG ===> onFinish: ", anim, evt);
     },
@@ -23,12 +35,8 @@ const App: FC = () => {
   });
 
   useEffect(() => {
-    /* animate(
-      { transform: ["rotate(0deg)", "rotate(360deg)"] },
-      { duration: 5000, fill: "forwards" }
-      // true
-    ); */
-  }, [animate]);
+    // animate(keyframes, timing);
+  }, [animate, keyframes, timing]);
 
   return (
     <>
@@ -92,7 +100,7 @@ const App: FC = () => {
             marginTop: "5rem",
             width: "100px",
             height: "100px",
-            background: "#000",
+            background: "red",
           }}
           ref={ref}
         />

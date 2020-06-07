@@ -6,8 +6,7 @@ Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_
 
 ## Milestone
 
-- [x] Basic animation with key-frames and timing.
-- [x] Playback controller.
+- [x] Basic animation with keyframes and timing.
 - [x] Animation event callbacks.
 - [x] Pause animation at start.
 - [x] Set animation whenever you want.
@@ -58,16 +57,22 @@ import useWebAnimations from "@welly/use-web-animations";
 
 const App = () => {
   const { ref } = useWebAnimations({
-    // Define the keyframes, rotate the target from 0 degree to 360 degree
-    keyframes: { transform: ["rotate(0deg)", "rotate(360deg)"] },
-    // Define the timing, the duration is in milliseconds
-    timing: { duration: 3000, iterations: Infinity },
+    keyframes: {
+      transform: ["rotate(0deg)", "rotate(360deg)"], // Rotate from 0 degree to 360 degree
+      background: ["red", "blue", "green"], // Go through three colors
+    },
+    timing: {
+      delay: 500, // Start with a 500ms delay
+      duration: 1000, // Run for 1000ms
+      iterations: 2, // Repeat once
+      direction: "alternate", // Run the animation forwards and then backwards
+      easing: "ease-in-out", // Use a fancy timing function
+    },
     onFinish: (animation, event) => {
-      // Triggered when the animation completes naturally
-      // or finished by calling the animation.finish() method
+      // Triggered whenever the animation enters the finished play state
     },
     onCancel: (animation, event) => {
-      // Triggered when the animation is called by calling the animation.cancel() method
+      // Triggered whenever the animation enters the canceled play state
     },
   });
 
@@ -77,7 +82,7 @@ const App = () => {
         style={{
           width: "100px",
           height: "100px",
-          background: "green",
+          background: "red",
         }}
         ref={ref}
       />
