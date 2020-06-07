@@ -49,7 +49,7 @@ The [API](#api) design of the hook not only inherits the DX of the [Web Animatio
 
 ### Basic Usage
 
-Create a spinning animation by the `keyframes` and `timing` options.
+Create a spinning animation by the `keyframes` ([formats](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Keyframe_Formats)) and `timing` ([properties](https://developer.mozilla.org/en-US/docs/Web/API/EffectTiming)) options.
 
 ```js
 import React from "react";
