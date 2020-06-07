@@ -26,12 +26,12 @@ const App: FC = () => {
     keyframes,
     // @ts-ignore
     timing,
-    pausedAtStart: true,
-    onFinish: (anim, evt) => {
-      console.log("LOG ===> onFinish: ", anim, evt);
+    // pausedAtStart: true,
+    onReady: (anim) => {
+      console.log("LOG ===> onReady: ", anim);
     },
-    onCancel: (anim, evt) => {
-      console.log("LOG ===> onCancel: ", anim, evt);
+    onFinish: (anim) => {
+      console.log("LOG ===> onFinish: ", anim);
     },
   });
 
