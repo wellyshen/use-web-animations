@@ -72,10 +72,10 @@ const App = () => {
       // Triggered when the animation is ready to play
     },
     onUpdate: (animation) => {
-      // Triggered whenever the animation is running or play state changes
+      // Triggered whenever the animation enters the running state or changes state
     },
     onFinish: (animation) => {
-      // Triggered whenever the animation enters the finished play state
+      // Triggered whenever the animation enters the finished state
     },
   });
 
