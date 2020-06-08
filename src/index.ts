@@ -61,6 +61,7 @@ const useWebAnimations = <T extends HTMLElement>({
     animate(keyframes, timing, pausedAtStart);
 
     const anim = getAnimation();
+    // Google Chrome < v84 has no the ready property
     if (onReady && anim?.ready) anim.ready.then(onReady);
   }, [keyframes, timing, pausedAtStart, getAnimation, onReady, onFinish]);
 
