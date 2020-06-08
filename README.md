@@ -7,7 +7,7 @@ Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_
 ## Milestone
 
 - [x] Basic animation with keyframes and timing.
-- [ ] Animation event callbacks.
+- [x] Animation event callbacks.
 - [x] Pause animation at start.
 - [x] Set animation whenever you want.
 - [ ] Server-side compatibility.
@@ -69,7 +69,10 @@ const App = () => {
       easing: "ease-in-out", // Use a fancy timing function
     },
     onReady: (animation) => {
-      // Triggered whenever the animation is ready to play
+      // Triggered when the animation is ready to play
+    },
+    onUpdate: (animation) => {
+      // Triggered whenever the animation is running or play state changes
     },
     onFinish: (animation) => {
       // Triggered whenever the animation enters the finished play state
