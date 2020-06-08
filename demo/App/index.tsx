@@ -6,20 +6,20 @@ import GitHubCorner from "../GitHubCorner";
 import { root, container, title, subtitle } from "./styles";
 import useWebAnimations from "../../src";
 
+const keyframes = {
+  transform: ["rotate(0deg)", "rotate(360deg)"],
+  background: ["red", "blue", "green"],
+};
+const timing = {
+  delay: 500,
+  duration: 1000,
+  iterations: 2,
+  direction: "alternate",
+  easing: "ease-in-out",
+};
+
 const App: FC = () => {
   // const ref = useRef();
-
-  const keyframes = {
-    transform: ["rotate(0deg)", "rotate(360deg)"],
-    background: ["red", "blue", "green"],
-  };
-  const timing = {
-    delay: 500,
-    duration: 1000,
-    iterations: 2,
-    direction: "alternate",
-    easing: "ease-in-out",
-  };
 
   const { ref, getAnimation, animate } = useWebAnimations<HTMLDivElement>({
     // ref,
@@ -30,14 +30,17 @@ const App: FC = () => {
     onReady: (anim) => {
       console.log("LOG ===> onReady: ", anim);
     },
+    onUpdate: (anim) => {
+      console.log("LOG ===> onUpdate: ", anim);
+    },
     onFinish: (anim) => {
       console.log("LOG ===> onFinish: ", anim);
     },
   });
 
   useEffect(() => {
-    // animate(keyframes, timing);
-  }, [animate, keyframes, timing]);
+    animate(keyframes, timing);
+  }, [animate]);
 
   return (
     <>
@@ -65,6 +68,7 @@ const App: FC = () => {
           </button>
           <button
             onClick={() => {
+              console.log("LOG ===> Pause: ", getAnimation());
               getAnimation().pause();
             }}
             type="button"
@@ -73,6 +77,7 @@ const App: FC = () => {
           </button>
           <button
             onClick={() => {
+              console.log("LOG ===> Reverse: ", getAnimation());
               getAnimation().reverse();
             }}
             type="button"
@@ -81,6 +86,7 @@ const App: FC = () => {
           </button>
           <button
             onClick={() => {
+              console.log("LOG ===> Finish: ", getAnimation());
               getAnimation().finish();
             }}
             type="button"
@@ -89,6 +95,7 @@ const App: FC = () => {
           </button>
           <button
             onClick={() => {
+              console.log("LOG ===> Cancel: ", getAnimation());
               getAnimation().cancel();
             }}
             type="button"
