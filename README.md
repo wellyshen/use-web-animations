@@ -58,7 +58,7 @@ import useWebAnimations from "@welly/use-web-animations";
 const App = () => {
   const { ref } = useWebAnimations({
     keyframes: {
-      transform: ["rotate(0deg)", "rotate(360deg)"], // Rotate from 0 degree to 360 degree
+      transform: ["rotate(0deg)", "rotate(360deg)"], // Rotate from 0º to 360º
       background: ["red", "blue", "green"], // Go through three colors
     },
     timing: {
