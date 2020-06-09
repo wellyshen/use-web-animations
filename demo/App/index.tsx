@@ -26,20 +26,20 @@ const App: FC = () => {
     keyframes,
     // @ts-ignore
     timing,
-    // pausedAtStart: true,
+    pausedAtStart: true,
     onReady: (anim) => {
-      console.log("LOG ===> onReady: ", anim);
+      // console.log("LOG ===> onReady: ", anim);
     },
     onUpdate: (anim) => {
-      console.log("LOG ===> onUpdate: ", anim);
+      // console.log("LOG ===> onUpdate: ", anim);
     },
     onFinish: (anim) => {
-      console.log("LOG ===> onFinish: ", anim);
+      // console.log("LOG ===> onFinish: ", anim);
     },
   });
 
   useEffect(() => {
-    animate(keyframes, timing);
+    // animate(keyframes, timing);
   }, [animate]);
 
   return (
@@ -60,6 +60,7 @@ const App: FC = () => {
         <div>
           <button
             onClick={() => {
+              console.log("LOG ===> Play: ", getAnimation());
               getAnimation().play();
             }}
             type="button"
@@ -101,6 +102,16 @@ const App: FC = () => {
             type="button"
           >
             Cancel
+          </button>
+          <button
+            onClick={() => {
+              console.log("LOG ===> Seek: ", getAnimation());
+              getAnimation().currentTime =
+                getAnimation().effect.getTiming().duration / 2 + 500;
+            }}
+            type="button"
+          >
+            Seek
           </button>
         </div>
         <div
