@@ -28,13 +28,13 @@ const App: FC = () => {
     timing,
     pausedAtStart: true,
     onReady: (anim) => {
-      // console.log("LOG ===> onReady: ", anim);
+      console.log("LOG ===> onReady: ", anim);
     },
     onUpdate: (anim) => {
-      // console.log("LOG ===> onUpdate: ", anim);
+      console.log("LOG ===> onUpdate: ", anim);
     },
     onFinish: (anim) => {
-      // console.log("LOG ===> onFinish: ", anim);
+      console.log("LOG ===> onFinish: ", anim);
     },
   });
 
