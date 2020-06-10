@@ -1,15 +1,27 @@
 import React, { FC, useRef, useEffect } from "react";
 import { Global, css } from "@emotion/core";
+import { Slider } from "@reach/slider";
+import "@reach/slider/styles.css";
 import normalize from "normalize.css";
 
 import GitHubCorner from "../GitHubCorner";
-import { root, container, title, subtitle, frame, target } from "./styles";
+import {
+  root,
+  container,
+  title,
+  subtitle,
+  frame,
+  target,
+  fakeTarget,
+} from "./styles";
 import useWebAnimations from "../../src";
 
 const App: FC = () => {
   // const ref = useRef();
 
-  const { ref, getAnimation, animate } = useWebAnimations<HTMLDivElement>({
+  const { ref, playState, getAnimation, animate } = useWebAnimations<
+    HTMLDivElement
+  >({
     // ref,
     keyframes: {
       transform: ["translateX(0)", "translateX(270px)"],
@@ -19,19 +31,21 @@ const App: FC = () => {
       delay: 500,
       duration: 1000,
       fill: "forwards",
-      easing: "ease-in-out",
+      easing: "ease-out",
     },
     // pausedAtStart: true,
     onReady: (anim) => {
-      console.log("LOG ===> onReady: ", anim);
+      // console.log("LOG ===> onReady: ", anim);
     },
     onUpdate: (anim) => {
       console.log("LOG ===> onUpdate: ", anim);
     },
     onFinish: (anim) => {
-      console.log("LOG ===> onFinish: ", anim);
+      // console.log("LOG ===> onFinish: ", anim);
     },
   });
+
+  console.log("LOG ===> playback: ", playState);
 
   useEffect(() => {
     /* animate(
@@ -43,7 +57,7 @@ const App: FC = () => {
         delay: 500,
         duration: 1000,
         fill: "forwards",
-        easing: "ease-in-out",
+        easing: "ease-out",
       }
     ); */
   }, [animate]);
@@ -64,9 +78,17 @@ const App: FC = () => {
           Animations API.
         </p>
         <div>
+          <Slider
+            min={500}
+            max={1500}
+            step={10}
+            onChange={(value) => {
+              getAnimation().currentTime = value;
+            }}
+          />
           <button
             onClick={() => {
-              console.log("LOG ===> Play: ", getAnimation());
+              // console.log("LOG ===> Play: ", getAnimation());
               getAnimation().play();
             }}
             type="button"
@@ -75,7 +97,7 @@ const App: FC = () => {
           </button>
           <button
             onClick={() => {
-              console.log("LOG ===> Pause: ", getAnimation());
+              // console.log("LOG ===> Pause: ", getAnimation());
               getAnimation().pause();
             }}
             type="button"
@@ -84,7 +106,7 @@ const App: FC = () => {
           </button>
           <button
             onClick={() => {
-              console.log("LOG ===> Reverse: ", getAnimation());
+              // console.log("LOG ===> Reverse: ", getAnimation());
               getAnimation().reverse();
             }}
             type="button"
@@ -93,7 +115,7 @@ const App: FC = () => {
           </button>
           <button
             onClick={() => {
-              console.log("LOG ===> Finish: ", getAnimation());
+              // console.log("LOG ===> Finish: ", getAnimation());
               getAnimation().finish();
             }}
             type="button"
@@ -102,24 +124,16 @@ const App: FC = () => {
           </button>
           <button
             onClick={() => {
-              console.log("LOG ===> Cancel: ", getAnimation());
+              // console.log("LOG ===> Cancel: ", getAnimation());
               getAnimation().cancel();
             }}
             type="button"
           >
             Cancel
           </button>
-          <button
-            onClick={() => {
-              console.log("LOG ===> Seek: ", getAnimation());
-              getAnimation().currentTime = 950;
-            }}
-            type="button"
-          >
-            Seek
-          </button>
         </div>
         <div css={frame}>
+          <div css={[target, fakeTarget]} />
           <div css={target} ref={ref} />
         </div>
       </div>
