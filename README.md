@@ -84,7 +84,7 @@ const App = () => {
   return (
     <div className="container">
       <p>🎞️ Animation is {playState}</p>
-      <div className="box" ref={ref} />
+      <div className="target" ref={ref} />
     </div>
   );
 };
