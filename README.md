@@ -11,6 +11,7 @@ Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_
 - [x] Pause animation at start.
 - [x] Set animation whenever you want.
 - [x] Expose play-state as a return value.
+- [ ] Waiting for Google Chrome v84 for supporting more functions (see the [article](https://web.dev/web-animations))
 - [ ] Server-side compatibility.
 - [ ] Unit testing.
 - [x] TypeScript type definition.
