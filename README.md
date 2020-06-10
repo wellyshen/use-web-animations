@@ -10,6 +10,7 @@ Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_
 - [x] Animation event callbacks.
 - [x] Pause animation at start.
 - [x] Set animation whenever you want.
+- [x] Expose play-state as a return value.
 - [ ] Server-side compatibility.
 - [ ] Unit testing.
 - [x] TypeScript type definition.
@@ -58,7 +59,7 @@ import useWebAnimations from "@welly/use-web-animations";
 const App = () => {
   const { ref } = useWebAnimations({
     keyframes: {
-      transform: ["rotate(0deg)", "rotate(360deg)"], // Rotate from 0º to 360º
+      transform: ["translateX(300px)"], // Move by 300px
       background: ["red", "blue", "green"], // Go through three colors
     },
     timing: {
@@ -81,7 +82,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <div className="square" ref={ref} />
+      <div className="target" ref={ref} />
     </div>
   );
 };
