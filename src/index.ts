@@ -1,6 +1,6 @@
 import "web-animations-js";
 
-import { RefObject, useRef, useCallback, useEffect } from "react";
+import { RefObject, useState, useRef, useCallback, useEffect } from "react";
 import useDeepCompareEffect from "use-deep-compare-effect";
 
 import useLatest from "./useLatest";
@@ -20,17 +20,15 @@ interface Options<T> {
   onUpdate?: Callback;
   onFinish?: Callback;
 }
+type PlayState = string | null;
 interface Animate {
   (keyframes: Keyframes, timing?: Timing, pausedAtStart?: PausedAtStart): void;
 }
 interface Return<T> {
   readonly ref: RefObject<T>;
+  readonly playState: PlayState;
   readonly getAnimation: () => Animation;
   readonly animate: Animate;
-}
-enum PlayState {
-  Running = "running",
-  Finished = "finished",
 }
 
 const useWebAnimations = <T extends HTMLElement>({
@@ -42,6 +40,7 @@ const useWebAnimations = <T extends HTMLElement>({
   onUpdate,
   onFinish,
 }: Options<T> = {}): Return<T> => {
+  const [playState, setPlayState] = useState<PlayState>(null);
   const animRef = useRef<Animation>();
   const prevPlayStateRef = useRef<string>();
   const onReadyRef = useLatest<Callback>(onReady);
@@ -75,23 +74,26 @@ const useWebAnimations = <T extends HTMLElement>({
       const anim = getAnimation();
 
       if (anim) {
-        const { playState } = anim;
+        const { playState: curPlayState } = anim;
+
+        if (curPlayState !== prevPlayStateRef.current)
+          setPlayState(curPlayState);
 
         if (
           onUpdateRef.current &&
-          (playState === PlayState.Running ||
-            playState !== prevPlayStateRef.current)
+          (curPlayState === "running" ||
+            curPlayState !== prevPlayStateRef.current)
         )
           onUpdateRef.current(anim);
 
         if (
           onFinishRef.current &&
-          playState === PlayState.Finished &&
-          prevPlayStateRef.current !== PlayState.Finished
+          curPlayState === "finished" &&
+          prevPlayStateRef.current !== "finished"
         )
           onFinishRef.current(anim);
 
-        prevPlayStateRef.current = playState;
+        prevPlayStateRef.current = curPlayState;
       }
 
       requestAnimationFrame(update);
@@ -101,7 +103,7 @@ const useWebAnimations = <T extends HTMLElement>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getAnimation]);
 
-  return { ref, getAnimation, animate };
+  return { ref, playState, getAnimation, animate };
 };
 
 export default useWebAnimations;
