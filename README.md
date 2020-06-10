@@ -57,7 +57,7 @@ import React from "react";
 import useWebAnimations from "@welly/use-web-animations";
 
 const App = () => {
-  const { ref } = useWebAnimations({
+  const { ref, playState } = useWebAnimations({
     keyframes: {
       transform: ["translateX(300px)"], // Move by 300px
       background: ["red", "blue", "green"], // Go through three colors
@@ -82,7 +82,8 @@ const App = () => {
 
   return (
     <div className="container">
-      <div className="target" ref={ref} />
+      <p>🎞️ Animation is {playState}</p>
+      <div className="box" ref={ref} />
     </div>
   );
 };
