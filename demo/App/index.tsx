@@ -3,30 +3,25 @@ import { Global, css } from "@emotion/core";
 import normalize from "normalize.css";
 
 import GitHubCorner from "../GitHubCorner";
-import { root, container, title, subtitle } from "./styles";
+import { root, container, title, subtitle, frame, target } from "./styles";
 import useWebAnimations from "../../src";
-
-const keyframes = {
-  transform: ["rotate(0deg)", "rotate(360deg)"],
-  background: ["red", "blue", "green"],
-};
-const timing = {
-  delay: 500,
-  duration: 1000,
-  iterations: 2,
-  direction: "alternate",
-  easing: "ease-in-out",
-};
 
 const App: FC = () => {
   // const ref = useRef();
 
   const { ref, getAnimation, animate } = useWebAnimations<HTMLDivElement>({
     // ref,
-    keyframes,
-    // @ts-ignore
-    timing,
-    pausedAtStart: true,
+    keyframes: {
+      transform: ["translateX(0)", "translateX(270px)"],
+      background: ["red", "blue", "green"],
+    },
+    timing: {
+      delay: 500,
+      duration: 1000,
+      fill: "forwards",
+      easing: "ease-in-out",
+    },
+    // pausedAtStart: true,
     onReady: (anim) => {
       console.log("LOG ===> onReady: ", anim);
     },
@@ -39,7 +34,18 @@ const App: FC = () => {
   });
 
   useEffect(() => {
-    // animate(keyframes, timing);
+    /* animate(
+      {
+        transform: ["translateX(0)", "translateX(270px)"],
+        background: ["red", "blue", "green"],
+      },
+      {
+        delay: 500,
+        duration: 1000,
+        fill: "forwards",
+        easing: "ease-in-out",
+      }
+    ); */
   }, [animate]);
 
   return (
@@ -106,23 +112,16 @@ const App: FC = () => {
           <button
             onClick={() => {
               console.log("LOG ===> Seek: ", getAnimation());
-              getAnimation().currentTime =
-                getAnimation().effect.getTiming().duration / 2 + 500;
+              getAnimation().currentTime = 950;
             }}
             type="button"
           >
             Seek
           </button>
         </div>
-        <div
-          style={{
-            marginTop: "5rem",
-            width: "100px",
-            height: "100px",
-            background: "red",
-          }}
-          ref={ref}
-        />
+        <div css={frame}>
+          <div css={target} ref={ref} />
+        </div>
       </div>
     </>
   );

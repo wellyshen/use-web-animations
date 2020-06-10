@@ -121,3 +121,19 @@ export const controller = css`
   border: 1px solid #777;
   cursor: nwse-resize;
 `;
+
+export const frame = css`
+  display: flex;
+  align-items: center;
+  margin-top: 2.5rem;
+  padding: 10px;
+  width: 320px;
+  height: 100px;
+  border: 1px solid #777;
+`;
+
+export const target = css`
+  width: 50px;
+  height: 50px;
+  background: red;
+`;
