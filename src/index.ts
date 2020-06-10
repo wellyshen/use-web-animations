@@ -3,6 +3,8 @@ import "web-animations-js";
 import { RefObject, useRef, useCallback, useEffect } from "react";
 import useDeepCompareEffect from "use-deep-compare-effect";
 
+import useLatest from "./useLatest";
+
 interface Callback {
   (animation: Animation): void;
 }
@@ -42,6 +44,9 @@ const useWebAnimations = <T extends HTMLElement>({
 }: Options<T> = {}): Return<T> => {
   const animRef = useRef<Animation>();
   const prevPlayStateRef = useRef<string>();
+  const onReadyRef = useLatest<Callback>(onReady);
+  const onUpdateRef = useLatest<Callback>(onUpdate);
+  const onFinishRef = useLatest<Callback>(onFinish);
   const refVar = useRef<T>();
   const ref = refOpt || refVar;
 
@@ -62,8 +67,8 @@ const useWebAnimations = <T extends HTMLElement>({
 
     const anim = getAnimation();
     // Google Chrome < v84 has no the ready property
-    if (onReady && anim?.ready) anim.ready.then(onReady);
-  }, [keyframes, timing, pausedAtStart, getAnimation, onReady, onFinish]);
+    if (onReadyRef.current && anim?.ready) anim.ready.then(onReadyRef.current);
+  }, [keyframes, timing, pausedAtStart, getAnimation]);
 
   useEffect(() => {
     const update = () => {
@@ -73,18 +78,18 @@ const useWebAnimations = <T extends HTMLElement>({
         const { playState } = anim;
 
         if (
-          onUpdate &&
+          onUpdateRef.current &&
           (playState === PlayState.Running ||
             playState !== prevPlayStateRef.current)
         )
-          onUpdate(anim);
+          onUpdateRef.current(anim);
 
         if (
-          onFinish &&
+          onFinishRef.current &&
           playState === PlayState.Finished &&
           prevPlayStateRef.current !== PlayState.Finished
         )
-          onFinish(anim);
+          onFinishRef.current(anim);
 
         prevPlayStateRef.current = playState;
       }
@@ -93,7 +98,8 @@ const useWebAnimations = <T extends HTMLElement>({
     };
 
     requestAnimationFrame(update);
-  }, [getAnimation, onUpdate, onFinish]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getAnimation]);
 
   return { ref, getAnimation, animate };
 };
