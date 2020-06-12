@@ -1,9 +1,11 @@
-import "web-animations-js";
-
 import { RefObject, useState, useRef, useCallback, useEffect } from "react";
 import useDeepCompareEffect from "use-deep-compare-effect";
 
 import useLatest from "./useLatest";
+
+// @ts-ignore
+// eslint-disable-next-line no-unused-expressions
+if (typeof window !== "undefined") import("web-animations-js");
 
 interface Callback {
   (animation: Animation): void;
