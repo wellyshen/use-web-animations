@@ -17,6 +17,7 @@ declare module "@wellyshen/use-web-animations" {
     timing?: Timing;
     pausedAtStart?: PausedAtStart;
     onReady?: Callback;
+    onUpdate?: Callback;
     onFinish?: Callback;
   }
 
