@@ -17,7 +17,6 @@ Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_
 - [x] Pause animation at start.
 - [x] Set animation whenever you want.
 - [x] Expose play-state as a return value.
-- [ ] Waiting for Google Chrome v84 for supporting more functions (see the [article](https://web.dev/web-animations))
 - [ ] Server-side compatibility.
 - [ ] Unit testing.
 - [x] TypeScript type definition.
@@ -32,6 +31,8 @@ The features of [Web Animations API](https://developer.mozilla.org/en-US/docs/We
 | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="32px" height="32px" /><br/>Chrome | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="32px" height="32px" /><br/>Firefox | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="32px" height="32px" /><br/>IE / Edge | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="32px" height="32px" /><br/>Safari | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari-ios/safari-ios_48x48.png" alt="iOS Safari" width="32px" height="32px" /><br/>iOS Safari |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |                                                                            56+                                                                            |                                                                              27+                                                                              |                                                                         IE10+, Edge                                                                         |                                                                            9+                                                                             |                                                                                   7.1+                                                                                    |
+
+> ⚠️ Please note, some features aren't supported before Google Chrome , like on-ready event, partial keyframes etc. Read the [article](https://web.dev/web-animations) to learn more.
 
 ## Requirement
 
