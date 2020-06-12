@@ -143,7 +143,7 @@
     "@types/resize-observer-browser": "^0.1.3",
     "babel-plugin-emotion": "^10.0.33",
     "eslint": "^6.8.0",
-    "eslint-config-welly": "^1.1.2",
+    "eslint-config-welly": "^1.2.0",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "lint-staged": "^10.2.9",

@@ -43,7 +43,7 @@ $ npm install --save @welly/use-web-animations
 
 ## Before We Start
 
-With the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API), we can move interactive animations from stylesheets to JavaScript, separating presentation from behavior. The API was designed based on the concept of the [CSS Animations](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations) but there're still some differences between them. I strongly recommend you to read the [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Using_the_Web_Animations_API) before we dive into this hook.
+With the Web Animations API, we can move interactive animations from stylesheets to JavaScript, separating presentation from behavior. The API was designed based on the concept of the [CSS Animations](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations) but there're still some differences between them. I strongly recommend you to read the [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Using_the_Web_Animations_API) before we dive into this hook.
 
 ## Usage
 
@@ -89,6 +89,70 @@ const App = () => {
   );
 };
 ```
+
+### Playback Control
+
+The shortcoming with existing technologies was the lack of playback control. The Web Animations API provides several useful methods for controlling playback: play, pause, reverse, cancel, finish, seek, control speed via the [methods](https://developer.mozilla.org/en-US/docs/Web/API/Animation#Methods) of the [Animation](https://developer.mozilla.org/en-US/docs/Web/API/Animation) interface.
+
+This hook exposes the animation instance for us to interact with animations, we can access it by the `getAnimation()` return value.
+
+```js
+import React from "react";
+import useWebAnimations from "@welly/use-web-animations";
+
+const App = () => {
+  const { ref, playState, getAnimation } = useWebAnimations({
+    pausedAtStart: true, // Pause animation at start, default is false
+    keyframes: { transform: ["translateX(300px)"] },
+    timing: { duration: 1000, fill: "forwards" },
+  });
+
+  const play = () => {
+    getAnimation().play();
+  };
+
+  const pause = () => {
+    getAnimation().pause();
+  };
+
+  const reverse = () => {
+    getAnimation().reverse();
+  };
+
+  const cancel = () => {
+    getAnimation().cancel();
+  };
+
+  const finish = () => {
+    getAnimation().finish();
+  };
+
+  const seek = (time) => {
+    getAnimation().currentTime = time;
+  };
+
+  const updatePlaybackRate = (rate) => {
+    getAnimation().updatePlaybackRate(rate);
+  };
+
+  return (
+    <div className="container">
+      <button onClick={play}>Play</button>
+      <button onClick={pause}>Pause</button>
+      <button onClick={reverse}>Reverse</button>
+      <button onClick={cancel}>Cancel</button>
+      <button onClick={finish}>Finish</button>
+      <input type="range" max="300" onChange={seek} />
+      <input type="number" value="1" onChange={updatePlaybackRate} />
+      <div className="target" ref={ref} />
+    </div>
+  );
+};
+```
+
+### Animation Information
+
+Coming soon...
 
 ## API
 
