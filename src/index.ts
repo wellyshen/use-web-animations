@@ -5,7 +5,7 @@ import useLatest from "./useLatest";
 
 // @ts-ignore
 // eslint-disable-next-line no-unused-expressions
-if (typeof document !== "undefined") import("web-animations-js");
+// if (typeof document !== "undefined") import("web-animations-js");
 
 interface Callback {
   (animation: Animation): void;
