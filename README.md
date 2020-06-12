@@ -5,14 +5,14 @@
 Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) (a.k.a WAAPI) in the React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook) way. Let's create highly-performant, flexible and manipulable animations in the modern web world 🛸
 
 [![build status](https://img.shields.io/github/workflow/status/wellyshen/use-web-animations/CI?style=flat-square)](https://github.com/wellyshen/use-web-animations/actions?query=workflow%3ACI)
-[![npm version](https://img.shields.io/npm/v/@welly/use-web-animations?style=flat-square)](https://www.npmjs.com/package/@welly/use-web-animations)
-[![npm downloads](https://img.shields.io/npm/dm/@welly/use-web-animations?style=flat-square)](https://www.npmtrends.com/@welly/use-web-animations)
-[![npm downloads](https://img.shields.io/npm/dt/@welly/use-web-animations?style=flat-square)](https://www.npmtrends.com/@welly/use-web-animations)
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@welly/use-web-animations?style=flat-square)](https://bundlephobia.com/result?p=@welly/use-web-animations)
+[![npm version](https://img.shields.io/npm/v/@wellyshen/use-web-animations?style=flat-square)](https://www.npmjs.com/package/@wellyshen/use-web-animations)
+[![npm downloads](https://img.shields.io/npm/dm/@wellyshen/use-web-animations?style=flat-square)](https://www.npmtrends.com/@wellyshen/use-web-animations)
+[![npm downloads](https://img.shields.io/npm/dt/@wellyshen/use-web-animations?style=flat-square)](https://www.npmtrends.com/@wellyshen/use-web-animations)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@wellyshen/use-web-animations?style=flat-square)](https://bundlephobia.com/result?p=@wellyshen/use-web-animations)
 [![MIT licensed](https://img.shields.io/github/license/wellyshen/use-web-animations?style=flat-square)](https://raw.githubusercontent.com/wellyshen/use-web-animations/master/LICENSE)
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](https://github.com/wellyshen/use-web-animations/blob/master/CONTRIBUTING.md)
-[![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fwellyshen%2Fuse-web-animations)](https://twitter.com/intent/tweet?text=With%20@welly/use-web-animations,%20I%20can%20build%20fancy%20and%20performant%20animations%20for%20my%20web%20app.%20Thanks,%20@Welly%20Shen%20🤩)
+[![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fwellyshen%2Fuse-web-animations)](https://twitter.com/intent/tweet?text=With%20@wellyshen/use-web-animations,%20I%20can%20build%20fancy%20and%20performant%20animations%20for%20my%20web%20app.%20Thanks,%20@Welly%20Shen%20🤩)
 
 ## Milestone
 
@@ -44,12 +44,12 @@ To use `use-web-animations`, you must use `react@16.8.0` or greater which includ
 
 ## Installation
 
-This package is distributed via [npm](https://www.npmjs.com/package/@welly/use-web-animations).
+This package is distributed via [npm](https://www.npmjs.com/package/@wellyshen/use-web-animations).
 
 ```sh
-$ yarn add @welly/use-web-animations
+$ yarn add @wellyshen/use-web-animations
 # or
-$ npm install --save @welly/use-web-animations
+$ npm install --save @wellyshen/use-web-animations
 ```
 
 ## Before We Start
@@ -66,7 +66,7 @@ Create a spinning animation by the `keyframes` ([formats](https://developer.mozi
 
 ```js
 import React from "react";
-import useWebAnimations from "@welly/use-web-animations";
+import useWebAnimations from "@wellyshen/use-web-animations";
 
 const App = () => {
   const { ref, playState } = useWebAnimations({
@@ -109,7 +109,7 @@ This hook exposes the animation instance for us to interact with animations, we 
 
 ```js
 import React from "react";
-import useWebAnimations from "@welly/use-web-animations";
+import useWebAnimations from "@wellyshen/use-web-animations";
 
 const App = () => {
   const { ref, playState, getAnimation } = useWebAnimations({

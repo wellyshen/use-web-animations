@@ -1,4 +1,4 @@
-declare module "@welly/use-web-animations" {
+declare module "@wellyshen/use-web-animations" {
   import { RefObject } from "react";
 
   export interface Callback {
