@@ -78,5 +78,4 @@ export default {
   output: isDist ? [cjs, esm] : [cjs],
   plugins,
   external: isDist ? Object.keys(pkg.peerDependencies) : [],
-  inlineDynamicImports: true,
 };

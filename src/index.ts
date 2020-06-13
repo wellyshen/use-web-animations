@@ -1,11 +1,11 @@
 import { RefObject, useState, useRef, useCallback, useEffect } from "react";
 import useDeepCompareEffect from "use-deep-compare-effect";
 
+// @ts-ignore
+import loadPolyfill from "./polyfill";
 import useLatest from "./useLatest";
 
-// @ts-ignore
-// eslint-disable-next-line no-unused-expressions
-if (typeof window !== "undefined") import("web-animations-js");
+if (typeof window !== "undefined") loadPolyfill();
 
 interface Callback {
   (animation: Animation): void;
