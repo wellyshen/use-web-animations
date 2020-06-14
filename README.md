@@ -1,8 +1,8 @@
-> 🚧 This package is in-progress, **don't use it now**. Because API may be changed frequently, if you're willing to be the early user, please note any change via [release](https://github.com/wellyshen/use-web-animations/releases). Here's the [milestone](#milestone).
+> 🚧 This package is in-progress, **DON'T USE IT NOW**. Because API may be changed frequently, if you're willing to be the early user, please note any change via the [release](https://github.com/wellyshen/use-web-animations/releases). Here's the [milestone](#milestone).
 
 # useWebAnimations
 
-Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) (a.k.a WAAPI) in the React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook) way. Let's create highly-performant, flexible and manipulable animations in the modern web world 🛸
+Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) (a.k.a WAAPI) in the React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook) way. Let's create highly-performant, flexible and manipulable web animations in the modern world 🏙
 
 [![build status](https://img.shields.io/github/workflow/status/wellyshen/use-web-animations/CI?style=flat-square)](https://github.com/wellyshen/use-web-animations/actions?query=workflow%3ACI)
 [![npm version](https://img.shields.io/npm/v/@wellyshen/use-web-animations?style=flat-square)](https://www.npmjs.com/package/@wellyshen/use-web-animations)
@@ -27,6 +27,10 @@ Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_
 - [ ] Demo app.
 - [ ] Demo code.
 - [ ] Documentation.
+
+## Features
+
+Coming soon...
 
 ## Browser Support
 
@@ -71,7 +75,7 @@ import useWebAnimations from "@wellyshen/use-web-animations";
 const App = () => {
   const { ref, playState } = useWebAnimations({
     keyframes: {
-      transform: ["translateX(300px)"], // Move by 300px
+      transform: ["translateX(500px)"], // Move by 500px
       background: ["red", "blue", "green"], // Go through three colors
     },
     timing: {
@@ -103,9 +107,7 @@ const App = () => {
 
 ### Playback Control
 
-The shortcoming with existing technologies was the lack of playback control. The Web Animations API provides several useful methods for controlling playback: play, pause, reverse, cancel, finish, seek, control speed via the [methods](https://developer.mozilla.org/en-US/docs/Web/API/Animation#Methods) of the [Animation](https://developer.mozilla.org/en-US/docs/Web/API/Animation) interface.
-
-This hook exposes the animation instance for us to interact with animations, we can access it by the `getAnimation()` return value.
+The shortcoming with existing technologies was the lack of playback control. The Web Animations API provides several useful methods for controlling playback: play, pause, reverse, cancel, finish, seek, control speed via the [methods](https://developer.mozilla.org/en-US/docs/Web/API/Animation#Methods) of the **Animation** interface. This hook exposes the animation instance for us to interact with animations, we can access it by the `getAnimation()` return value.
 
 ```js
 import React from "react";
@@ -114,7 +116,7 @@ import useWebAnimations from "@wellyshen/use-web-animations";
 const App = () => {
   const { ref, playState, getAnimation } = useWebAnimations({
     pausedAtStart: true, // Pause animation at start, default is false
-    keyframes: { transform: ["translateX(300px)"] },
+    keyframes: { transform: ["translateX(500px)"] },
     timing: { duration: 1000, fill: "forwards" },
   });
 
@@ -138,11 +140,13 @@ const App = () => {
     getAnimation().finish();
   };
 
-  const seek = (time) => {
+  const seek = (e) => {
+    const time = parseInt(e.target.value, 10);
     getAnimation().currentTime = time;
   };
 
-  const updatePlaybackRate = (rate) => {
+  const updatePlaybackRate = (e) => {
+    const rate = parseInt(e.target.value, 10);
     getAnimation().updatePlaybackRate(rate);
   };
 
@@ -153,7 +157,7 @@ const App = () => {
       <button onClick={reverse}>Reverse</button>
       <button onClick={cancel}>Cancel</button>
       <button onClick={finish}>Finish</button>
-      <input type="range" max="300" onChange={seek} />
+      <input type="range" max="300" step="10" onChange={seek} />
       <input type="number" value="1" onChange={updatePlaybackRate} />
       <div className="target" ref={ref} />
     </div>
@@ -161,9 +165,65 @@ const App = () => {
 };
 ```
 
-### Animation Information
+### Getting Animation's Information
 
-Coming soon...
+When using the Web Animations API, we can get the information of an animation via the [properties](https://developer.mozilla.org/en-US/docs/Web/API/Animation#Properties) of the **Animation** interface. However, we can get the information of an animation by the `getAnimation()` return value as well.
+
+```js
+import React from "react";
+import useWebAnimations from "@wellyshen/use-web-animations";
+
+const App = () => {
+  const { ref, getAnimation } = useWebAnimations({
+    keyframes: { transform: ["translateX(500px)"] },
+    timing: { duration: 1000, fill: "forwards" },
+  });
+
+  const speedUp = () => {
+    const animation = getAnimation();
+    animation.updatePlaybackRate(animation.playbackRate * 0.25);
+  };
+
+  const JumpToHalf = () => {
+    const animation = getAnimation();
+    animation.currentTime = animation.effect.getTiming().duration / 2;
+  };
+
+  return (
+    <div className="container">
+      <button onClick={speedUp}>Speed Up</button>
+      <button onClick={JumpToHalf}>Jump to Half</button>
+      <div className="target" ref={ref} />
+    </div>
+  );
+};
+```
+
+The animation instance isn't a part of [React state](https://reactjs.org/docs/hooks-state.html), which means we need to access it by the `getAnimation()` whenever we need. If you want to monitor an animation's information, here's the `onUpdate` event for you. The event is implemented by the [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) internally and the event callback is triggered when the `animation.playState` is running or changes.
+
+```js
+import React, { useState } from "react";
+import useWebAnimations from "@wellyshen/use-web-animations";
+
+const App = () => {
+  const [showEl, setShowEl] = useState(false);
+  const { ref } = useWebAnimations({
+    keyframes: { transform: ["translateX(500px)"] },
+    timing: { duration: 1000, fill: "forwards" },
+    onUpdate: (animation) => {
+      if (animation.currentTime > animation.effect.getTiming().duration / 2)
+        setShowEl(true);
+    },
+  });
+
+  return (
+    <div className="container">
+      {showEl && <div className="some-element" />}
+      <div className="target" ref={ref} />
+    </div>
+  );
+};
+```
 
 ## API
 
