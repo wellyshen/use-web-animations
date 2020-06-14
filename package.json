@@ -3,7 +3,7 @@
   "version": "0.0.9",
   "description": "React hook for highly-performant and manipulable animations using Web Animations API.",
   "license": "MIT",
-  "homepage": "https://use-web-animations.netlify.com",
+  "homepage": "https://use-web-animations.netlify.app",
   "repository": "https://github.com/wellyshen/use-web-animations",
   "bugs": "https://github.com/wellyshen/use-web-animations/issues",
   "keywords": [
