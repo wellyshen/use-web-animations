@@ -1,7 +1,5 @@
 import React, { FC, useRef, useEffect } from "react";
 import { Global, css } from "@emotion/core";
-import { Slider } from "@reach/slider";
-import "@reach/slider/styles.css";
 import normalize from "normalize.css";
 
 import GitHubCorner from "../GitHubCorner";
@@ -78,12 +76,13 @@ const App: FC = () => {
           Animations API.
         </p>
         <div>
-          <Slider
-            min={500}
-            max={1500}
-            step={10}
-            onChange={(value) => {
-              getAnimation().currentTime = value;
+          <input
+            type="range"
+            min="500"
+            max="1500"
+            step="10"
+            onChange={(e) => {
+              getAnimation().currentTime = parseInt(e.target.value, 10);
             }}
           />
           <button

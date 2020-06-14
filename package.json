@@ -145,7 +145,6 @@
     "@babel/preset-typescript": "^7.10.1",
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.28",
-    "@reach/slider": "^0.10.3",
     "@rollup/plugin-babel": "^5.0.3",
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-html": "^0.2.0",
