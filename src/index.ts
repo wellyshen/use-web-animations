@@ -27,7 +27,7 @@ interface Animate {
   (keyframes: Keyframes, timing?: Timing, pausedAtStart?: PausedAtStart): void;
 }
 interface Return<T> {
-  readonly ref: RefObject<T>;
+  ref: RefObject<T>;
   readonly playState: PlayState;
   readonly getAnimation: () => Animation;
   readonly animate: Animate;
