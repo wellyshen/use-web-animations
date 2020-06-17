@@ -22,6 +22,7 @@ const App: FC = () => {
   >({
     // ref,
     id: "test-1",
+    // playbackRate: 2,
     // pausedAtStart: true,
     keyframes: {
       transform: ["translateX(0)", "translateX(270px)"],
@@ -49,7 +50,8 @@ const App: FC = () => {
   useEffect(() => {
     /* animate({
       id: "test-2",
-      // pausedAtStart: true,
+      playbackRate: 2,
+      pausedAtStart: true,
       keyframes: {
         transform: ["translateX(0)", "translateX(270px)"],
         background: ["red", "blue", "green"],
