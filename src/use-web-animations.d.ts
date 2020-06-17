@@ -1,21 +1,34 @@
 declare module "@wellyshen/use-web-animations" {
   import { RefObject } from "react";
 
-  export interface Callback {
-    (animation: Animation): void;
-  }
-
   type Keyframes = Keyframe[] | PropertyIndexedKeyframes;
 
-  type Timing = number | KeyframeAnimationOptions;
+  type PlayState = string | null;
 
-  type PausedAtStart = boolean;
+  interface AnimConf {
+    id?: string;
+    playbackRate?: number;
+    pausedAtStart?: boolean;
+    timing?: number | KeyframeAnimationOptions;
+  }
 
-  interface Options<T> {
+  interface Animate {
+    (args: AnimConf & { keyframes: Keyframes }): void;
+  }
+
+  export interface Event {
+    playState: PlayState;
+    animate: Animate;
+    animation: Animation;
+  }
+
+  export interface Callback {
+    (event: Event): void;
+  }
+
+  interface Options<T> extends AnimConf {
     ref?: RefObject<T>;
     keyframes?: Keyframes;
-    timing?: Timing;
-    pausedAtStart?: PausedAtStart;
     onReady?: Callback;
     onUpdate?: Callback;
     onFinish?: Callback;
@@ -23,13 +36,9 @@ declare module "@wellyshen/use-web-animations" {
 
   interface Return<T> {
     ref: RefObject<T>;
-    readonly playState: string | null;
+    readonly playState: PlayState;
     readonly getAnimation: () => Animation;
-    readonly animate: (
-      keyframes: Keyframes,
-      timing?: Timing,
-      pausedAtStart?: PausedAtStart
-    ) => void;
+    readonly animate: Animate;
   }
 
   const useWebAnimations: <T extends HTMLElement>(

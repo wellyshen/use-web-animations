@@ -7,24 +7,30 @@ import useLatest from "./useLatest";
 
 if (typeof window !== "undefined") loadPolyfill();
 
-interface Callback {
-  (animation: Animation): void;
-}
 type Keyframes = Keyframe[] | PropertyIndexedKeyframes;
-type Timing = number | KeyframeAnimationOptions;
-type PausedAtStart = boolean;
-interface Options<T> {
+type PlayState = string | null;
+interface AnimConf {
+  id?: string;
+  playbackRate?: number;
+  pausedAtStart?: boolean;
+  timing?: number | KeyframeAnimationOptions;
+}
+interface Animate {
+  (args: AnimConf & { keyframes: Keyframes }): void;
+}
+interface Callback {
+  (event: {
+    playState: PlayState;
+    animate: Animate;
+    animation: Animation;
+  }): void;
+}
+interface Options<T> extends AnimConf {
   ref?: RefObject<T>;
   keyframes?: Keyframes;
-  timing?: Timing;
-  pausedAtStart?: PausedAtStart;
   onReady?: Callback;
   onUpdate?: Callback;
   onFinish?: Callback;
-}
-type PlayState = string | null;
-interface Animate {
-  (keyframes: Keyframes, timing?: Timing, pausedAtStart?: PausedAtStart): void;
 }
 interface Return<T> {
   ref: RefObject<T>;
@@ -35,9 +41,11 @@ interface Return<T> {
 
 const useWebAnimations = <T extends HTMLElement>({
   ref: refOpt,
+  id,
+  playbackRate,
+  pausedAtStart = false,
   keyframes,
   timing,
-  pausedAtStart = false,
   onReady,
   onUpdate,
   onFinish,
@@ -54,29 +62,40 @@ const useWebAnimations = <T extends HTMLElement>({
   const getAnimation = useCallback(() => animRef.current, []);
 
   const animate: Animate = useCallback(
-    (k, t, p) => {
-      if (!ref.current || !k) return;
+    (args) => {
+      if (!ref.current || !args.keyframes) return;
 
-      animRef.current = ref.current.animate(k, t);
-      if (p) animRef.current.pause();
+      animRef.current = ref.current.animate(args.keyframes, args.timing);
+      const { current: anim } = animRef;
+
+      if (args.pausedAtStart) anim.pause();
+      if (args.id) anim.id = args.id;
+      if (args.playbackRate) anim.playbackRate = args.playbackRate;
+      // Google Chrome < v84 has no the ready property
+      if (anim.ready)
+        anim.ready.then((animation) => {
+          onReadyRef.current({
+            playState: animation.playState,
+            animate,
+            animation,
+          });
+        });
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [ref]
   );
 
   useDeepCompareEffect(() => {
-    animate(keyframes, timing, pausedAtStart);
-
-    const anim = getAnimation();
-    // Google Chrome < v84 has no the ready property
-    if (onReadyRef.current && anim?.ready) anim.ready.then(onReadyRef.current);
-  }, [keyframes, timing, pausedAtStart, getAnimation]);
+    animate({ id, playbackRate, pausedAtStart, keyframes, timing });
+  }, [id, playbackRate, pausedAtStart, keyframes, timing, animate]);
 
   useEffect(() => {
     const update = () => {
-      const anim = getAnimation();
+      const animation = getAnimation();
 
-      if (anim) {
-        const { playState: curPlayState } = anim;
+      if (animation) {
+        const { playState: curPlayState } = animation;
+        const e = { playState: animation.playState, animate, animation };
 
         if (curPlayState !== prevPlayStateRef.current)
           setPlayState(curPlayState);
@@ -86,14 +105,14 @@ const useWebAnimations = <T extends HTMLElement>({
           (curPlayState === "running" ||
             curPlayState !== prevPlayStateRef.current)
         )
-          onUpdateRef.current(anim);
+          onUpdateRef.current(e);
 
         if (
           onFinishRef.current &&
           curPlayState === "finished" &&
           prevPlayStateRef.current !== "finished"
         )
-          onFinishRef.current(anim);
+          onFinishRef.current(e);
 
         prevPlayStateRef.current = curPlayState;
       }
@@ -103,7 +122,7 @@ const useWebAnimations = <T extends HTMLElement>({
 
     requestAnimationFrame(update);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getAnimation]);
+  }, [getAnimation, animate]);
 
   return { ref, playState, getAnimation, animate };
 };
