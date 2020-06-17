@@ -21,6 +21,8 @@ const App: FC = () => {
     HTMLDivElement
   >({
     // ref,
+    id: "test-1",
+    // pausedAtStart: true,
     keyframes: {
       transform: ["translateX(0)", "translateX(270px)"],
       background: ["red", "blue", "green"],
@@ -31,33 +33,34 @@ const App: FC = () => {
       fill: "forwards",
       easing: "ease-out",
     },
-    // pausedAtStart: true,
-    onReady: (anim) => {
-      console.log("LOG ===> onReady: ", anim);
+    onReady: ({ playState: p, animate: a, animation: anim }) => {
+      console.log("LOG ===> onReady: ", p, a, anim);
     },
-    onUpdate: (anim) => {
-      console.log("LOG ===> onUpdate: ", anim);
+    onUpdate: ({ playState: p, animate: a, animation: anim }) => {
+      console.log("LOG ===> onUpdate: ", p, a, anim);
     },
-    onFinish: (anim) => {
-      console.log("LOG ===> onFinish: ", anim);
+    onFinish: ({ playState: p, animate: a, animation: anim }) => {
+      console.log("LOG ===> onFinish: ", p, a, anim);
     },
   });
 
   console.log("LOG ===> playback: ", playState);
 
   useEffect(() => {
-    /* animate(
-      {
+    /* animate({
+      id: "test-2",
+      // pausedAtStart: true,
+      keyframes: {
         transform: ["translateX(0)", "translateX(270px)"],
         background: ["red", "blue", "green"],
       },
-      {
+      timing: {
         delay: 500,
         duration: 1000,
         fill: "forwards",
         easing: "ease-out",
-      }
-    ); */
+      },
+    }); */
   }, [animate]);
 
   return (
