@@ -22,6 +22,7 @@ Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_
 - [x] Set animation whenever you want.
 - [x] Expose play-state as a return value.
 - [x] Server-side compatibility.
+- [x] Expose some useful properties, like `id`, `playbackRate` etc.
 - [ ] Unit testing.
 - [x] TypeScript type definition.
 - [ ] Demo app.
@@ -116,7 +117,7 @@ import useWebAnimations from "@wellyshen/use-web-animations";
 
 const App = () => {
   const { ref, playState, getAnimation } = useWebAnimations({
-    playbackRate: 0.5, // Initialize playback rate, default is 1
+    playbackRate: 0.5, // Change playback rate, default is 1
     pausedAtStart: true, // Pause animation at start, default is false
     keyframes: { transform: ["translateX(500px)"] },
     timing: { duration: 1000, fill: "forwards" },
@@ -226,6 +227,73 @@ const App = () => {
   );
 };
 ```
+
+### Dynamic Interactions with Animation
+
+We can create and play an animation at the timing we want by the `animate()` return value, which is implemented based on the [Element.animate()](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate). It's useful for interactions and the [composite modes](https://css-tricks.com/additive-animation-web-animations-api).
+
+Let's create a mouse interaction effect:
+
+```js
+import React, { useEffect } from "react";
+import useWebAnimations from "@wellyshen/use-web-animations";
+
+const App = () => {
+  const { ref, animate } = useWebAnimations();
+
+  useEffect(() => {
+    document.addEventListener("mousemove", (e) => {
+      // The target will follow the mouse cursor
+      animate({
+        keyframes: { transform: `translate(${e.clientX}px, ${e.clientY}px)` },
+        timing: { duration: 500, fill: "forwards" },
+      });
+    });
+  }, [animate]);
+
+  return (
+    <div className="container">
+      <div className="target" ref={ref} />
+    </div>
+  );
+};
+```
+
+Create a bounce effect via lifecycle and composite mode:
+
+```js
+import React from "react";
+import useWebAnimations from "@wellyshen/use-web-animations";
+
+const App = () => {
+  const { ref, animate } = useWebAnimations({
+    id: "fall", // Set animation id, default is empty string
+    keyframes: [{ top: 0, easing: "ease-in" }, { top: "500px" }],
+    timing: { duration: 300, fill: "forwards" },
+    onFinish: ({ animate, animation }) => {
+      // Lifecycle is triggered by each animation, we can check the id to prevent animation from repeating
+      if (animation.id === "bounce") return;
+
+      animate({
+        id: "bounce",
+        keyframes: [
+          { top: "500px", easing: "ease-in" },
+          { top: "10px", easing: "ease-out" },
+        ],
+        timing: { duration: 300, composite: "add" },
+      });
+    },
+  });
+
+  return (
+    <div className="container">
+      <div className="target" ref={ref} />
+    </div>
+  );
+};
+```
+
+> ⚠️ Composite modes isn't fully supported by all the browsers, please check the [browser compatibility](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffect/composite#Browser_compatibility) carefully before using it.
 
 ## Use Your Own `ref`
 
