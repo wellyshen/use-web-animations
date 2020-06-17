@@ -85,15 +85,16 @@ const App = () => {
       direction: "alternate", // Run the animation forwards and then backwards
       easing: "ease-in-out", // Use a fancy timing function
     },
-    onReady: (animation) => {
-      // Triggered when the animation is ready to play
+    onReady: ({ playState, animate, animation }) => {
+      // Triggered whenever the animation is ready to play
     },
-    onUpdate: (animation) => {
+    onUpdate: ({ playState, animate, animation }) => {
       // Triggered whenever the animation enters the running state or changes state
     },
-    onFinish: (animation) => {
+    onFinish: ({ playState, animate, animation }) => {
       // Triggered whenever the animation enters the finished state
     },
+    // More useful options...
   });
 
   return (
@@ -115,6 +116,7 @@ import useWebAnimations from "@wellyshen/use-web-animations";
 
 const App = () => {
   const { ref, playState, getAnimation } = useWebAnimations({
+    playbackRate: 0.5, // Initialize playback rate, default is 1
     pausedAtStart: true, // Pause animation at start, default is false
     keyframes: { transform: ["translateX(500px)"] },
     timing: { duration: 1000, fill: "forwards" },
@@ -210,7 +212,7 @@ const App = () => {
   const { ref } = useWebAnimations({
     keyframes: { transform: ["translateX(500px)"] },
     timing: { duration: 1000, fill: "forwards" },
-    onUpdate: (animation) => {
+    onUpdate: ({ animation }) => {
       if (animation.currentTime > animation.effect.getTiming().duration / 2)
         setShowEl(true);
     },
@@ -223,6 +225,15 @@ const App = () => {
     </div>
   );
 };
+```
+
+## Use Your Own `ref`
+
+In case of you had a ref already or you want to share a ref for other purposes. You can pass in the ref instead of using the one provided by this hook.
+
+```js
+const ref = useRef();
+const { playState } = useWebAnimations({ ref });
 ```
 
 ## API
