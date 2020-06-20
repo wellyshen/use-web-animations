@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default ({ files }) => `
   <!DOCTYPE html>
-  <html lang="en">
+  <html lang="en" class="antialiased">
     <head>
       <meta charset="utf-8" />
       <link rel="icon" href="assets/favicon.ico" />
@@ -9,7 +9,6 @@ export default ({ files }) => `
       <meta name="theme-color" content="#000000" />
       <link rel="apple-touch-icon" href="assets/logo192.png" />
       <link rel="manifest" href="assets/manifest.json" />
-      <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
       <link rel="stylesheet" href=${files.css[0].fileName} />
       <title>useWebAnimations</title>
       <meta property="og:title" content="useWebAnimations" />
@@ -21,7 +20,7 @@ export default ({ files }) => `
       <meta name="twitter:site" content="@use-web-animations" />
       <meta name="twitter:creator" content="@wellyshen" />
     </head>
-    <body>
+    <body class="text-gray-600">
       <div id="app"></div>
       <script type="text/javascript" src=${files.js[0].fileName}></script>
     </body>

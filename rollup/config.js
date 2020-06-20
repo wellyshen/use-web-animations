@@ -1,15 +1,17 @@
-import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
-import babel from "@rollup/plugin-babel";
-import replace from "@rollup/plugin-replace";
-import url from "@rollup/plugin-url";
-import postcss from "rollup-plugin-postcss";
-import html from "@rollup/plugin-html";
-import serve from "rollup-plugin-serve";
-import livereload from "rollup-plugin-livereload";
 import { sizeSnapshot } from "rollup-plugin-size-snapshot";
 import { terser } from "rollup-plugin-terser";
+import babel from "@rollup/plugin-babel";
+import commonjs from "@rollup/plugin-commonjs";
 import copy from "rollup-plugin-copy";
+import html from "@rollup/plugin-html";
+import livereload from "rollup-plugin-livereload";
+import postcss from "rollup-plugin-postcss";
+import replace from "@rollup/plugin-replace";
+import resolve from "@rollup/plugin-node-resolve";
+import serve from "rollup-plugin-serve";
+import tailwind from "tailwindcss";
+import discardComments from "postcss-discard-comments";
+import url from "@rollup/plugin-url";
 
 import pkg from "../package.json";
 import template from "./template";
@@ -43,7 +45,13 @@ const plugins = [
     ),
   }),
   !isDist && url(),
-  !isDist && postcss({ extract: true, sourceMap: isDev, minimize: !isDev }),
+  !isDist &&
+    postcss({
+      extract: true,
+      sourceMap: isDev,
+      minimize: !isDev,
+      plugins: [tailwind, discardComments({ removeAll: true })],
+    }),
   !isDist && html({ template }),
   !isDist &&
     copy({
