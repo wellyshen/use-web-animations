@@ -8,7 +8,7 @@ declare module "@wellyshen/use-web-animations" {
   interface AnimConf {
     id?: string;
     playbackRate?: number;
-    pausedAtStart?: boolean;
+    autoPlay?: boolean;
     timing?: number | KeyframeAnimationOptions;
   }
 
