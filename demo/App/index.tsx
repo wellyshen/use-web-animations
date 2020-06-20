@@ -23,7 +23,7 @@ const App: FC = () => {
     // ref,
     id: "test-1",
     // playbackRate: 2,
-    // autoPlay: false,
+    autoPlay: false,
     keyframes: {
       transform: ["translateX(0)", "translateX(270px)"],
       background: ["red", "blue", "green"],
@@ -48,7 +48,7 @@ const App: FC = () => {
   console.log("LOG ===> playback: ", playState);
 
   useEffect(() => {
-    animate({
+    /* animate({
       id: "test-2",
       playbackRate: 2,
       autoPlay: false,
@@ -62,7 +62,7 @@ const App: FC = () => {
         fill: "forwards",
         easing: "ease-out",
       },
-    });
+    }); */
   }, [animate]);
 
   return (
