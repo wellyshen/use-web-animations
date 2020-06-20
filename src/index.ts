@@ -71,23 +71,21 @@ const useWebAnimations = <T extends HTMLElement>({
       if (!args.autoPlay) anim.pause();
       if (args.id) anim.id = args.id;
       if (args.playbackRate) anim.playbackRate = args.playbackRate;
-      // "ready" and "finished" methods only available on Google Chrome v84+
-      if (anim.ready)
-        anim.ready.then((animation) => {
-          onReadyRef.current({
-            playState: animation.playState,
-            animate,
-            animation,
-          });
+
+      anim.ready.then((animation) => {
+        onReadyRef.current({
+          playState: animation.playState,
+          animate,
+          animation,
         });
-      if (anim.finished)
-        anim.finished.then((animation) => {
-          onFinishRef.current({
-            playState: animation.playState,
-            animate,
-            animation,
-          });
+      });
+      anim.finished.then((animation) => {
+        onFinishRef.current({
+          playState: animation.playState,
+          animate,
+          animation,
         });
+      });
 
       prevPlayStateRef.current = undefined;
     },
