@@ -35,27 +35,22 @@ export const title = css`
 `;
 
 export const subtitle = css`
-  margin: 0 0 2.5rem;
+  margin: 0 0 5rem;
 `;
 
-export const frame = css`
-  display: flex;
-  align-items: center;
-  margin-top: 2.5rem;
-  padding: 10px;
-  width: 320px;
-  height: 100px;
-  border: 1px solid #777;
+export const mask = css`
+  position: relative;
+  width: 28rem;
 `;
 
-export const target = css`
-  width: 50px;
-  height: 50px;
-  background: red;
-  z-index: 1;
-`;
-
-export const fakeTarget = css`
+export const block = css`
   position: absolute;
-  opacity: 0.25;
+  height: 100%;
+  background: #000;
+`;
+
+export const text = css`
+  font-size: 3rem;
+  font-weight: bold;
+  opacity: 0;
 `;

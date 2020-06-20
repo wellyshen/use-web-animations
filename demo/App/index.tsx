@@ -1,69 +1,28 @@
-import React, { FC, useRef, useEffect } from "react";
+import React, { FC } from "react";
 import { Global, css } from "@emotion/core";
 import normalize from "normalize.css";
 
 import GitHubCorner from "../GitHubCorner";
-import {
-  root,
-  container,
-  title,
-  subtitle,
-  frame,
-  target,
-  fakeTarget,
-} from "./styles";
+import { root, container, title, subtitle, mask, block, text } from "./styles";
 import useWebAnimations from "../../src";
 
 const App: FC = () => {
-  // const ref = useRef();
-
-  const { ref, playState, getAnimation, animate } = useWebAnimations<
-    HTMLDivElement
-  >({
-    // ref,
-    id: "test-1",
-    // playbackRate: 2,
-    autoPlay: false,
-    keyframes: {
-      transform: ["translateX(0)", "translateX(270px)"],
-      background: ["red", "blue", "green"],
-    },
+  const { ref: blockRef } = useWebAnimations<HTMLDivElement>({
+    keyframes: { width: ["0", "100%", "0"], left: ["0", "0", "100%"] },
     timing: {
-      delay: 500,
-      duration: 1000,
+      duration: 2000,
       fill: "forwards",
-      easing: "ease-out",
-    },
-    onReady: ({ playState: p, animate: a, animation: anim }) => {
-      console.log("LOG ===> onReady: ", p, a, anim);
-    },
-    onUpdate: ({ playState: p, animate: a, animation: anim }) => {
-      console.log("LOG ===> onUpdate: ", p, a, anim);
-    },
-    onFinish: ({ playState: p, animate: a, animation: anim }) => {
-      console.log("LOG ===> onFinish: ", p, a, anim);
+      easing: "cubic-bezier(0.74, 0.06, 0.4, 0.92)",
     },
   });
-
-  console.log("LOG ===> playback: ", playState);
-
-  useEffect(() => {
-    /* animate({
-      id: "test-2",
-      playbackRate: 2,
-      autoPlay: false,
-      keyframes: {
-        transform: ["translateX(0)", "translateX(270px)"],
-        background: ["red", "blue", "green"],
-      },
-      timing: {
-        delay: 500,
-        duration: 1000,
-        fill: "forwards",
-        easing: "ease-out",
-      },
-    }); */
-  }, [animate]);
+  const { ref: textRef } = useWebAnimations<HTMLDivElement>({
+    keyframes: { opacity: ["0", "1"] },
+    timing: {
+      delay: 1600,
+      duration: 1000,
+      fill: "forwards",
+    },
+  });
 
   return (
     <>
@@ -80,65 +39,11 @@ const App: FC = () => {
           React hook for highly-performant and manipulable animations using Web
           Animations API.
         </p>
-        <div>
-          <input
-            type="range"
-            min="500"
-            max="1500"
-            step="10"
-            onChange={(e) => {
-              getAnimation().currentTime = parseInt(e.target.value, 10);
-            }}
-          />
-          <button
-            onClick={() => {
-              // console.log("LOG ===> Play: ", getAnimation());
-              getAnimation().play();
-            }}
-            type="button"
-          >
-            Play
-          </button>
-          <button
-            onClick={() => {
-              // console.log("LOG ===> Pause: ", getAnimation());
-              getAnimation().pause();
-            }}
-            type="button"
-          >
-            Pause
-          </button>
-          <button
-            onClick={() => {
-              // console.log("LOG ===> Reverse: ", getAnimation());
-              getAnimation().reverse();
-            }}
-            type="button"
-          >
-            Reverse
-          </button>
-          <button
-            onClick={() => {
-              // console.log("LOG ===> Finish: ", getAnimation());
-              getAnimation().finish();
-            }}
-            type="button"
-          >
-            Finish
-          </button>
-          <button
-            onClick={() => {
-              // console.log("LOG ===> Cancel: ", getAnimation());
-              getAnimation().cancel();
-            }}
-            type="button"
-          >
-            Cancel
-          </button>
-        </div>
-        <div css={frame}>
-          <div css={[target, fakeTarget]} />
-          <div css={target} ref={ref} />
+        <div css={mask}>
+          <div css={block} ref={blockRef} />
+          <div css={text} ref={textRef}>
+            Black Lives Matter
+          </div>
         </div>
       </div>
     </>
