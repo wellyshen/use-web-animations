@@ -71,21 +71,22 @@ const useWebAnimations = <T extends HTMLElement>({
       if (!args.autoPlay) anim.pause();
       if (args.id) anim.id = args.id;
       if (args.playbackRate) anim.playbackRate = args.playbackRate;
-
-      anim.ready.then((animation) => {
-        onReadyRef.current({
-          playState: animation.playState,
-          animate,
-          animation,
+      if (onReadyRef.current)
+        anim.ready.then((animation) => {
+          onReadyRef.current({
+            playState: animation.playState,
+            animate,
+            animation,
+          });
         });
-      });
-      anim.finished.then((animation) => {
-        onFinishRef.current({
-          playState: animation.playState,
-          animate,
-          animation,
+      if (onFinishRef.current)
+        anim.finished.then((animation) => {
+          onFinishRef.current({
+            playState: animation.playState,
+            animate,
+            animation,
+          });
         });
-      });
 
       prevPlayStateRef.current = undefined;
     },
