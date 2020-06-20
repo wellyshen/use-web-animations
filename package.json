@@ -182,7 +182,8 @@
     "stylelint-prettier": "^1.1.2",
     "ts-jest": "^26.1.0",
     "typescript": "^3.9.5",
-    "web-animations-js": "^2.3.2"
+    "web-animations-js": "^2.3.2",
+    "yarn": "^1.22.4"
   },
   "dependencies": {
     "use-deep-compare-effect": "^1.3.1"
