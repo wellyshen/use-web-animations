@@ -48,7 +48,7 @@ const App: FC = () => {
   console.log("LOG ===> playback: ", playState);
 
   useEffect(() => {
-    /* animate({
+    animate({
       id: "test-2",
       playbackRate: 2,
       autoPlay: false,
@@ -62,7 +62,7 @@ const App: FC = () => {
         fill: "forwards",
         easing: "ease-out",
       },
-    }); */
+    });
   }, [animate]);
 
   return (

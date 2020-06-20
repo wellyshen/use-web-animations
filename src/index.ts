@@ -71,7 +71,7 @@ const useWebAnimations = <T extends HTMLElement>({
       if (!args.autoPlay) anim.pause();
       if (args.id) anim.id = args.id;
       if (args.playbackRate) anim.playbackRate = args.playbackRate;
-      // Google Chrome < v84 has no the ready property
+      // "ready" and "finished" methods only available on Google Chrome v84+
       if (anim.ready)
         anim.ready.then((animation) => {
           onReadyRef.current({
@@ -80,6 +80,16 @@ const useWebAnimations = <T extends HTMLElement>({
             animation,
           });
         });
+      if (anim.finished)
+        anim.finished.then((animation) => {
+          onFinishRef.current({
+            playState: animation.playState,
+            animate,
+            animation,
+          });
+        });
+
+      prevPlayStateRef.current = undefined;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [ref]
@@ -95,7 +105,6 @@ const useWebAnimations = <T extends HTMLElement>({
 
       if (animation) {
         const { playState: curPlayState } = animation;
-        const e = { playState: animation.playState, animate, animation };
 
         if (curPlayState !== prevPlayStateRef.current)
           setPlayState(curPlayState);
@@ -105,14 +114,11 @@ const useWebAnimations = <T extends HTMLElement>({
           (curPlayState === "running" ||
             curPlayState !== prevPlayStateRef.current)
         )
-          onUpdateRef.current(e);
-
-        if (
-          onFinishRef.current &&
-          curPlayState === "finished" &&
-          prevPlayStateRef.current !== "finished"
-        )
-          onFinishRef.current(e);
+          onUpdateRef.current({
+            playState: animation.playState,
+            animate,
+            animation,
+          });
 
         prevPlayStateRef.current = curPlayState;
       }
