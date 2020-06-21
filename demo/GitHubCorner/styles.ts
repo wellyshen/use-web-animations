@@ -22,8 +22,8 @@ export const octo = css`
   top: 0;
   right: 0;
   border: 0;
-  fill: #151513;
-  color: #fff;
+  fill: #fff;
+  color: #000;
 `;
 
 export const octoArm = css`

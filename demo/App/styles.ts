@@ -14,7 +14,10 @@ export const container = css`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
   padding: 5rem 5%;
+  color: #fff;
+  background: #000;
   ${sm} {
     padding-left: 10%;
     padding-right: 10%;
@@ -46,7 +49,7 @@ export const mask = css`
 export const block = css`
   position: absolute;
   height: 100%;
-  background: #000;
+  background: #fff;
 `;
 
 export const text = css`
