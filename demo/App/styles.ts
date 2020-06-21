@@ -43,7 +43,10 @@ export const subtitle = css`
 
 export const mask = css`
   position: relative;
-  width: 28rem;
+  width: 88vw;
+  ${sm} {
+    width: 48vw;
+  }
 `;
 
 export const block = css`
@@ -53,7 +56,10 @@ export const block = css`
 `;
 
 export const text = css`
-  font-size: 3rem;
+  font-size: 9vw;
   font-weight: bold;
   opacity: 0;
+  ${sm} {
+    font-size: 5vw;
+  }
 `;
