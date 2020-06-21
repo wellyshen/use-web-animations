@@ -44,8 +44,8 @@ export const subtitle = css`
 export const mask = css`
   position: relative;
   width: 88vw;
-  ${sm} {
-    width: 48vw;
+  ${md} {
+    width: 38rem;
   }
 `;
 
@@ -59,7 +59,7 @@ export const text = css`
   font-size: 9vw;
   font-weight: bold;
   opacity: 0;
-  ${sm} {
-    font-size: 5vw;
+  ${md} {
+    font-size: 4rem;
   }
 `;
