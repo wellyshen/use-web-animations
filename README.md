@@ -177,7 +177,7 @@ const App = () => {
     animation.updatePlaybackRate(animation.playbackRate * 0.25);
   };
 
-  const JumpToHalf = () => {
+  const jumpToHalf = () => {
     const animation = getAnimation();
     animation.currentTime = animation.effect.getTiming().duration / 2;
   };
@@ -185,7 +185,7 @@ const App = () => {
   return (
     <div className="container">
       <button onClick={speedUp}>Speed Up</button>
-      <button onClick={JumpToHalf}>Jump to Half</button>
+      <button onClick={jumpToHalf}>Jump to Half</button>
       <div className="target" ref={ref} />
     </div>
   );
