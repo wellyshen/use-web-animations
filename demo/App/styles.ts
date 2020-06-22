@@ -15,7 +15,7 @@ export const container = css`
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  padding: 5rem 5%;
+  padding: 0 5%;
   color: #fff;
   background: #000;
   ${sm} {
@@ -33,7 +33,7 @@ export const container = css`
 `;
 
 export const title = css`
-  margin: 0 0 0.75rem;
+  margin: 5rem 0 0.75rem;
   text-align: center;
 `;
 
@@ -45,7 +45,8 @@ export const mask = css`
   position: relative;
   margin-bottom: 2.5rem;
   width: 87vw;
-  overflow-x: hidden;
+  overflow: hidden;
+  user-select: none;
   ${md} {
     width: 29rem;
   }
