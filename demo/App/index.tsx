@@ -13,7 +13,6 @@ import {
   text,
   heart,
   btn,
-  progress,
 } from "./styles";
 import useWebAnimations from "../../src";
 
