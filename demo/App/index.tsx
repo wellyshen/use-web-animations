@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, MouseEvent } from "react";
 import { Global, css } from "@emotion/core";
 import normalize from "normalize.css";
 
@@ -12,11 +12,15 @@ import {
   block,
   text,
   heart,
+  btn,
 } from "./styles";
 import useWebAnimations from "../../src";
 
 const App: FC = () => {
-  const { ref: blockRef } = useWebAnimations<HTMLDivElement>({
+  const { ref: blockRef, getAnimation: getBlockAnim } = useWebAnimations<
+    HTMLDivElement
+  >({
+    autoPlay: false,
     keyframes: { width: ["0", "100%", "0"], left: ["0", "0", "100%"] },
     timing: {
       duration: 2000,
@@ -24,7 +28,10 @@ const App: FC = () => {
       easing: "cubic-bezier(0.74, 0.06, 0.4, 0.92)",
     },
   });
-  const { ref: textRef } = useWebAnimations<HTMLDivElement>({
+  const { ref: textRef, getAnimation: getTextAnim } = useWebAnimations<
+    HTMLDivElement
+  >({
+    autoPlay: false,
     keyframes: { opacity: ["0", "1"] },
     timing: {
       delay: 1600,
@@ -32,7 +39,10 @@ const App: FC = () => {
       fill: "forwards",
     },
   });
-  const { ref: heartRef } = useWebAnimations<HTMLDivElement>({
+  const { ref: heartRef, getAnimation: getHeartAnim } = useWebAnimations<
+    HTMLDivElement
+  >({
+    autoPlay: false,
     keyframes: [
       { transform: "translate3d(0, 0, 0)", opacity: 1 },
       { transform: "translate3d(0, -130%, 0)", opacity: 0.5 },
@@ -45,6 +55,12 @@ const App: FC = () => {
       easing: "cubic-bezier(0.215, 0.610, 0.355, 1)",
     },
   });
+
+  const handlePlayback = (e: MouseEvent) => {
+    (getBlockAnim() as any)[(e.target as HTMLButtonElement).id]();
+    (getTextAnim() as any)[(e.target as HTMLButtonElement).id]();
+    (getHeartAnim() as any)[(e.target as HTMLButtonElement).id]();
+  };
 
   return (
     <>
@@ -69,6 +85,20 @@ const App: FC = () => {
           <span css={heart} ref={heartRef}>
             ❤
           </span>
+        </div>
+        <div>
+          <button id="play" css={btn} type="button" onClick={handlePlayback}>
+            PLAY
+          </button>
+          <button id="pause" css={btn} type="button" onClick={handlePlayback}>
+            PAUSE
+          </button>
+          <button id="reverse" css={btn} type="button" onClick={handlePlayback}>
+            REVERSE
+          </button>
+          <button id="finish" css={btn} type="button" onClick={handlePlayback}>
+            FINISH
+          </button>
         </div>
       </div>
     </>

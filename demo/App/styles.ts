@@ -43,6 +43,7 @@ export const subtitle = css`
 
 export const mask = css`
   position: relative;
+  margin-bottom: 2.5rem;
   width: 87vw;
   overflow-x: hidden;
   ${md} {
@@ -73,5 +74,22 @@ export const heart = css`
   color: #f00;
   ${md} {
     font-size: 3rem;
+  }
+`;
+
+export const btn = css`
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #fff;
+  color: #fff;
+  background: none;
+  cursor: pointer;
+  &:not(:first-of-type) {
+    margin-left: -1px;
+  }
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+  &:focus {
+    outline: none;
   }
 `;
