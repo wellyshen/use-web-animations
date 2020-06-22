@@ -3,7 +3,16 @@ import { Global, css } from "@emotion/core";
 import normalize from "normalize.css";
 
 import GitHubCorner from "../GitHubCorner";
-import { root, container, title, subtitle, mask, block, text } from "./styles";
+import {
+  root,
+  container,
+  title,
+  subtitle,
+  mask,
+  block,
+  text,
+  heart,
+} from "./styles";
 import useWebAnimations from "../../src";
 
 const App: FC = () => {
@@ -21,6 +30,19 @@ const App: FC = () => {
       delay: 1600,
       duration: 1000,
       fill: "forwards",
+    },
+  });
+  const { ref: heartRef } = useWebAnimations<HTMLDivElement>({
+    keyframes: [
+      { transform: "translate3d(0, 0, 0)", opacity: 1 },
+      { transform: "translate3d(0, -130%, 0)", opacity: 0.5 },
+      { transform: "translate3d(0, -100%, 0)", opacity: 1 },
+    ],
+    timing: {
+      delay: 2000,
+      duration: 300,
+      fill: "forwards",
+      easing: "cubic-bezier(0.215, 0.610, 0.355, 1)",
     },
   });
 
@@ -41,9 +63,12 @@ const App: FC = () => {
         </p>
         <div css={mask}>
           <div css={block} ref={blockRef} />
-          <div css={text} ref={textRef}>
-            Black Lives Matter
-          </div>
+          <span css={text} ref={textRef}>
+            BLACK LIVES MATTER
+          </span>
+          <span css={heart} ref={heartRef}>
+            ❤
+          </span>
         </div>
       </div>
     </>

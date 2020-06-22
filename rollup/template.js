@@ -9,7 +9,7 @@ export default ({ files }) => `
       <meta name="theme-color" content="#000000" />
       <link rel="apple-touch-icon" href="assets/logo192.png" />
       <link rel="manifest" href="assets/manifest.json" />
-      <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Bowlby+One+SC&display=swap" rel="stylesheet" />
       <link rel="stylesheet" href=${files.css[0].fileName} />
       <title>useWebAnimations</title>
       <meta property="og:title" content="useWebAnimations" />

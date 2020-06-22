@@ -43,9 +43,10 @@ export const subtitle = css`
 
 export const mask = css`
   position: relative;
-  width: 88vw;
+  width: 87vw;
+  overflow-x: hidden;
   ${md} {
-    width: 38rem;
+    width: 29rem;
   }
 `;
 
@@ -56,10 +57,21 @@ export const block = css`
 `;
 
 export const text = css`
-  font-size: 9vw;
-  font-weight: bold;
+  font-family: "Bowlby One SC", cursive;
+  font-size: 12vw;
   opacity: 0;
   ${md} {
     font-size: 4rem;
+  }
+`;
+
+export const heart = css`
+  position: absolute;
+  top: 100%;
+  margin-left: 1rem;
+  font-size: 9vw;
+  color: #f00;
+  ${md} {
+    font-size: 3rem;
   }
 `;
