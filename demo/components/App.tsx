@@ -55,11 +55,11 @@ const App: FC = () => {
       <h1 className="font-bold text-6xl text-gray-900 leading-tight mb-4 mt-32">
         useWebAnimations
       </h1>
-      <p className="text-2xl leading-relaxed max-w-screen-sm mx-auto mb-12">
+      <p className="text-2xl leading-relaxed max-w-screen-sm mx-auto mb-16">
         A React hook for highly-performant and manipulable animations, using the
         Web Animations API.
       </p>
-      <div className="flex justify-center">
+      <div className="flex justify-center mb-12">
         <button
           className="shadow-inner uppercase border-t-2 border-r-2 border-l-2 border-b-2 border-blue-500 bg-blue-500 text-white rounded-tl-md rounded-bl-md px-5 py-3 text-gray-900 flex items-center font-bold text-sm tracking-wider"
           id="play"
@@ -105,6 +105,7 @@ const App: FC = () => {
           <span>Finish</span>
         </button>
       </div>
+      <div className="w-full rounded-lg h-64 bg-gray-200" />
     </Wrap>
   );
 };
