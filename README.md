@@ -232,6 +232,8 @@ We can create and play an animation at the timing we want by the `animate()` ret
 
 Let's create a mouse interaction effect:
 
+[![Edit useWebAnimations - interaction](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/usewebanimations-interaction-4jrs9?fontsize=14&hidenavigation=1&theme=dark)
+
 ```js
 import React, { useEffect } from "react";
 import useWebAnimations from "@wellyshen/use-web-animations";
