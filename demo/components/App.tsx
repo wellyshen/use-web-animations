@@ -1,6 +1,7 @@
 import React, { FC, MouseEvent } from "react";
 import useWebAnimations from "../../src";
 import Wrap from "./Wrap";
+import Header from "./Header";
 import Finish from "../icons/Finish";
 import Play from "../icons/Play";
 import Pause from "../icons/Pause";
@@ -52,7 +53,8 @@ const App: FC = () => {
 
   return (
     <Wrap>
-      <h1 className="font-bold text-6xl text-gray-900 leading-tight mb-4 mt-32">
+      <Header />
+      <h1 className="font-bold text-6xl text-gray-900 leading-tight mb-4">
         useWebAnimations
       </h1>
       <p className="text-2xl leading-relaxed max-w-screen-sm mx-auto mb-16">
@@ -61,7 +63,7 @@ const App: FC = () => {
       </p>
       <div className="flex justify-center mb-12">
         <button
-          className="shadow-inner uppercase border-t-2 border-r-2 border-l-2 border-b-2 border-blue-500 bg-blue-500 text-white rounded-tl-md rounded-bl-md px-5 py-3 text-gray-900 flex items-center font-bold text-sm tracking-wider"
+          className="shadow-inner uppercase border-t-2 border-r-2 border-l-2 border-b-2 border-pink-500 bg-pink-500 text-white rounded-tl-md rounded-bl-md px-5 py-3 text-gray-900 flex items-center font-bold text-sm tracking-wider"
           id="play"
           type="button"
           onClick={handlePlayback}
