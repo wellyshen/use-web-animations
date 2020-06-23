@@ -71,15 +71,18 @@ const App: FC = () => {
 
     const blockAnim = getBlockAnim();
     const blockTiming = blockAnim.effect.getTiming();
+    if (blockAnim.playState === "running") blockAnim.pause();
     blockAnim.currentTime = ((blockTiming.duration as number) / 100) * value;
 
     const textAnim = getTextAnim();
     const textTiming = textAnim.effect.getTiming();
+    if (textAnim.playState === "running") textAnim.pause();
     textAnim.currentTime =
       ((textTiming.delay + (textTiming.duration as number)) / 100) * value;
 
     const heartAnim = getHeartAnim();
     const heartTiming = heartAnim.effect.getTiming();
+    if (heartAnim.playState === "running") heartAnim.pause();
     heartAnim.currentTime =
       ((heartTiming.delay + (heartTiming.duration as number)) / 100) * value;
   };
