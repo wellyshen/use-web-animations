@@ -116,7 +116,7 @@ const App: FC = () => {
           Cancel
         </button>
       </div>
-      <div>
+      {/* <div>
         <div
           style={{
             width: 50,
@@ -131,7 +131,7 @@ const App: FC = () => {
           style={{ width: 50, height: 50, background: "red", zIndex: 1 }}
           ref={ref}
         />
-      </div>
+      </div> */}
     </Wrap>
   );
 };
