@@ -68,7 +68,7 @@ const useWebAnimations = <T extends HTMLElement>({
       animRef.current = ref.current.animate(args.keyframes, args.timing);
       const { current: anim } = animRef;
 
-      if (!args.autoPlay) anim.pause();
+      if (args.autoPlay === false) anim.pause();
       if (args.id) anim.id = args.id;
       if (args.playbackRate) anim.playbackRate = args.playbackRate;
       if (onReadyRef.current)
