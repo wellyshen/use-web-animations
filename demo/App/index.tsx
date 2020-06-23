@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from "react";
+import React, { FC, MouseEvent, ChangeEvent, useState } from "react";
 import { Global, css } from "@emotion/core";
 import normalize from "normalize.css";
 
@@ -13,10 +13,12 @@ import {
   text,
   heart,
   btn,
+  slider,
 } from "./styles";
 import useWebAnimations from "../../src";
 
 const App: FC = () => {
+  const [val, setVal] = useState<number>(0);
   const { ref: blockRef, getAnimation: getBlockAnim } = useWebAnimations<
     HTMLDivElement
   >({
@@ -55,9 +57,30 @@ const App: FC = () => {
 
   const handlePlayback = (e: MouseEvent) => {
     const method = (e.target as HTMLButtonElement).id;
+
     (getBlockAnim() as any)[method]();
     (getTextAnim() as any)[method]();
     (getHeartAnim() as any)[method]();
+  };
+
+  const handleSeek = (e: ChangeEvent) => {
+    const value = parseInt((e.target as HTMLInputElement).value, 10);
+
+    setVal(value);
+
+    const blockAnim = getBlockAnim();
+    const blockTiming = blockAnim.effect.getTiming();
+    blockAnim.currentTime = ((blockTiming.duration as number) / 100) * value;
+
+    const textAnim = getTextAnim();
+    const textTiming = textAnim.effect.getTiming();
+    textAnim.currentTime =
+      ((textTiming.delay + (textTiming.duration as number)) / 100) * value;
+
+    const heartAnim = getHeartAnim();
+    const heartTiming = heartAnim.effect.getTiming();
+    heartAnim.currentTime =
+      ((heartTiming.delay + (heartTiming.duration as number)) / 100) * value;
   };
 
   return (
@@ -85,18 +108,31 @@ const App: FC = () => {
           </span>
         </div>
         <div>
-          <button id="play" css={btn} type="button" onClick={handlePlayback}>
-            PLAY
-          </button>
-          <button id="pause" css={btn} type="button" onClick={handlePlayback}>
-            PAUSE
-          </button>
-          <button id="reverse" css={btn} type="button" onClick={handlePlayback}>
-            REVERSE
-          </button>
-          <button id="finish" css={btn} type="button" onClick={handlePlayback}>
-            FINISH
-          </button>
+          <div>
+            <button id="play" css={btn} type="button" onClick={handlePlayback}>
+              PLAY
+            </button>
+            <button id="pause" css={btn} type="button" onClick={handlePlayback}>
+              PAUSE
+            </button>
+            <button
+              id="reverse"
+              css={btn}
+              type="button"
+              onClick={handlePlayback}
+            >
+              REVERSE
+            </button>
+            <button
+              id="finish"
+              css={btn}
+              type="button"
+              onClick={handlePlayback}
+            >
+              FINISH
+            </button>
+          </div>
+          <input css={slider} type="range" value={val} onChange={handleSeek} />
         </div>
       </div>
     </>

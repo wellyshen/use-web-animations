@@ -94,3 +94,43 @@ export const btn = css`
     outline: none;
   }
 `;
+
+export const slider = css`
+  position: relative;
+  margin-top: 1.5rem;
+  width: 100%;
+  background: none;
+  -webkit-appearance: none;
+  &:focus {
+    border: none;
+    outline: none;
+  }
+  &::-moz-range-track {
+    height: 1px;
+    background: #fff;
+  }
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+  }
+  &::-moz-range-thumb {
+    width: 21px;
+    height: 21px;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    height: 1px;
+    background: #fff;
+  }
+`;
