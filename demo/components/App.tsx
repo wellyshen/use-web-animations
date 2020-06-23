@@ -1,5 +1,6 @@
 import React, { FC, useRef, useEffect } from "react";
-import useWebAnimations from "../src";
+import useWebAnimations from "../../src";
+import Wrap from "./Wrap";
 
 const App: FC = () => {
   // const ref = useRef();
@@ -53,7 +54,7 @@ const App: FC = () => {
   }, [animate]);
 
   return (
-    <div>
+    <Wrap>
       <h1>useWebAnimations</h1>
       <p>
         React hook for highly-performant and manipulable animations using Web
@@ -131,7 +132,7 @@ const App: FC = () => {
           ref={ref}
         />
       </div>
-    </div>
+    </Wrap>
   );
 };
 
