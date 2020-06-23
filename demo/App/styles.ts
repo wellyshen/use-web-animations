@@ -132,5 +132,6 @@ export const slider = css`
     width: 100%;
     height: 1px;
     background: #fff;
+    cursor: pointer;
   }
 `;
