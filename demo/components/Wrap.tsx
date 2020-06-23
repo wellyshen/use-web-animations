@@ -7,6 +7,7 @@ const Wrap: FC = ({ children }: { children: React.ReactNode }) => (
       mx-auto
       px-4
       md:px-8
+      text-center
     `}
   >
     {children}

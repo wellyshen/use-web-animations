@@ -48,10 +48,12 @@ const App: FC = () => {
 
   return (
     <Wrap>
-      <h1>useWebAnimations</h1>
-      <p>
-        React hook for highly-performant and manipulable animations using Web
-        Animations API.
+      <h1 className="font-bold text-6xl text-gray-900 leading-tight mb-4">
+        useWebAnimations
+      </h1>
+      <p className="text-xl leading-relaxed max-w-screen-sm mx-auto">
+        A React hook for highly-performant and manipulable animations, using the
+        Web Animations API.
       </p>
       <div>
         <button id="play" type="button" onClick={handlePlayback}>
