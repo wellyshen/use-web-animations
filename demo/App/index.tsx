@@ -45,16 +45,14 @@ const App: FC = () => {
     HTMLDivElement
   >({
     autoPlay: false,
-    keyframes: [
-      { transform: "translate3d(0, 0, 0)", opacity: 1 },
-      { transform: "translate3d(0, -130%, 0)", opacity: 0.5 },
-      { transform: "translate3d(0, -100%, 0)", opacity: 1 },
-    ],
+    keyframes: {
+      transform: ["translate3d(0, 0, 0)", "translate3d(0, -100%, 0)"],
+    },
     timing: {
       delay: 2000,
-      duration: 300,
+      duration: 250,
       fill: "forwards",
-      easing: "cubic-bezier(0.215, 0.610, 0.355, 1)",
+      easing: "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
     },
   });
 
