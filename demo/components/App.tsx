@@ -1,6 +1,10 @@
 import React, { FC, MouseEvent } from "react";
 import useWebAnimations from "../../src";
 import Wrap from "./Wrap";
+import Finish from "../icons/Finish";
+import Play from "../icons/Play";
+import Pause from "../icons/Pause";
+import Reverse from "../icons/Reverse";
 
 const App: FC = () => {
   const { ref: blockRef, getAnimation: getBlockAnim } = useWebAnimations<
@@ -48,25 +52,57 @@ const App: FC = () => {
 
   return (
     <Wrap>
-      <h1 className="font-bold text-6xl text-gray-900 leading-tight mb-4">
+      <h1 className="font-bold text-6xl text-gray-900 leading-tight mb-4 mt-32">
         useWebAnimations
       </h1>
-      <p className="text-xl leading-relaxed max-w-screen-sm mx-auto">
+      <p className="text-2xl leading-relaxed max-w-screen-sm mx-auto mb-12">
         A React hook for highly-performant and manipulable animations, using the
         Web Animations API.
       </p>
-      <div>
-        <button id="play" type="button" onClick={handlePlayback}>
-          PLAY
+      <div className="flex justify-center">
+        <button
+          className="shadow-inner uppercase border-t-2 border-r-2 border-l-2 border-b-2 border-blue-500 bg-blue-500 text-white rounded-tl-md rounded-bl-md px-5 py-3 text-gray-900 flex items-center font-bold text-sm tracking-wider"
+          id="play"
+          type="button"
+          onClick={handlePlayback}
+        >
+          <div className="w-5 h-5 mr-1 text-white">
+            <Play />
+          </div>
+          <span className="text-white">Play</span>
         </button>
-        <button id="pause" type="button" onClick={handlePlayback}>
-          PAUSE
+        <button
+          className="uppercase border-t-2 border-r-2 border-b-2 border-gray-600 px-5 py-3 text-gray-900 flex items-center font-bold text-sm tracking-wider"
+          id="pause"
+          type="button"
+          onClick={handlePlayback}
+        >
+          <div className="w-5 h-5 mr-1">
+            <Pause />
+          </div>
+          <span>Pause</span>
         </button>
-        <button id="reverse" type="button" onClick={handlePlayback}>
-          REVERSE
+        <button
+          className="uppercase border-t-2 border-r-2 border-b-2 border-gray-600 px-5 py-3 text-gray-900 flex items-center font-bold text-sm tracking-wider"
+          id="reverse"
+          type="button"
+          onClick={handlePlayback}
+        >
+          <div className="w-5 h-5 mr-1">
+            <Reverse />
+          </div>
+          <span>Reverse</span>
         </button>
-        <button id="finish" type="button" onClick={handlePlayback}>
-          FINISH
+        <button
+          className="uppercase border-t-2 border-r-2 border-b-2 border-gray-600 rounded-tr-md rounded-br-md px-5 py-3 text-gray-900 flex items-center font-bold text-sm tracking-wider"
+          id="finish"
+          type="button"
+          onClick={handlePlayback}
+        >
+          <div className="w-5 h-5 mr-1">
+            <Finish />
+          </div>
+          <span>Finish</span>
         </button>
       </div>
     </Wrap>
