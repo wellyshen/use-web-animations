@@ -12,7 +12,7 @@ type PlayState = string | null;
 interface AnimConf {
   id?: string;
   playbackRate?: number;
-  pausedAtStart?: boolean;
+  autoPlay?: boolean;
   timing?: number | KeyframeAnimationOptions;
 }
 interface Animate {
@@ -43,7 +43,7 @@ const useWebAnimations = <T extends HTMLElement>({
   ref: refOpt,
   id,
   playbackRate,
-  pausedAtStart = false,
+  autoPlay,
   keyframes,
   timing,
   onReady,
@@ -68,11 +68,10 @@ const useWebAnimations = <T extends HTMLElement>({
       animRef.current = ref.current.animate(args.keyframes, args.timing);
       const { current: anim } = animRef;
 
-      if (args.pausedAtStart) anim.pause();
+      if (args.autoPlay === false) anim.pause();
       if (args.id) anim.id = args.id;
       if (args.playbackRate) anim.playbackRate = args.playbackRate;
-      // Google Chrome < v84 has no the ready property
-      if (anim.ready)
+      if (onReadyRef.current)
         anim.ready.then((animation) => {
           onReadyRef.current({
             playState: animation.playState,
@@ -80,14 +79,24 @@ const useWebAnimations = <T extends HTMLElement>({
             animation,
           });
         });
+      if (onFinishRef.current)
+        anim.finished.then((animation) => {
+          onFinishRef.current({
+            playState: animation.playState,
+            animate,
+            animation,
+          });
+        });
+
+      prevPlayStateRef.current = undefined;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [ref]
   );
 
   useDeepCompareEffect(() => {
-    animate({ id, playbackRate, pausedAtStart, keyframes, timing });
-  }, [id, playbackRate, pausedAtStart, keyframes, timing, animate]);
+    animate({ id, playbackRate, autoPlay, keyframes, timing });
+  }, [id, playbackRate, autoPlay, keyframes, timing, animate]);
 
   useEffect(() => {
     const update = () => {
@@ -95,7 +104,6 @@ const useWebAnimations = <T extends HTMLElement>({
 
       if (animation) {
         const { playState: curPlayState } = animation;
-        const e = { playState: animation.playState, animate, animation };
 
         if (curPlayState !== prevPlayStateRef.current)
           setPlayState(curPlayState);
@@ -105,14 +113,11 @@ const useWebAnimations = <T extends HTMLElement>({
           (curPlayState === "running" ||
             curPlayState !== prevPlayStateRef.current)
         )
-          onUpdateRef.current(e);
-
-        if (
-          onFinishRef.current &&
-          curPlayState === "finished" &&
-          prevPlayStateRef.current !== "finished"
-        )
-          onFinishRef.current(e);
+          onUpdateRef.current({
+            playState: animation.playState,
+            animate,
+            animation,
+          });
 
         prevPlayStateRef.current = curPlayState;
       }
