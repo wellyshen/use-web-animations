@@ -43,7 +43,7 @@ const useWebAnimations = <T extends HTMLElement>({
   ref: refOpt,
   id,
   playbackRate,
-  autoPlay = true,
+  autoPlay,
   keyframes,
   timing,
   onReady,
