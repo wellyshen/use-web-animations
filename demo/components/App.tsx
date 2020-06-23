@@ -1,57 +1,50 @@
-import React, { FC, useRef, useEffect } from "react";
+import React, { FC, MouseEvent } from "react";
 import useWebAnimations from "../../src";
 import Wrap from "./Wrap";
 
 const App: FC = () => {
-  // const ref = useRef();
-
-  const { ref, playState, getAnimation, animate } = useWebAnimations<
+  const { ref: blockRef, getAnimation: getBlockAnim } = useWebAnimations<
     HTMLDivElement
   >({
-    // ref,
-    id: "test-1",
-    // playbackRate: 2,
-    // pausedAtStart: true,
-    keyframes: {
-      transform: ["translateX(0)", "translateX(270px)"],
-      background: ["red", "blue", "green"],
-    },
+    keyframes: { width: ["0", "100%", "0"], left: ["0", "0", "100%"] },
     timing: {
-      delay: 500,
+      duration: 2000,
+      fill: "forwards",
+      easing: "cubic-bezier(0.74, 0.06, 0.4, 0.92)",
+    },
+  });
+  const { ref: textRef, getAnimation: getTextAnim } = useWebAnimations<
+    HTMLDivElement
+  >({
+    keyframes: { opacity: ["0", "1"] },
+    timing: {
+      delay: 1600,
       duration: 1000,
       fill: "forwards",
-      easing: "ease-out",
     },
-    onReady: ({ playState: p, animate: a, animation: anim }) => {
-      console.log("LOG ===> onReady: ", p, a, anim);
-    },
-    onUpdate: ({ playState: p, animate: a, animation: anim }) => {
-      console.log("LOG ===> onUpdate: ", p, a, anim);
-    },
-    onFinish: ({ playState: p, animate: a, animation: anim }) => {
-      console.log("LOG ===> onFinish: ", p, a, anim);
+  });
+  const { ref: heartRef, getAnimation: getHeartAnim } = useWebAnimations<
+    HTMLDivElement
+  >({
+    keyframes: [
+      { transform: "translate3d(0, 0, 0)", opacity: 1 },
+      { transform: "translate3d(0, -130%, 0)", opacity: 0.5 },
+      { transform: "translate3d(0, -100%, 0)", opacity: 1 },
+    ],
+    timing: {
+      delay: 2000,
+      duration: 300,
+      fill: "forwards",
+      easing: "cubic-bezier(0.215, 0.610, 0.355, 1)",
     },
   });
 
-  console.log("LOG ===> playback: ", playState);
-
-  useEffect(() => {
-    /* animate({
-      id: "test-2",
-      playbackRate: 2,
-      pausedAtStart: true,
-      keyframes: {
-        transform: ["translateX(0)", "translateX(270px)"],
-        background: ["red", "blue", "green"],
-      },
-      timing: {
-        delay: 500,
-        duration: 1000,
-        fill: "forwards",
-        easing: "ease-out",
-      },
-    }); */
-  }, [animate]);
+  const handlePlayback = (e: MouseEvent) => {
+    const method = (e.target as HTMLButtonElement).id;
+    (getBlockAnim() as any)[method]();
+    (getTextAnim() as any)[method]();
+    (getHeartAnim() as any)[method]();
+  };
 
   return (
     <Wrap>
@@ -61,77 +54,19 @@ const App: FC = () => {
         Animations API.
       </p>
       <div>
-        <input
-          type="range"
-          min="500"
-          max="1500"
-          step="10"
-          onChange={(e) => {
-            getAnimation().currentTime = parseInt(e.target.value, 10);
-          }}
-        />
-        <button
-          onClick={() => {
-            // console.log("LOG ===> Play: ", getAnimation());
-            getAnimation().play();
-          }}
-          type="button"
-        >
-          Play
+        <button id="play" type="button" onClick={handlePlayback}>
+          PLAY
         </button>
-        <button
-          onClick={() => {
-            // console.log("LOG ===> Pause: ", getAnimation());
-            getAnimation().pause();
-          }}
-          type="button"
-        >
-          Pause
+        <button id="pause" type="button" onClick={handlePlayback}>
+          PAUSE
         </button>
-        <button
-          onClick={() => {
-            // console.log("LOG ===> Reverse: ", getAnimation());
-            getAnimation().reverse();
-          }}
-          type="button"
-        >
-          Reverse
+        <button id="reverse" type="button" onClick={handlePlayback}>
+          REVERSE
         </button>
-        <button
-          onClick={() => {
-            // console.log("LOG ===> Finish: ", getAnimation());
-            getAnimation().finish();
-          }}
-          type="button"
-        >
-          Finish
-        </button>
-        <button
-          onClick={() => {
-            // console.log("LOG ===> Cancel: ", getAnimation());
-            getAnimation().cancel();
-          }}
-          type="button"
-        >
-          Cancel
+        <button id="finish" type="button" onClick={handlePlayback}>
+          FINISH
         </button>
       </div>
-      {/* <div>
-        <div
-          style={{
-            width: 50,
-            height: 50,
-            background: "red",
-            zIndex: 1,
-            position: "absolute",
-            opacity: 0.25,
-          }}
-        />
-        <div
-          style={{ width: 50, height: 50, background: "red", zIndex: 1 }}
-          ref={ref}
-        />
-      </div> */}
     </Wrap>
   );
 };
