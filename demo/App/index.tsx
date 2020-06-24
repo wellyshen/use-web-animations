@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent, ChangeEvent, useState } from "react";
+import React, { FC, MouseEvent, ChangeEvent } from "react";
 import { Global, css } from "@emotion/core";
 import normalize from "normalize.css";
 
@@ -18,7 +18,6 @@ import {
 import useWebAnimations from "../../src";
 
 const App: FC = () => {
-  const [val, setVal] = useState<number>(0);
   const { ref: blockRef, getAnimation: getBlockAnim } = useWebAnimations<
     HTMLDivElement
   >({
@@ -136,7 +135,12 @@ const App: FC = () => {
               FINISH
             </button>
           </div>
-          <input css={slider} type="range" value={val} onChange={handleSeek} />
+          <input
+            css={slider}
+            type="range"
+            defaultValue="0"
+            onChange={handleSeek}
+          />
         </div>
       </div>
     </>
