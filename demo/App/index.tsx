@@ -66,8 +66,6 @@ const App: FC = () => {
   const handleSeek = (e: ChangeEvent) => {
     const value = parseInt((e.target as HTMLInputElement).value, 10);
 
-    setVal(value);
-
     const blockAnim = getBlockAnim();
     const blockTiming = blockAnim.effect.getTiming();
     if (blockAnim.playState === "running") blockAnim.pause();
