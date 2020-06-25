@@ -1,8 +1,8 @@
 import React, { FC, MouseEvent, ChangeEvent } from "react";
 
 import useWebAnimations from "../../src";
-import { container, title } from "../theme";
-import { subtitle, mask, block, txt, heart, btn, slider } from "./styles";
+import { container, title, subtitle } from "../theme";
+import { mask, block, txt, heart, btn, slider } from "./styles";
 
 const Main: FC = () => {
   const { ref: blockRef, getAnimation: getBlockAnim } = useWebAnimations<

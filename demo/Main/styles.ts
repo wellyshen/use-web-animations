@@ -4,10 +4,6 @@ import mq from "../utils/mq";
 
 const { md } = mq;
 
-export const subtitle = css`
-  margin: 0.75rem 0 5rem;
-`;
-
 export const mask = css`
   position: relative;
   margin-bottom: 2.5rem;

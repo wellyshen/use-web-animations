@@ -4,7 +4,7 @@ import normalize from "normalize.css";
 
 import GitHubCorner from "../GitHubCorner";
 import Main from "../Main";
-import Animate from "../Animate";
+import Animate from "../Animations";
 import { root } from "./styles";
 
 const App: FC = () => {
