@@ -1,12 +1,13 @@
 import React, { FC } from "react";
 
-import useWebAnimations, { bounce } from "../../src";
+import useWebAnimations from "../../src";
+import * as animations from "../../src/animations";
 import { container, title, subtitle } from "../theme";
 import { link, target } from "./styles";
 
 const Animations: FC = () => {
   const { ref, getAnimation } = useWebAnimations<HTMLButtonElement>({
-    ...bounce,
+    ...animations.bounce,
   });
 
   const play = () => {
