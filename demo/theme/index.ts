@@ -24,5 +24,10 @@ export const container = css`
 `;
 
 export const title = css`
-  margin: 0;
+  margin: 0 0 0.75rem;
+  font-size: 2rem;
+`;
+
+export const subtitle = css`
+  margin: 0 0 5rem;
 `;
