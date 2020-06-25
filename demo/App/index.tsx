@@ -4,6 +4,7 @@ import normalize from "normalize.css";
 
 import GitHubCorner from "../GitHubCorner";
 import Main from "../Main";
+import Animate from "../Animate";
 import { root } from "./styles";
 
 const App: FC = () => {
@@ -17,6 +18,7 @@ const App: FC = () => {
       />
       <GitHubCorner url="https://github.com/wellyshen/use-web-animations" />
       <Main />
+      <Animate />
     </>
   );
 };
