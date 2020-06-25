@@ -34,7 +34,6 @@ export const container = css`
 
 export const title = css`
   margin: 5rem 0 0.75rem;
-  text-align: center;
 `;
 
 export const subtitle = css`
