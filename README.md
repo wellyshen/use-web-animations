@@ -379,6 +379,22 @@ const { ref } = useWebAnimations({
 - bounceOutLeft
 - bounceOutRight
 - bounceOutUp
+
+#### Fading entrances
+
+- fadeIn
+- fadeInDown
+- fadeInDownBig
+- fadeInLeft
+- fadeInLeftBig
+- fadeInRight
+- fadeInRightBig
+- fadeInUp
+- fadeInUpBig
+- fadeInTopLeft
+- fadeInTopRight
+- fadeInBottomLeft
+- fadeInBottomRight
 </details>
 
 ## Use Your Own `ref`

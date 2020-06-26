@@ -85,6 +85,21 @@ const Animations: FC = () => {
           <option value="bounceOutRight">bounceOutRight</option>
           <option value="bounceOutUp">bounceOutUp</option>
         </optgroup>
+        <optgroup label="Fading entrances">
+          <option value="fadeIn">fadeIn</option>
+          <option value="fadeInDown">fadeInDown</option>
+          <option value="fadeInDownBig">fadeInDownBig</option>
+          <option value="fadeInLeft">fadeInLeft</option>
+          <option value="fadeInLeftBig">fadeInLeftBig</option>
+          <option value="fadeInRight">fadeInRight</option>
+          <option value="fadeInRightBig">fadeInRightBig</option>
+          <option value="fadeInUp">fadeInUp</option>
+          <option value="fadeInUpBig">fadeInUpBig</option>
+          <option value="fadeInTopLeft">fadeInTopLeft</option>
+          <option value="fadeInTopRight">fadeInTopRight</option>
+          <option value="fadeInBottomLeft">fadeInBottomLeft</option>
+          <option value="fadeInBottomRight">fadeInBottomRight</option>
+        </optgroup>
       </select>
     </div>
   );
