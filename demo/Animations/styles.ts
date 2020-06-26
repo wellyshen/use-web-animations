@@ -16,6 +16,7 @@ export const target = css`
   font-size: 5rem;
   background: #333;
   cursor: pointer;
+  z-index: 1;
   &:focus {
     outline: none;
   }

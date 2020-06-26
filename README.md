@@ -395,6 +395,22 @@ const { ref } = useWebAnimations({
 - fadeInTopRight
 - fadeInBottomLeft
 - fadeInBottomRight
+
+#### Fading exits
+
+- fadeOut
+- fadeOutDown
+- fadeOutDownBig
+- fadeOutLeft
+- fadeOutLeftBig
+- fadeOutRight
+- fadeOutRightBig
+- fadeOutUp
+- fadeOutUpBig
+- fadeOutTopLeft
+- fadeOutTopRight
+- fadeOutBottomLeft
+- fadeOutBottomRight
 </details>
 
 ## Use Your Own `ref`
