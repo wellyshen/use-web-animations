@@ -21,6 +21,8 @@
     "motion",
     "playback-control",
     "performance",
+    "interaction",
+    "ux",
     "typescript"
   ],
   "author": "Welly Shen <hivoid19@gmail.com> (https://github.com/wellyshen)",
