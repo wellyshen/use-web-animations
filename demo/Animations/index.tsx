@@ -45,6 +45,17 @@ const Animations: FC = () => {
       <select css={select} onChange={handleChangeSelect}>
         <optgroup label="Attention Seekers">
           <option value="bounce">bounce</option>
+          <option value="flash">flash</option>
+          <option value="pulse">pulse</option>
+          <option value="rubberBand">rubberBand</option>
+          <option value="shakeX">shakeX</option>
+          <option value="shakeY">shakeY</option>
+          <option value="headShake">headShake</option>
+          <option value="swing">swing</option>
+          <option value="tada">tada</option>
+          <option value="wobble">wobble</option>
+          <option value="jello">jello</option>
+          <option value="heartBeat">heartBeat</option>
         </optgroup>
       </select>
     </div>
