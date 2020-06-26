@@ -349,6 +349,13 @@ const { ref } = useWebAnimations({
 - wobble
 - jello
 - heartBeat
+
+#### Back entrances
+
+- backInDown
+- backInLeft
+- backInRight
+- backInUp
 </details>
 
 ## Use Your Own `ref`
