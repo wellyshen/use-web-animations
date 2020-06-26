@@ -29,7 +29,7 @@ const Animations: FC = () => {
         A collection of animations for Web Animations API, based on{" "}
         <a
           css={link}
-          href="http://daneden.github.io/animate.css/"
+          href="https://animate.style"
           target="_blank"
           rel="noreferrer"
         >

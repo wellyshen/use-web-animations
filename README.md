@@ -23,6 +23,7 @@ Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_
 - 🎣 Easy to use, based on React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook).
 - 🧸 Built-ins [polyfill](https://github.com/web-animations/web-animations-js) for better [browser compatibility](#browser-support).
 - 🎛 Super flexible [API](#api) design which can cover [all the cases](#usage) that you need.
+- 🎞 [Built-ins Animations](#use-built-in-animations) for you, based on [Animate.css](https://animate.style).
 - 🔩 Supports custom `refs` for [some reasons](#use-your-own-ref).
 - 📜 Supports [TypeScript](https://www.typescriptlang.org) type definition.
 - 🗄️ Server-side rendering compatibility.
@@ -294,6 +295,26 @@ const App = () => {
 ```
 
 > ⚠️ Composite modes isn't fully supported by all the browsers, please check the [browser compatibility](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffect/composite#Browser_compatibility) carefully before using it.
+
+## Use Built-in Animations
+
+Too lazy to think about animation? We provide a collection of ready-to-use animations for you, these animations are implemented based on [Animate.css](https://animate.style).
+
+```js
+import React from "react";
+import useWebAnimations, { bounce } from "@wellyshen/use-web-animations";
+
+const App = () => {
+  // Add a pre-defined effect to the target
+  const { ref } = useWebAnimations({ ...bounce });
+
+  return (
+    <div className="container">
+      <div className="target" ref={ref} />
+    </div>
+  );
+};
+```
 
 ## Use Your Own `ref`
 
