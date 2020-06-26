@@ -356,6 +356,13 @@ const { ref } = useWebAnimations({
 - backInLeft
 - backInRight
 - backInUp
+
+#### Back exits
+
+- backOutDown
+- backOutLeft
+- backOutRight
+- backOutUp
 </details>
 
 ## Use Your Own `ref`

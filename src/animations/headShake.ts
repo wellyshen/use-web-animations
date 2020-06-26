@@ -10,5 +10,5 @@ export default {
     { ...frame1, offset: 0.5 },
     { ...frame1, offset: 1 },
   ],
-  timing: { duration: 1000, easing: "ease-in-out" },
+  timing: { duration: 1000, fill: "both", easing: "ease-in-out" },
 };

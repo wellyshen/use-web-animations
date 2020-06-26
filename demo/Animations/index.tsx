@@ -7,9 +7,11 @@ import { link, target, select } from "./styles";
 
 const Animations: FC = () => {
   const [val, setVal] = useState<string>("bounce");
+  // @ts-ignore
+  const { keyframes, timing } = animations[val];
   const { ref, getAnimation } = useWebAnimations<HTMLButtonElement>({
-    // @ts-ignore
-    ...animations[val],
+    keyframes,
+    timing: { ...timing, fill: "auto" },
   });
 
   const play = () => {
@@ -62,6 +64,12 @@ const Animations: FC = () => {
           <option value="backInLeft">backInLeft</option>
           <option value="backInRight">backInRight</option>
           <option value="backInUp">backInUp</option>
+        </optgroup>
+        <optgroup label="Back exits">
+          <option value="backOutDown">backOutDown</option>
+          <option value="backOutLeft">backOutLeft</option>
+          <option value="backOutRight">backOutRight</option>
+          <option value="backOutUp">backOutUp</option>
         </optgroup>
       </select>
     </div>

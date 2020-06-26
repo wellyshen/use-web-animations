@@ -9,5 +9,5 @@ export default {
     { transform: "rotate3d(0, 0, 1, -5deg)", offset: 0.8 },
     { transform: "rotate3d(0, 0, 1, 0deg)", transformOrigin, offset: 1 },
   ],
-  timing: { duration: 1000 },
+  timing: { duration: 1000, fill: "both" },
 };

@@ -14,5 +14,5 @@ export default {
     { transform: "skewX(-0.1953125deg) skewY(-0.1953125deg)", offset: 0.888 },
     { ...frame1, transformOrigin, offset: 1 },
   ],
-  timing: { duration: 1000 },
+  timing: { duration: 1000, fill: "both" },
 };

@@ -33,5 +33,5 @@ export default {
     },
     { ...frame1, transformOrigin, offset: 1 },
   ],
-  timing: { duration: 1000 },
+  timing: { duration: 1000, fill: "both" },
 };

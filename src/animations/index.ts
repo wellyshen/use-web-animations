@@ -16,3 +16,8 @@ export { default as backInDown } from "./backInDown";
 export { default as backInLeft } from "./backInLeft";
 export { default as backInRight } from "./backInRight";
 export { default as backInUp } from "./backInUp";
+// Back exits
+export { default as backOutDown } from "./backOutDown";
+export { default as backOutLeft } from "./backOutLeft";
+export { default as backOutRight } from "./backOutRight";
+export { default as backOutUp } from "./backOutUp";
