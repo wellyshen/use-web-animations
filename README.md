@@ -23,7 +23,7 @@ Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_
 - 🎣 Easy to use, based on React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook).
 - 🧸 Built-ins [polyfill](https://github.com/web-animations/web-animations-js) for better [browser compatibility](#browser-support).
 - 🎛 Super flexible [API](#api) design which can cover [all the cases](#usage) that you need.
-- 🎞 [Built-ins Animations](#use-built-in-animations) for you, based on [Animate.css](https://animate.style).
+- 🎞 [Built-ins animations](#use-built-in-animations) for you, based on [Animate.css](https://animate.style).
 - 🔩 Supports custom `refs` for [some reasons](#use-your-own-ref).
 - 📜 Supports [TypeScript](https://www.typescriptlang.org) type definition.
 - 🗄️ Server-side rendering compatibility.
@@ -298,7 +298,9 @@ const App = () => {
 
 ## Use Built-in Animations
 
-Too lazy to think about animation? We provide a collection of ready-to-use animations for you, these animations are implemented based on [Animate.css](https://animate.style).
+Too lazy to think about animation? We provide a collection of ready-to-use animations for you, they are implemented based on [Animate.css](https://animate.style).
+
+👉🏻 [Check out the demo](https://use-web-animations.netlify.app#animations).
 
 ```js
 import React from "react";
@@ -315,6 +317,39 @@ const App = () => {
   );
 };
 ```
+
+We can customize the built-in animation by overriding its properties:
+
+```js
+const { keyframes, timing } = bounce;
+const { ref } = useWebAnimations({
+  keyframes,
+  timing: {
+    ...timing,
+    delay: 1000, // Delay 1s
+    duration: timing.duration * 0.75, // Speed up the animation
+  },
+});
+```
+
+<details>
+<summary>See all available animations</summary>
+
+**Attention seekers**
+
+- bounce
+- flash
+- pulse
+- rubberBand
+- shakeX
+- shakeY
+- headShake
+- swing
+- tada
+- wobble
+- jello
+- heartBeat
+</details>
 
 ## Use Your Own `ref`
 
