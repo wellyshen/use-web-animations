@@ -1,17 +1,23 @@
-import React, { FC } from "react";
+import React, { FC, ChangeEvent, useState } from "react";
 
 import useWebAnimations from "../../src";
 import * as animations from "../../src/animations";
 import { container, title, subtitle } from "../theme";
-import { link, target } from "./styles";
+import { link, target, select } from "./styles";
 
 const Animations: FC = () => {
+  const [val, setVal] = useState<string>("bounce");
   const { ref, getAnimation } = useWebAnimations<HTMLButtonElement>({
-    ...animations.bounce,
+    // @ts-ignore
+    ...animations[val],
   });
 
   const play = () => {
     getAnimation().play();
+  };
+
+  const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    setVal(e.currentTarget.value);
   };
 
   return (
@@ -36,6 +42,11 @@ const Animations: FC = () => {
           🍿
         </span>
       </button>
+      <select css={select} onChange={handleChangeSelect}>
+        <optgroup label="Attention Seekers">
+          <option value="bounce">bounce</option>
+        </optgroup>
+      </select>
     </div>
   );
 };

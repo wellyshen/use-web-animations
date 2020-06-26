@@ -51,7 +51,7 @@ export const btn = css`
     margin-left: -1px;
   }
   &:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.2);
   }
   &:focus {
     outline: none;
