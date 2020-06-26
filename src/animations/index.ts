@@ -1,3 +1,4 @@
+// Attention seekers
 export { default as bounce } from "./bounce";
 export { default as flash } from "./flash";
 export { default as pulse } from "./pulse";
@@ -10,3 +11,8 @@ export { default as tada } from "./tada";
 export { default as wobble } from "./wobble";
 export { default as jello } from "./jello";
 export { default as heartBeat } from "./heartBeat";
+// Back entrances
+export { default as backInDown } from "./backInDown";
+export { default as backInLeft } from "./backInLeft";
+export { default as backInRight } from "./backInRight";
+export { default as backInUp } from "./backInUp";

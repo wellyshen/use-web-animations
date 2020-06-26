@@ -57,6 +57,12 @@ const Animations: FC = () => {
           <option value="jello">jello</option>
           <option value="heartBeat">heartBeat</option>
         </optgroup>
+        <optgroup label="Back entrances">
+          <option value="backInDown">backInDown</option>
+          <option value="backInLeft">backInLeft</option>
+          <option value="backInRight">backInRight</option>
+          <option value="backInUp">backInUp</option>
+        </optgroup>
       </select>
     </div>
   );
