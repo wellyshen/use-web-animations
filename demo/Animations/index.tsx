@@ -71,6 +71,20 @@ const Animations: FC = () => {
           <option value="backOutRight">backOutRight</option>
           <option value="backOutUp">backOutUp</option>
         </optgroup>
+        <optgroup label="Bouncing entrances">
+          <option value="bounceIn">bounceIn</option>
+          <option value="bounceInDown">bounceInDown</option>
+          <option value="bounceInLeft">bounceInLeft</option>
+          <option value="bounceInRight">bounceInRight</option>
+          <option value="bounceInUp">bounceInUp</option>
+        </optgroup>
+        <optgroup label="Bouncing exits">
+          <option value="bounceOut">bounceOut</option>
+          <option value="bounceOutDown">bounceOutDown</option>
+          <option value="bounceOutLeft">bounceOutLeft</option>
+          <option value="bounceOutRight">bounceOutRight</option>
+          <option value="bounceOutUp">bounceOutUp</option>
+        </optgroup>
       </select>
     </div>
   );

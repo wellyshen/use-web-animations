@@ -1,10 +1,7 @@
 const easing1 = "cubic-bezier(0.215, 0.61, 0.355, 1)";
 const easing2 = "cubic-bezier(0.755, 0.05, 0.855, 0.06)";
 const transformOrigin = "center bottom";
-const frame1 = {
-  transform: "translate3d(0, 0, 0)",
-  easing: easing1,
-};
+const frame1 = { transform: "translate3d(0, 0, 0)", easing: easing1 };
 const frame2 = {
   transform: "translate3d(0, -30px, 0) scaleY(1.1)",
   easing: easing2,

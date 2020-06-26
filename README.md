@@ -363,6 +363,22 @@ const { ref } = useWebAnimations({
 - backOutLeft
 - backOutRight
 - backOutUp
+
+#### Bouncing entrances
+
+- bounceIn
+- bounceInDown
+- bounceInLeft
+- bounceInRight
+- bounceInUp
+
+#### Bouncing exits
+
+- bounceOut
+- bounceOutDown
+- bounceOutLeft
+- bounceOutRight
+- bounceOutUp
 </details>
 
 ## Use Your Own `ref`
