@@ -335,7 +335,7 @@ const { ref } = useWebAnimations({
 <details>
 <summary>See all available animations</summary>
 
-### Attention seekers
+#### Attention seekers
 
 - bounce
 - flash
