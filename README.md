@@ -442,6 +442,13 @@ const { ref } = useWebAnimations({
 - rotateOutDownRight
 - rotateOutUpLeft
 - rotateOutUpRight
+
+#### Specials
+
+- hinge
+- jackInTheBox
+- rollIn
+- rollOut
 </details>
 
 ## Use Your Own `ref`

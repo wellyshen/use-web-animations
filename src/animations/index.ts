@@ -73,3 +73,7 @@ export { default as rotateOutDownLeft } from "./rotateOutDownLeft";
 export { default as rotateOutDownRight } from "./rotateOutDownRight";
 export { default as rotateOutUpLeft } from "./rotateOutUpLeft";
 export { default as rotateOutUpRight } from "./rotateOutUpRight";
+export { default as hinge } from "./hinge";
+export { default as jackInTheBox } from "./jackInTheBox";
+export { default as rollIn } from "./rollIn";
+export { default as rollOut } from "./rollOut";

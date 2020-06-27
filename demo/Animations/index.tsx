@@ -142,6 +142,12 @@ const Animations: FC = () => {
           <option value="rotateOutUpLeft">rotateOutUpLeft</option>
           <option value="rotateOutUpRight">rotateOutUpRight</option>
         </optgroup>
+        <optgroup label="Specials">
+          <option value="hinge">hinge</option>
+          <option value="jackInTheBox">jackInTheBox</option>
+          <option value="rollIn">rollIn</option>
+          <option value="rollOut">rollOut</option>
+        </optgroup>
       </select>
     </div>
   );
