@@ -1,15 +1,24 @@
-const transformOrigin = "top left";
 const easing = "ease-in-out";
-const frame1 = { transform: "rotate3d(0, 0, 1, 80deg)", easing };
-const frame2 = { transform: "rotate3d(0, 0, 1, 60deg)", opacity: 1, easing };
+const transformOrigin = "top left";
+const frame1 = {
+  transform: "rotate3d(0, 0, 1, 80deg)",
+  easing,
+  transformOrigin,
+};
+const frame2 = {
+  transform: "rotate3d(0, 0, 1, 60deg)",
+  opacity: 1,
+  easing,
+  transformOrigin,
+};
 
 export default {
   keyframes: [
     {
       transform: "translate3d(0, 0, 0)",
       opacity: 1,
-      transformOrigin,
       easing,
+      transformOrigin,
       offset: 0,
     },
     { ...frame1, offset: 0.2 },

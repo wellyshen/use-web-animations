@@ -148,6 +148,20 @@ const Animations: FC = () => {
           <option value="rollIn">rollIn</option>
           <option value="rollOut">rollOut</option>
         </optgroup>
+        <optgroup label="Zooming entrances">
+          <option value="zoomIn">zoomIn</option>
+          <option value="zoomInDown">zoomInDown</option>
+          <option value="zoomInLeft">zoomInLeft</option>
+          <option value="zoomInRight">zoomInRight</option>
+          <option value="zoomInUp">zoomInUp</option>
+        </optgroup>
+        <optgroup label="Zooming exits">
+          <option value="zoomOut">zoomOut</option>
+          <option value="zoomOutDown">zoomOutDown</option>
+          <option value="zoomOutLeft">zoomOutLeft</option>
+          <option value="zoomOutRight">zoomOutRight</option>
+          <option value="zoomOutUp">zoomOutUp</option>
+        </optgroup>
       </select>
     </div>
   );

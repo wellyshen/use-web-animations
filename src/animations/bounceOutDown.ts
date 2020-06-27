@@ -2,7 +2,7 @@ const frame = { transform: "translate3d(0, -20px, 0) scaleY(0.9)", opacity: 1 };
 
 export default {
   keyframes: [
-    { transform: "translate3d(0, 0, 0)", opacity: 1, offset: 0 },
+    { transform: "none", opacity: 1, offset: 0 },
     { transform: "translate3d(0, 10px, 0) scaleY(0.985)", offset: 0.2 },
     { ...frame, offset: 0.4 },
     { ...frame, offset: 0.45 },

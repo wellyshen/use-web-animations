@@ -449,6 +449,22 @@ const { ref } = useWebAnimations({
 - jackInTheBox
 - rollIn
 - rollOut
+
+#### Zooming entrances
+
+- zoomIn
+- zoomInDown
+- zoomInLeft
+- zoomInRight
+- zoomInUp
+
+#### Zooming exits
+
+- zoomOut
+- zoomOutDown
+- zoomOutLeft
+- zoomOutRight
+- zoomOutUp
 </details>
 
 ## Use Your Own `ref`

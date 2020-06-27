@@ -8,7 +8,7 @@ export default {
     { ...frame1, offset: 0.28 },
     { ...frame2, offset: 0.42 },
     { ...frame1, offset: 0.7 },
-    { ...frame1, offset: 1 },
+    { transform: "none", offset: 1 },
   ],
   timing: { duration: 1300, fill: "both", easing: "ease-in-out" },
 };
