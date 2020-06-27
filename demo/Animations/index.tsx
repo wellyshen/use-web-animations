@@ -122,6 +122,12 @@ const Animations: FC = () => {
           <option value="flipOutX">flipOutX</option>
           <option value="flipOutY">flipOutY</option>
         </optgroup>
+        <optgroup label="Lightspeed">
+          <option value="lightSpeedInRight">lightSpeedInRight</option>
+          <option value="lightSpeedInLeft">lightSpeedInLeft</option>
+          <option value="lightSpeedOutRight">lightSpeedOutRight</option>
+          <option value="lightSpeedOutLeft">lightSpeedOutLeft</option>
+        </optgroup>
       </select>
     </div>
   );

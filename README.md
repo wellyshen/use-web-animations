@@ -419,6 +419,13 @@ const { ref } = useWebAnimations({
 - flipInY
 - flipOutX
 - flipOutY
+
+#### Lightspeed
+
+- lightSpeedInRight
+- lightSpeedInLeft
+- lightSpeedOutRight
+- lightSpeedOutLeft
 </details>
 
 ## Use Your Own `ref`

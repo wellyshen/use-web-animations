@@ -59,3 +59,7 @@ export { default as flipInX } from "./flipInX";
 export { default as flipInY } from "./flipInY";
 export { default as flipOutX } from "./flipOutX";
 export { default as flipOutY } from "./flipOutY";
+export { default as lightSpeedInRight } from "./lightSpeedInRight";
+export { default as lightSpeedInLeft } from "./lightSpeedInLeft";
+export { default as lightSpeedOutRight } from "./lightSpeedOutRight";
+export { default as lightSpeedOutLeft } from "./lightSpeedOutLeft";
