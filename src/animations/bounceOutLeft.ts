@@ -1,10 +1,6 @@
 export default {
   keyframes: [
-    {
-      transform: "translate3d(0, 0, 0) scaleX(1)",
-      opacity: 1,
-      offset: 0,
-    },
+    { transform: "translate3d(0, 0, 0)", opacity: 1, offset: 0 },
     {
       transform: "translate3d(20px, 0, 0) scaleX(0.9)",
       opacity: 1,

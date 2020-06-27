@@ -135,6 +135,13 @@ const Animations: FC = () => {
           <option value="rotateInUpLeft">rotateInUpLeft</option>
           <option value="rotateInUpRight">rotateInUpRight</option>
         </optgroup>
+        <optgroup label="Rotating exits">
+          <option value="rotateOut">rotateOut</option>
+          <option value="rotateOutDownLeft">rotateOutDownLeft</option>
+          <option value="rotateOutDownRight">rotateOutDownRight</option>
+          <option value="rotateOutUpLeft">rotateOutUpLeft</option>
+          <option value="rotateOutUpRight">rotateOutUpRight</option>
+        </optgroup>
       </select>
     </div>
   );
