@@ -411,6 +411,14 @@ const { ref } = useWebAnimations({
 - fadeOutTopRight
 - fadeOutBottomLeft
 - fadeOutBottomRight
+
+#### Flippers
+
+- flip
+- flipInX
+- flipInY
+- flipOutX
+- flipOutY
 </details>
 
 ## Use Your Own `ref`

@@ -115,6 +115,13 @@ const Animations: FC = () => {
           <option value="fadeOutBottomLeft">fadeOutBottomLeft</option>
           <option value="fadeOutBottomRight">fadeOutBottomRight</option>
         </optgroup>
+        <optgroup label="Flippers">
+          <option value="flip">flip</option>
+          <option value="flipInX">flipInX</option>
+          <option value="flipInY">flipInY</option>
+          <option value="flipOutX">flipOutX</option>
+          <option value="flipOutY">flipOutY</option>
+        </optgroup>
       </select>
     </div>
   );
