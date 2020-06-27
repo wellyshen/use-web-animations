@@ -9,7 +9,7 @@ const Animations: FC = () => {
   const [val, setVal] = useState<string>("bounce");
   // @ts-ignore
   const { keyframes, timing } = animations[val];
-  const { ref, getAnimation } = useWebAnimations<HTMLButtonElement>({
+  const { ref, getAnimation } = useWebAnimations<HTMLDivElement>({
     keyframes,
     timing: { ...timing, fill: "auto" },
   });
@@ -39,11 +39,18 @@ const Animations: FC = () => {
         </a>
         .
       </p>
-      <button css={target} onClick={play} type="button" ref={ref}>
+      <div
+        css={target}
+        ref={ref}
+        onClick={play}
+        onKeyPress={play}
+        role="button"
+        tabIndex={0}
+      >
         <span role="img" aria-label="icon">
           🍿
         </span>
-      </button>
+      </div>
       <select css={select} onChange={handleChangeSelect}>
         <optgroup label="Attention Seekers">
           <option value="bounce">bounce</option>

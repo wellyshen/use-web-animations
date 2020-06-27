@@ -12,10 +12,12 @@ export const link = css`
 `;
 
 export const target = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 2.5rem;
   width: 200px;
   height: 200px;
-  border: none;
   border-radius: 4px;
   font-size: 5rem;
   background: #333;
