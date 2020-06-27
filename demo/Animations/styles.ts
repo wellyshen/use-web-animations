@@ -22,6 +22,7 @@ export const target = css`
   font-size: 5rem;
   background: #333;
   cursor: pointer;
+  user-select: none;
   &:focus {
     outline: none;
   }
