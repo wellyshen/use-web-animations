@@ -162,6 +162,18 @@ const Animations: FC = () => {
           <option value="zoomOutRight">zoomOutRight</option>
           <option value="zoomOutUp">zoomOutUp</option>
         </optgroup>
+        <optgroup label="Sliding entrances">
+          <option value="slideInDown">slideInDown</option>
+          <option value="slideInLeft">slideInLeft</option>
+          <option value="slideInRight">slideInRight</option>
+          <option value="slideInUp">slideInUp</option>
+        </optgroup>
+        <optgroup label="Sliding exits">
+          <option value="slideOutDown">slideOutDown</option>
+          <option value="slideOutLeft">slideOutLeft</option>
+          <option value="slideOutRight">slideOutRight</option>
+          <option value="slideOutUp">slideOutUp</option>
+        </optgroup>
       </select>
     </div>
   );

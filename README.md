@@ -465,6 +465,20 @@ const { ref } = useWebAnimations({
 - zoomOutLeft
 - zoomOutRight
 - zoomOutUp
+
+#### Sliding entrances
+
+- slideInDown
+- slideInLeft
+- slideInRight
+- slideInUp
+
+#### Sliding exits
+
+- slideOutDown
+- slideOutLeft
+- slideOutRight
+- slideOutUp
 </details>
 
 ## Use Your Own `ref`
