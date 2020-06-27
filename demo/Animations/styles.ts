@@ -1,5 +1,9 @@
 import { css } from "@emotion/core";
 
+export const container = css`
+  margin-bottom: 7rem;
+`;
+
 export const link = css`
   color: #fff;
   &:hover {

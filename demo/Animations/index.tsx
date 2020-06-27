@@ -2,8 +2,8 @@ import React, { FC, ChangeEvent, useState } from "react";
 
 import useWebAnimations from "../../src";
 import * as animations from "../../src/animations";
-import { container, title, subtitle } from "../theme";
-import { link, target, select } from "./styles";
+import { container as sharedContainer, title, subtitle } from "../theme";
+import { container, link, target, select } from "./styles";
 
 const Animations: FC = () => {
   const [val, setVal] = useState<string>("bounce");
@@ -23,7 +23,7 @@ const Animations: FC = () => {
   };
 
   return (
-    <div css={container}>
+    <div css={[sharedContainer, container]}>
       <h2 id="animations" css={title}>
         Animations
       </h2>
