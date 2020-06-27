@@ -128,6 +128,13 @@ const Animations: FC = () => {
           <option value="lightSpeedOutRight">lightSpeedOutRight</option>
           <option value="lightSpeedOutLeft">lightSpeedOutLeft</option>
         </optgroup>
+        <optgroup label="Rotating entrances">
+          <option value="rotateIn">rotateIn</option>
+          <option value="rotateInDownLeft">rotateInDownLeft</option>
+          <option value="rotateInDownRight">rotateInDownRight</option>
+          <option value="rotateInUpLeft">rotateInUpLeft</option>
+          <option value="rotateInUpRight">rotateInUpRight</option>
+        </optgroup>
       </select>
     </div>
   );

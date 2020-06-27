@@ -426,6 +426,14 @@ const { ref } = useWebAnimations({
 - lightSpeedInLeft
 - lightSpeedOutRight
 - lightSpeedOutLeft
+
+#### Rotating entrances
+
+- rotateIn
+- rotateInDownLeft
+- rotateInDownRight
+- rotateInUpLeft
+- rotateInUpRight
 </details>
 
 ## Use Your Own `ref`
