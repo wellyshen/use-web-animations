@@ -15,6 +15,7 @@ const Animations: FC = () => {
   });
 
   const play = () => {
+    console.log("LOG ====> Play");
     getAnimation().play();
   };
 
