@@ -8,7 +8,6 @@ const Main: FC = () => {
   const { ref: blockRef, getAnimation: getBlockAnim } = useWebAnimations<
     HTMLDivElement
   >({
-    autoPlay: false,
     keyframes: { width: ["0", "100%", "0"], left: ["0", "0", "100%"] },
     timing: {
       duration: 2000,
@@ -19,7 +18,6 @@ const Main: FC = () => {
   const { ref: textRef, getAnimation: getTxtAnim } = useWebAnimations<
     HTMLDivElement
   >({
-    autoPlay: false,
     keyframes: { opacity: ["0", "1"] },
     timing: {
       delay: 1600,
@@ -30,7 +28,6 @@ const Main: FC = () => {
   const { ref: heartRef, getAnimation: getHeartAnim } = useWebAnimations<
     HTMLDivElement
   >({
-    autoPlay: false,
     keyframes: {
       transform: ["translate3d(0, 0, 0)", "translate3d(0, -100%, 0)"],
     },
