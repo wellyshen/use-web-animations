@@ -1,5 +1,7 @@
 import { css } from "@emotion/core";
 
+import mq from "../utils/mq";
+
 export const container = css`
   margin-bottom: 7rem;
 `;
@@ -16,8 +18,8 @@ export const target = css`
   justify-content: center;
   align-items: center;
   margin-bottom: 2.5rem;
-  width: 200px;
-  height: 200px;
+  width: 140px;
+  height: 140px;
   border-radius: 4px;
   font-size: 5rem;
   background: #333;
@@ -25,6 +27,10 @@ export const target = css`
   user-select: none;
   &:focus {
     outline: none;
+  }
+  ${mq.sm} {
+    width: 200px;
+    height: 200px;
   }
 `;
 
