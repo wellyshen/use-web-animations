@@ -101,7 +101,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <p>🎞️ Animation is {playState}</p>
+      <p>🍿 Animation is {playState}</p>
       <div className="target" ref={ref} />
     </div>
   );
