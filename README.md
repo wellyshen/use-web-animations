@@ -108,7 +108,7 @@ const App = () => {
 };
 ```
 
-For browsers that don't support the `onReady` and `onFinish` events, we can use the `onUpdate` to monitor the animation's state instead.
+For browsers that don't yet support the `onReady` and `onFinish` events, we can use the `onUpdate` to monitor the animation's state instead.
 
 ```js
 let prevPending = true;
