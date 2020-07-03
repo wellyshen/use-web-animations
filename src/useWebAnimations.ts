@@ -7,6 +7,9 @@ import useLatest from "./useLatest";
 
 if (typeof window !== "undefined") loadPolyfill();
 
+const errorMsg = (type: string) =>
+  `> 💡use-web-animations: the browser doesn't support ${type} event, please use onUpdate to monitor the animation's state instead. See https://github.com/wellyshen/use-web-animations#basic-usage`;
+
 type Keyframes = Keyframe[] | PropertyIndexedKeyframes;
 type PlayState = string | null;
 interface AnimConf {
@@ -52,6 +55,7 @@ const useWebAnimations = <T extends HTMLElement>({
 }: Options<T> = {}): Return<T> => {
   const [playState, setPlayState] = useState<PlayState>(null);
   const animRef = useRef<Animation>();
+  const prevPendingRef = useRef<boolean>();
   const prevPlayStateRef = useRef<string>();
   const onReadyRef = useLatest<Callback>(onReady);
   const onUpdateRef = useLatest<Callback>(onUpdate);
@@ -71,22 +75,34 @@ const useWebAnimations = <T extends HTMLElement>({
       if (args.autoPlay === false) anim.pause();
       if (args.id) anim.id = args.id;
       if (args.playbackRate) anim.playbackRate = args.playbackRate;
-      if (onReadyRef.current)
-        anim.ready.then((animation) => {
-          onReadyRef.current({
-            playState: animation.playState,
-            animate,
-            animation,
+
+      if (onReadyRef.current) {
+        if (anim.ready) {
+          anim.ready.then((animation) => {
+            onReadyRef.current({
+              playState: animation.playState,
+              animate,
+              animation,
+            });
           });
-        });
-      if (onFinishRef.current)
-        anim.finished.then((animation) => {
-          onFinishRef.current({
-            playState: animation.playState,
-            animate,
-            animation,
+        } else {
+          console.error(errorMsg("onReady"));
+        }
+      }
+
+      if (onFinishRef.current) {
+        if (anim.finished) {
+          anim.finished.then((animation) => {
+            onFinishRef.current({
+              playState: animation.playState,
+              animate,
+              animation,
+            });
           });
-        });
+        } else {
+          console.error(errorMsg("onFinish"));
+        }
+      }
 
       prevPlayStateRef.current = undefined;
     },
@@ -103,22 +119,20 @@ const useWebAnimations = <T extends HTMLElement>({
       const animation = getAnimation();
 
       if (animation) {
-        const { playState: curPlayState } = animation;
+        const { pending, playState: curPlayState } = animation;
 
         if (curPlayState !== prevPlayStateRef.current)
           setPlayState(curPlayState);
 
         if (
           onUpdateRef.current &&
-          (curPlayState === "running" ||
-            curPlayState !== prevPlayStateRef.current)
+          (prevPendingRef.current !== pending ||
+            prevPlayStateRef.current !== curPlayState ||
+            curPlayState === "running")
         )
-          onUpdateRef.current({
-            playState: animation.playState,
-            animate,
-            animation,
-          });
+          onUpdateRef.current({ playState: curPlayState, animate, animation });
 
+        prevPendingRef.current = pending;
         prevPlayStateRef.current = curPlayState;
       }
 

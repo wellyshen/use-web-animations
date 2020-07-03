@@ -108,6 +108,30 @@ const App = () => {
 };
 ```
 
+For browsers that don't support the `onReady` and `onFinish` events, we can use the `onUpdate` to monitor the animation's state instead.
+
+```js
+let prevPending = true;
+
+const App = () => {
+  const { ref } = useWebAnimations({
+    // ...
+    onUpdate: ({ playState, animation: { pending } }) => {
+      if (prevPending && !pending) {
+        console.log("Animation is ready to play");
+      }
+      prevPending = pending;
+
+      if (playState === "finished") {
+        console.log("Animation has finished playing");
+      }
+    },
+  });
+
+  // ...
+};
+```
+
 ### Playback Control
 
 The shortcoming with existing technologies was the lack of playback control. The Web Animations API provides several useful methods for controlling playback: play, pause, reverse, cancel, finish, seek, control speed via the [methods](https://developer.mozilla.org/en-US/docs/Web/API/Animation#Methods) of the **Animation** interface. This hook exposes the animation instance for us to interact with animations, we can access it by the `getAnimation()` return value.
@@ -205,7 +229,7 @@ const App = () => {
 };
 ```
 
-The animation instance isn't a part of [React state](https://reactjs.org/docs/hooks-state.html), which means we need to access it by the `getAnimation()` whenever we need. If you want to monitor an animation's information, here's the `onUpdate` event for you. The event is implemented by the [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) internally and the event callback is triggered when the `animation.playState` is running or changes.
+The animation instance isn't a part of [React state](https://reactjs.org/docs/hooks-state.html), which means we need to access it by the `getAnimation()` whenever we need. If you want to monitor an animation's information, here's the `onUpdate` event for you. The event is implemented by the [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) internally and the event callback is triggered when the animation enters `running` state or changes state.
 
 ```js
 import React, { useState } from "react";
