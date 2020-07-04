@@ -1,12 +1,11 @@
 import { renderHook, act } from "@testing-library/react-hooks";
 
-import useWebAnimations, { Options } from "../useWebAnimations";
+import useWebAnimations, {
+  Options,
+  Return as Current,
+} from "../useWebAnimations";
 
 describe("useWebAnimations", () => {
-  window.requestAnimationFrame = jest.fn().mockImplementationOnce((cb) => {
-    setTimeout(cb, 0);
-  });
-
   const el = document.createElement("div");
   const target = { current: el };
   const mockKeyframes = { transform: ["translateX(500px)"] };
@@ -16,23 +15,32 @@ describe("useWebAnimations", () => {
     keyframes = mockKeyframes,
     timing = mockTiming,
     ...rest
-  }: Options<HTMLDivElement> = {}) =>
+  }: Options<HTMLDivElement> = {}): {
+    current: Current<HTMLDivElement>;
+  } =>
     renderHook(() => useWebAnimations({ ref, keyframes, timing, ...rest }))
       .result;
 
+  const id = "test";
+  const playbackRate = 1;
+  const animation = { playState: "running", pause: jest.fn() };
+
   beforeEach(() => {
     // @ts-ignore
-    el.animate = jest.fn(() => ({ playState: "running", pause: jest.fn() }));
+    el.animate = jest.fn(() => animation);
   });
 
   it("should return playState correctly", () => {
+    window.requestAnimationFrame = jest.fn().mockImplementationOnce((cb) => {
+      setTimeout(cb, 0);
+    });
     jest.useFakeTimers();
 
     const result = renderHelper();
     act(() => {
       jest.runAllTimers();
     });
-    expect(result.current.playState).toBe("running");
+    expect(result.current.playState).toBe(animation.playState);
   });
 
   it("shouldn't call animate if either ref or keyframes isn't set", () => {
@@ -56,6 +64,34 @@ describe("useWebAnimations", () => {
     expect(result.current.ref).toStrictEqual(target);
   });
 
+  it("should return workable getAnimation method", () => {
+    const result = renderHelper();
+    expect(result.current.getAnimation()).toStrictEqual(animation);
+  });
+
+  it("should return workable animate method", () => {
+    const result = renderHelper();
+    result.current.animate({
+      id,
+      autoPlay: false,
+      playbackRate,
+      keyframes: mockKeyframes,
+      timing: mockTiming,
+    });
+    // @ts-ignore
+    const anim = el.animate.mock.results[0].value;
+    expect(anim.pause).toHaveBeenCalled();
+    expect(anim.playbackRate).toBe(playbackRate);
+    expect(anim.id).toBe(id);
+    expect(el.animate).toHaveBeenCalledWith(mockKeyframes, mockTiming);
+  });
+
+  it("should set animation id correctly", () => {
+    renderHelper({ id });
+    // @ts-ignore
+    expect(el.animate.mock.results[0].value.id).toBe(id);
+  });
+
   it("should pause animation at start", () => {
     renderHelper({ autoPlay: false });
     // @ts-ignore
@@ -63,16 +99,8 @@ describe("useWebAnimations", () => {
   });
 
   it("should update playback rate correctly", () => {
-    const playbackRate = 1;
     renderHelper({ playbackRate });
     // @ts-ignore
     expect(el.animate.mock.results[0].value.playbackRate).toBe(playbackRate);
-  });
-
-  it("should set animation id correctly", () => {
-    const id = "test";
-    renderHelper({ id });
-    // @ts-ignore
-    expect(el.animate.mock.results[0].value.id).toBe(id);
   });
 });
