@@ -552,10 +552,6 @@ The `options` provides the following configurations and event callbacks for you.
 | `onUpdate`     | function         |         | It's invoked when an animation enters the `running` state or changes state. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object.                                                                                              |
 | `onFinish`     | function         |         | It's invoked when an animation enters the `finished` state. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object. (Google Chrome: [available in v84+](https://web.dev/web-animations/#orchestrating-animations-with-promises)) |
 
-## To Do
-
-- [ ] Testing.
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
