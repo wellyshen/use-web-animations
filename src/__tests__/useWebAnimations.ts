@@ -1,13 +1,16 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react-hooks";
 
 import useWebAnimations, { Options } from "../useWebAnimations";
 
 describe("useWebAnimations", () => {
+  window.requestAnimationFrame = jest.fn().mockImplementationOnce((cb) => {
+    setTimeout(cb, 0);
+  });
+
   const el = document.createElement("div");
   const target = { current: el };
   const mockKeyframes = { transform: ["translateX(500px)"] };
   const mockTiming = 3000;
-
   const renderHelper = ({
     ref = target,
     keyframes = mockKeyframes,
@@ -19,9 +22,17 @@ describe("useWebAnimations", () => {
 
   beforeEach(() => {
     // @ts-ignore
-    el.animate = jest.fn(() => ({
-      pause: jest.fn(),
-    }));
+    el.animate = jest.fn(() => ({ playState: "running", pause: jest.fn() }));
+  });
+
+  it("should return playState correctly", () => {
+    jest.useFakeTimers();
+
+    const result = renderHelper();
+    act(() => {
+      jest.runAllTimers();
+    });
+    expect(result.current.playState).toBe("running");
   });
 
   it("shouldn't call animate if either ref or keyframes isn't set", () => {
@@ -35,6 +46,14 @@ describe("useWebAnimations", () => {
   it("should call animate correctly", () => {
     renderHelper();
     expect(el.animate).toHaveBeenCalledWith(mockKeyframes, mockTiming);
+  });
+
+  it("should return workable ref", () => {
+    const result = renderHelper({ ref: null });
+    expect(result.current.ref).toStrictEqual({ current: null });
+
+    result.current.ref = target;
+    expect(result.current.ref).toStrictEqual(target);
   });
 
   it("should pause animation at start", () => {
