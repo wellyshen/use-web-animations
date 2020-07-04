@@ -28,7 +28,7 @@ interface Callback {
     animation: Animation;
   }): void;
 }
-interface Options<T> extends AnimConf {
+export interface Options<T> extends AnimConf {
   ref?: RefObject<T>;
   keyframes?: Keyframes;
   onReady?: Callback;

@@ -132,7 +132,8 @@
   "jest": {
     "preset": "ts-jest",
     "moduleNameMapper": {
-      "\\.(apng|bmp|gif|ico|cur|jpg|jpeg|jfif|pjpeg|pjp|png|svg|tif|tiff|webp)$": "<rootDir>/__mocks__/file.ts"
+      "\\.(apng|bmp|gif|ico|cur|jpg|jpeg|jfif|pjpeg|pjp|png|svg|tif|tiff|webp)$": "<rootDir>/__mocks__/file.ts",
+      "polyfill": "<rootDir>/__mocks__/polyfill.ts"
     },
     "collectCoverageFrom": [
       "src/*.(ts|tsx)",
