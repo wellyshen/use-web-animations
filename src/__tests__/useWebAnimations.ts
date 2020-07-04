@@ -1,28 +1,24 @@
 import { renderHook, act } from "@testing-library/react-hooks";
 
-import useWebAnimations, {
-  Options,
-  Return as Current,
-} from "../useWebAnimations";
+import useWebAnimations, { Options } from "../useWebAnimations";
 
 describe("useWebAnimations", () => {
   const el = document.createElement("div");
   const target = { current: el };
+  const id = "test";
+  const playbackRate = 1;
   const mockKeyframes = { transform: ["translateX(500px)"] };
   const mockTiming = 3000;
+
   const renderHelper = ({
     ref = target,
     keyframes = mockKeyframes,
     timing = mockTiming,
     ...rest
-  }: Options<HTMLDivElement> = {}): {
-    current: Current<HTMLDivElement>;
-  } =>
+  }: Options<HTMLDivElement> = {}) =>
     renderHook(() => useWebAnimations({ ref, keyframes, timing, ...rest }))
       .result;
 
-  const id = "test";
-  const playbackRate = 1;
   const animation = { playState: "running", pause: jest.fn() };
 
   beforeEach(() => {

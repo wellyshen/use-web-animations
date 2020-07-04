@@ -35,7 +35,7 @@ export interface Options<T> extends AnimConf {
   onUpdate?: Callback;
   onFinish?: Callback;
 }
-export interface Return<T> {
+interface Return<T> {
   ref: RefObject<T>;
   readonly playState: PlayState;
   readonly getAnimation: () => Animation;
