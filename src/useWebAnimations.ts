@@ -60,7 +60,7 @@ const useWebAnimations = <T extends HTMLElement>({
   const onReadyRef = useLatest<Callback>(onReady);
   const onUpdateRef = useLatest<Callback>(onUpdate);
   const onFinishRef = useLatest<Callback>(onFinish);
-  const refVar = useRef<T>();
+  const refVar = useRef<T>(null);
   const ref = refOpt || refVar;
 
   const getAnimation = useCallback(() => animRef.current, []);
@@ -121,7 +121,7 @@ const useWebAnimations = <T extends HTMLElement>({
       if (animation) {
         const { pending, playState: curPlayState } = animation;
 
-        if (curPlayState !== prevPlayStateRef.current)
+        if (prevPlayStateRef.current !== curPlayState)
           setPlayState(curPlayState);
 
         if (
