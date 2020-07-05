@@ -123,22 +123,6 @@ describe("useWebAnimations", () => {
     expect(onUpdate).toHaveBeenNthCalledWith(4, evt);
   });
 
-  it("should throw polyfill error", () => {
-    el.animate = null;
-    renderHelper();
-    expect(console.error).toHaveBeenCalledWith(polyfillErr);
-  });
-
-  it("should throw event errors", () => {
-    // @ts-ignore
-    el.animate = () => ({});
-    renderHelper({ onReady: () => null });
-    expect(console.error).toHaveBeenCalledWith(eventErr("onReady"));
-
-    renderHelper({ onFinish: () => null });
-    expect(console.error).toHaveBeenLastCalledWith(eventErr("onFinish"));
-  });
-
   it("shouldn't call animate if either ref or keyframes isn't set", () => {
     renderHelper({ ref: null });
     expect(el.animate).not.toHaveBeenCalled();
@@ -210,5 +194,21 @@ describe("useWebAnimations", () => {
     renderHelper({ playbackRate });
     // @ts-ignore
     expect(el.animate.mock.results[0].value.playbackRate).toBe(playbackRate);
+  });
+
+  it("should throw polyfill error", () => {
+    el.animate = null;
+    renderHelper();
+    expect(console.error).toHaveBeenCalledWith(polyfillErr);
+  });
+
+  it("should throw event errors", () => {
+    animation.ready = null;
+    renderHelper({ onReady: () => null });
+    expect(console.error).toHaveBeenCalledWith(eventErr("onReady"));
+
+    animation.finished = null;
+    renderHelper({ onFinish: () => null });
+    expect(console.error).toHaveBeenLastCalledWith(eventErr("onFinish"));
   });
 });
