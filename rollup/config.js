@@ -18,7 +18,6 @@ const { BUILD } = process.env;
 const isDev = BUILD === "dev";
 const isDemo = BUILD === "demo";
 const isDist = BUILD === "full" || BUILD === "pure";
-
 let src = "src";
 
 if (BUILD === "pure") {
