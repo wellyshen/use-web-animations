@@ -9,6 +9,9 @@ import useWebAnimations, {
 } from "../useWebAnimations";
 
 describe("useWebAnimations", () => {
+  console.error = jest.fn();
+  jest.useFakeTimers();
+
   const el = document.createElement("div");
   const target = { current: el };
   const id = "test";
@@ -24,9 +27,10 @@ describe("useWebAnimations", () => {
   }: Options<HTMLDivElement> = {}) =>
     renderHook(() => useWebAnimations({ ref, keyframes, timing, ...rest }));
 
-  const e = { playState: "running" };
+  const e = { playState: "pause" };
   const animation = {
-    playState: "running",
+    pending: true,
+    playState: "pause",
     ready: Promise.resolve(e),
     finished: Promise.resolve(e),
     pause: jest.fn(),
@@ -38,8 +42,6 @@ describe("useWebAnimations", () => {
   });
 
   it("should call onReady correctly", async () => {
-    console.error = jest.fn();
-
     const onReady = jest.fn();
     const { waitForNextUpdate } = renderHelper({ onReady });
     await waitForNextUpdate();
@@ -52,8 +54,6 @@ describe("useWebAnimations", () => {
   });
 
   it("should call onFinish correctly", async () => {
-    console.error = jest.fn();
-
     const onFinish = jest.fn();
     const { waitForNextUpdate } = renderHelper({ onFinish });
     await waitForNextUpdate();
@@ -65,17 +65,71 @@ describe("useWebAnimations", () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it("should throw polyfill error", () => {
-    console.error = jest.fn();
+  it("should call onUpdate correctly", () => {
+    window.requestAnimationFrame = jest
+      .fn()
+      .mockImplementationOnce((cb) => {
+        setTimeout(cb, 0);
+      })
+      .mockImplementationOnce((cb) => {
+        setTimeout(cb, 1);
+      })
+      .mockImplementationOnce((cb) => {
+        setTimeout(cb, 2);
+      })
+      .mockImplementationOnce((cb) => {
+        setTimeout(cb, 3);
+      })
+      .mockImplementationOnce((cb) => {
+        setTimeout(cb, 4);
+      });
 
+    const onUpdate = jest.fn();
+    let evt = {
+      playState: animation.playState,
+      animation,
+      animate: expect.any(Function),
+    };
+    renderHelper({ onUpdate });
+    act(() => {
+      jest.advanceTimersByTime(0);
+    });
+    expect(onUpdate).toHaveBeenCalledWith(evt);
+
+    act(() => {
+      jest.advanceTimersByTime(1);
+    });
+    expect(onUpdate).toHaveBeenCalledTimes(1);
+
+    animation.pending = false;
+    act(() => {
+      jest.advanceTimersByTime(2);
+    });
+    expect(onUpdate).toHaveBeenNthCalledWith(2, evt);
+
+    animation.playState = "running";
+    evt = {
+      ...evt,
+      playState: animation.playState,
+    };
+    act(() => {
+      jest.advanceTimersByTime(3);
+    });
+    expect(onUpdate).toHaveBeenNthCalledWith(3, evt);
+
+    act(() => {
+      jest.advanceTimersByTime(4);
+    });
+    expect(onUpdate).toHaveBeenNthCalledWith(4, evt);
+  });
+
+  it("should throw polyfill error", () => {
     el.animate = null;
     renderHelper();
     expect(console.error).toHaveBeenCalledWith(polyfillErr);
   });
 
   it("should throw event errors", () => {
-    console.error = jest.fn();
-
     // @ts-ignore
     el.animate = () => ({});
     renderHelper({ onReady: () => null });
@@ -110,7 +164,6 @@ describe("useWebAnimations", () => {
     window.requestAnimationFrame = jest.fn().mockImplementationOnce((cb) => {
       setTimeout(cb, 0);
     });
-    jest.useFakeTimers();
 
     const { result } = renderHelper();
     act(() => {
