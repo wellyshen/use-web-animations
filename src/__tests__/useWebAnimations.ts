@@ -1,6 +1,12 @@
+/* eslint-disable compat/compat */
+
 import { renderHook, act } from "@testing-library/react-hooks";
 
-import useWebAnimations, { Options } from "../useWebAnimations";
+import useWebAnimations, {
+  Options,
+  polyfillErr,
+  eventErr,
+} from "../useWebAnimations";
 
 describe("useWebAnimations", () => {
   const el = document.createElement("div");
@@ -16,27 +22,67 @@ describe("useWebAnimations", () => {
     timing = mockTiming,
     ...rest
   }: Options<HTMLDivElement> = {}) =>
-    renderHook(() => useWebAnimations({ ref, keyframes, timing, ...rest }))
-      .result;
+    renderHook(() => useWebAnimations({ ref, keyframes, timing, ...rest }));
 
-  const animation = { playState: "running", pause: jest.fn() };
+  const e = { playState: "running" };
+  const animation = {
+    playState: "running",
+    ready: Promise.resolve(e),
+    finished: Promise.resolve(e),
+    pause: jest.fn(),
+  };
 
   beforeEach(() => {
     // @ts-ignore
     el.animate = jest.fn(() => animation);
   });
 
-  it("should return playState correctly", () => {
-    window.requestAnimationFrame = jest.fn().mockImplementationOnce((cb) => {
-      setTimeout(cb, 0);
-    });
-    jest.useFakeTimers();
+  it("should call onReady correctly", async () => {
+    console.error = jest.fn();
 
-    const result = renderHelper();
-    act(() => {
-      jest.runAllTimers();
+    const onReady = jest.fn();
+    const { waitForNextUpdate } = renderHelper({ onReady });
+    await waitForNextUpdate();
+    expect(onReady).toHaveBeenCalledWith({
+      playState: e.playState,
+      animation: e,
+      animate: expect.any(Function),
     });
-    expect(result.current.playState).toBe(animation.playState);
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it("should call onFinish correctly", async () => {
+    console.error = jest.fn();
+
+    const onFinish = jest.fn();
+    const { waitForNextUpdate } = renderHelper({ onFinish });
+    await waitForNextUpdate();
+    expect(onFinish).toHaveBeenCalledWith({
+      playState: e.playState,
+      animation: e,
+      animate: expect.any(Function),
+    });
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it("should throw polyfill error", () => {
+    console.error = jest.fn();
+
+    el.animate = null;
+    renderHelper();
+    expect(console.error).toHaveBeenCalledWith(polyfillErr);
+  });
+
+  it("should throw event errors", () => {
+    console.error = jest.fn();
+
+    // @ts-ignore
+    el.animate = () => ({});
+    renderHelper({ onReady: () => null });
+    expect(console.error).toHaveBeenCalledWith(eventErr("onReady"));
+
+    renderHelper({ onFinish: () => null });
+    expect(console.error).toHaveBeenLastCalledWith(eventErr("onFinish"));
   });
 
   it("shouldn't call animate if either ref or keyframes isn't set", () => {
@@ -53,20 +99,33 @@ describe("useWebAnimations", () => {
   });
 
   it("should return workable ref", () => {
-    const result = renderHelper({ ref: null });
+    const { result } = renderHelper({ ref: null });
     expect(result.current.ref).toStrictEqual({ current: null });
 
     result.current.ref = target;
     expect(result.current.ref).toStrictEqual(target);
   });
 
+  it("should return playState correctly", () => {
+    window.requestAnimationFrame = jest.fn().mockImplementationOnce((cb) => {
+      setTimeout(cb, 0);
+    });
+    jest.useFakeTimers();
+
+    const { result } = renderHelper();
+    act(() => {
+      jest.runAllTimers();
+    });
+    expect(result.current.playState).toBe(animation.playState);
+  });
+
   it("should return workable getAnimation method", () => {
-    const result = renderHelper();
+    const { result } = renderHelper();
     expect(result.current.getAnimation()).toStrictEqual(animation);
   });
 
   it("should return workable animate method", () => {
-    const result = renderHelper();
+    const { result } = renderHelper();
     result.current.animate({
       id,
       autoPlay: false,
