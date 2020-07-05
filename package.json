@@ -47,7 +47,9 @@
     "test:watch": "yarn test --watch",
     "test:cov": "yarn clean:cov && yarn test --coverage",
     "build:demo": "yarn clean:dev && yarn clean:demo && rollup -c rollup/config.js --environment BUILD:demo",
-    "build:dist": "yarn clean:dist && BABEL_ENV=dist rollup -c rollup/config.js --environment BUILD:dist",
+    "build-full": "BABEL_ENV=dist rollup -c rollup/config.js --environment BUILD:full",
+    "build-pure": "BABEL_ENV=dist rollup -c rollup/config.js --environment BUILD:pure",
+    "build:dist": "run-s clean:dist build-full build-pure",
     "build": "run-s build:*",
     "preversion": "run-s type-check lint test build:dist",
     "postversion": "git push --follow-tags --no-verify && npm publish && yarn clean:dist",
@@ -138,6 +140,7 @@
     "collectCoverageFrom": [
       "src/*.(ts|tsx)",
       "!src/index.ts",
+      "!src/pure.ts",
       "!src/*.d.ts"
     ]
   },

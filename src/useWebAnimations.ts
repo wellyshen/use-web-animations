@@ -1,13 +1,11 @@
 import { RefObject, useState, useRef, useCallback, useEffect } from "react";
 import useDeepCompareEffect from "use-deep-compare-effect";
 
-// @ts-ignore
-import loadPolyfill from "./polyfill";
 import useLatest from "./useLatest";
 
-if (typeof window !== "undefined") loadPolyfill();
-
-const errorMsg = (type: string) =>
+export const polyfillErr =
+  "> 💡use-web-animations: please enable polyfill to use this hook. See https://github.com/wellyshen/use-web-animations#disable-polyfill";
+export const eventErr = (type: string): string =>
   `> 💡use-web-animations: the browser doesn't support ${type} event, please use onUpdate to monitor the animation's state instead. See https://github.com/wellyshen/use-web-animations#basic-usage`;
 
 type Keyframes = Keyframe[] | PropertyIndexedKeyframes;
@@ -68,6 +66,10 @@ const useWebAnimations = <T extends HTMLElement>({
   const animate: Animate = useCallback(
     (args) => {
       if (!ref.current || !args.keyframes) return;
+      if (!ref.current.animate) {
+        console.error(polyfillErr);
+        return;
+      }
 
       animRef.current = ref.current.animate(args.keyframes, args.timing);
       const { current: anim } = animRef;
@@ -86,7 +88,7 @@ const useWebAnimations = <T extends HTMLElement>({
             });
           });
         } else {
-          console.error(errorMsg("onReady"));
+          console.error(eventErr("onReady"));
         }
       }
 
@@ -100,7 +102,7 @@ const useWebAnimations = <T extends HTMLElement>({
             });
           });
         } else {
-          console.error(errorMsg("onFinish"));
+          console.error(eventErr("onFinish"));
         }
       }
 
