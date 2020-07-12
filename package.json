@@ -121,7 +121,7 @@
     ],
     "extends": [
       "stylelint-config-standard",
-      "stylelint-config-prettier"
+      "stylelint-prettier/recommended"
     ],
     "rules": {
       "prettier/prettier": true
