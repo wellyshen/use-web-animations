@@ -561,6 +561,13 @@ This hook built-ins the [polyfill](https://github.com/web-animations/web-animati
 + import useWebAnimations from "@wellyshen/use-web-animations/dist/pure";
 ```
 
+For [ES modules](https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive), use `@wellyshen/use-web-animations/dist/pure.esm` instead.
+
+```diff
+- import useWebAnimations from "@wellyshen/use-web-animations";
++ import useWebAnimations from "@wellyshen/use-web-animations/dist/pure.esm";
+```
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
