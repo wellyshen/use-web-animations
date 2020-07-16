@@ -78,7 +78,7 @@ import useWebAnimations from "@wellyshen/use-web-animations";
 const App = () => {
   const { ref, playState } = useWebAnimations({
     keyframes: {
-      transform: ["translateX(500px)"], // Move by 500px
+      transform: "translateX(500px)", // Move by 500px
       background: ["red", "blue", "green"], // Go through three colors
     },
     timing: {
@@ -147,7 +147,7 @@ const App = () => {
   const { ref, playState, getAnimation } = useWebAnimations({
     playbackRate: 0.5, // Change playback rate, default is 1
     autoPlay: false, // Automatically starts the animation, default is true
-    keyframes: { transform: ["translateX(500px)"] },
+    keyframes: { transform: "translateX(500px)" },
     timing: { duration: 1000, fill: "forwards" },
   });
 
@@ -206,7 +206,7 @@ import useWebAnimations from "@wellyshen/use-web-animations";
 
 const App = () => {
   const { ref, getAnimation } = useWebAnimations({
-    keyframes: { transform: ["translateX(500px)"] },
+    keyframes: { transform: "translateX(500px)" },
     timing: { duration: 1000, fill: "forwards" },
   });
 
@@ -239,7 +239,7 @@ import useWebAnimations from "@wellyshen/use-web-animations";
 const App = () => {
   const [showEl, setShowEl] = useState(false);
   const { ref } = useWebAnimations({
-    keyframes: { transform: ["translateX(500px)"] },
+    keyframes: { transform: "translateX(500px)" },
     timing: { duration: 1000, fill: "forwards" },
     onUpdate: ({ animation }) => {
       if (animation.currentTime > animation.effect.getTiming().duration / 2)
