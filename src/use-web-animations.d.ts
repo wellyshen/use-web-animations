@@ -49,7 +49,7 @@ declare module "@wellyshen/use-web-animations" {
 
   interface Anim {
     keyframes: Keyframe[];
-    timing: KeyframeAnimationOptions;
+    timing: EffectTiming;
   }
 
   export const bounce: Anim;
