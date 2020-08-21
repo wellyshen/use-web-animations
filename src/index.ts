@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-expect-error
 import loadPolyfill from "./polyfill";
 
 if (typeof window !== "undefined") loadPolyfill();

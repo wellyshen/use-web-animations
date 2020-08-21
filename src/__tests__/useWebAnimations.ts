@@ -37,7 +37,7 @@ describe("useWebAnimations", () => {
   };
 
   beforeEach(() => {
-    // @ts-ignore
+    // @ts-expect-error
     el.animate = jest.fn(() => animation);
   });
 
@@ -170,7 +170,7 @@ describe("useWebAnimations", () => {
       keyframes: mockKeyframes,
       timing: mockTiming,
     });
-    // @ts-ignore
+    // @ts-expect-error
     const anim = el.animate.mock.results[0].value;
     expect(anim.pause).toHaveBeenCalled();
     expect(anim.playbackRate).toBe(playbackRate);
@@ -180,19 +180,19 @@ describe("useWebAnimations", () => {
 
   it("should set animation id correctly", () => {
     renderHelper({ id });
-    // @ts-ignore
+    // @ts-expect-error
     expect(el.animate.mock.results[0].value.id).toBe(id);
   });
 
   it("should pause animation at start", () => {
     renderHelper({ autoPlay: false });
-    // @ts-ignore
+    // @ts-expect-error
     expect(el.animate.mock.results[0].value.pause).toHaveBeenCalled();
   });
 
   it("should update playback rate correctly", () => {
     renderHelper({ playbackRate });
-    // @ts-ignore
+    // @ts-expect-error
     expect(el.animate.mock.results[0].value.playbackRate).toBe(playbackRate);
   });
 
