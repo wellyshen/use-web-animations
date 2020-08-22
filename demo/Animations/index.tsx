@@ -39,6 +39,7 @@ const Animations: FC = () => {
         </a>
         .
       </p>
+      <div style={{overflow: "hidden"}}>
       <div
         css={target}
         ref={ref}
@@ -51,7 +52,7 @@ const Animations: FC = () => {
           🍿
         </span>
       </div>
-      <select css={select} onChange={handleChangeSelect}>
+      <select css={select} onChange={handleChangeSelect} style={{width: "100%"}}>
         <optgroup label="Attention Seekers">
           <option value="bounce">bounce</option>
           <option value="flash">flash</option>
@@ -182,6 +183,7 @@ const Animations: FC = () => {
           <option value="slideOutUp">slideOutUp</option>
         </optgroup>
       </select>
+      </div>
     </div>
   );
 };
