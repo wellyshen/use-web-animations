@@ -20,7 +20,7 @@ export const target = css`
   margin-bottom: 2.5rem;
   width: 140px;
   height: 140px;
-  font-size: 7rem;
+  font-size: 6rem;
   background: #333;
   cursor: pointer;
   user-select: none;
@@ -30,6 +30,7 @@ export const target = css`
   ${mq.sm} {
     width: 200px;
     height: 200px;
+    font-size: 7rem;
   }
 `;
 
