@@ -14,11 +14,11 @@ Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](https://github.com/wellyshen/use-web-animations/blob/master/CONTRIBUTING.md)
 [![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fwellyshen%2Fuse-web-animations)](https://twitter.com/intent/tweet?text=With%20@wellyshen/use-web-animations,%20I%20can%20build%20fancy%20and%20performant%20animations%20for%20my%20web%20app.%20Thanks,%20@Welly%20Shen%20🤩)
 
-![demo_basic](https://user-images.githubusercontent.com/21308003/85407583-f564cd00-b595-11ea-968a-b436ae56cd14.gif)
+![demo_basic](https://user-images.githubusercontent.com/21308003/91186058-280b7d00-e721-11ea-8180-e739d14c7ec7.gif)
 
 ⚡️ Try yourself: https://use-web-animations.netlify.app
 
-![demo_animate](https://user-images.githubusercontent.com/21308003/86127263-2e5eed80-bb12-11ea-983d-ae33fb8a8670.gif)
+![demo_animate](https://user-images.githubusercontent.com/21308003/91186066-2a6dd700-e721-11ea-84c5-b2c4ff984cf5.gif)
 
 ⚡️ Try yourself: https://use-web-animations.netlify.app#animations
 
