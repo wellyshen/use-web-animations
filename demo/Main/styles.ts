@@ -2,12 +2,13 @@ import { css } from "@emotion/core";
 
 import mq from "../utils/mq";
 
-const { md } = mq;
+const { sm, md } = mq;
 
 export const mask = css`
   position: relative;
   margin-bottom: 2.5rem;
   width: 87vw;
+  text-align: left;
   overflow: hidden;
   user-select: none;
   ${md} {
@@ -42,8 +43,9 @@ export const heart = css`
 `;
 
 export const btn = css`
-  padding: 0.35rem 0.5rem;
-  border: 1px solid #fff;
+  padding: 0.5rem;
+  border: 1px dashed #fff;
+  font-weight: bold;
   color: #fff;
   background: none;
   cursor: pointer;
@@ -55,6 +57,9 @@ export const btn = css`
   }
   &:focus {
     outline: none;
+  }
+  ${sm} {
+    padding: 0.5rem 1rem;
   }
 `;
 
@@ -69,14 +74,12 @@ export const slider = css`
     outline: none;
   }
   &::-moz-range-track {
-    height: 1px;
     background: #fff;
   }
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 21px;
     height: 21px;
-    border-radius: 50%;
     background: #fff;
     cursor: pointer;
   }
@@ -84,7 +87,6 @@ export const slider = css`
     width: 21px;
     height: 21px;
     border: none;
-    border-radius: 50%;
     background: #fff;
     cursor: pointer;
   }

@@ -1,4 +1,4 @@
-# useWebAnimations
+# <em><b>USE-WEB-ANIMATIONS</b></em>
 
 Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) (a.k.a WAAPI) in the React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook) way. Let's create highly-performant, flexible and manipulable web animations in the modern world. Hope you guys 👍🏻 it!
 

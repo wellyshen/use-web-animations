@@ -9,10 +9,10 @@ export default ({ files }) => `
       <meta name="theme-color" content="#000000" />
       <link rel="apple-touch-icon" href="assets/logo192.png" />
       <link rel="manifest" href="assets/manifest.json" />
-      <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Bowlby+One+SC&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Bowlby+One+SC&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
       <link rel="stylesheet" href=${files.css[0].fileName} />
-      <title>useWebAnimations</title>
-      <meta property="og:title" content="useWebAnimations" />
+      <title>USE-WEB-ANIMATIONS</title>
+      <meta property="og:title" content="USE-WEB-ANIMATIONS" />
       <meta property="og:type" content="website" />
       <meta property="og:image" content="https://use-web-animations.netlify.app/assets/og_image.png" />
       <meta property="og:description" content="React hook for highly-performant and manipulable animations using Web Animations API." />

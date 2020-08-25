@@ -70,7 +70,7 @@ const Main: FC = () => {
 
   return (
     <div css={container}>
-      <h1 css={title}>useWebAnimations</h1>
+      <h1 css={title}>USE-WEB-ANIMATIONS</h1>
       <p css={subtitle}>
         React hook for highly-performant and manipulable animations using Web
         Animations API.

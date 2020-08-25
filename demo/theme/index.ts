@@ -9,6 +9,7 @@ export const container = css`
   flex-direction: column;
   align-items: center;
   padding: 5rem 5%;
+  text-align: center;
   ${sm} {
     padding-left: 10%;
     padding-right: 10%;

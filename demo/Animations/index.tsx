@@ -25,7 +25,7 @@ const Animations: FC = () => {
   return (
     <div css={[sharedContainer, container]}>
       <h2 id="animations" css={title}>
-        Animations
+        ANIMATIONS
       </h2>
       <p css={subtitle}>
         A collection of animations for Web Animations API, based on{" "}
