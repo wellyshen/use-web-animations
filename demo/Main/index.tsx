@@ -51,20 +51,31 @@ const Main: FC = () => {
     const value = parseInt((e.target as HTMLInputElement).value, 10);
 
     const blockAnim = getBlockAnim();
+    // @ts-expect-error
     const blockTiming = blockAnim.effect.getTiming();
+    // @ts-expect-error
     if (blockAnim.playState === "running") blockAnim.pause();
+    // @ts-expect-error
     blockAnim.currentTime = ((blockTiming.duration as number) / 100) * value;
 
     const txtAnim = getTxtAnim();
+    // @ts-expect-error
     const txtTiming = txtAnim.effect.getTiming();
+    // @ts-expect-error
     if (txtAnim.playState === "running") txtAnim.pause();
+    // @ts-expect-error
     txtAnim.currentTime =
+      // @ts-expect-error
       ((txtTiming.delay + (txtTiming.duration as number)) / 100) * value;
 
     const heartAnim = getHeartAnim();
+    // @ts-expect-error
     const heartTiming = heartAnim.effect.getTiming();
+    // @ts-expect-error
     if (heartAnim.playState === "running") heartAnim.pause();
+    // @ts-expect-error
     heartAnim.currentTime =
+      // @ts-expect-error
       ((heartTiming.delay + (heartTiming.duration as number)) / 100) * value;
   };
 

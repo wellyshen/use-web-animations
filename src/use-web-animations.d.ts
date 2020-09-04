@@ -37,7 +37,7 @@ declare module "@wellyshen/use-web-animations" {
   interface Return<T> {
     ref: RefObject<T>;
     readonly playState: PlayState;
-    readonly getAnimation: () => Animation;
+    readonly getAnimation: () => Animation | undefined;
     readonly animate: Animate;
   }
 

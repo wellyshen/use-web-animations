@@ -124,9 +124,11 @@ describe("useWebAnimations", () => {
   });
 
   it("shouldn't call animate if either ref or keyframes isn't set", () => {
+    // @ts-expect-error
     renderHelper({ ref: null });
     expect(el.animate).not.toHaveBeenCalled();
 
+    // @ts-expect-error
     renderHelper({ keyframes: null });
     expect(el.animate).not.toHaveBeenCalled();
   });
@@ -137,6 +139,7 @@ describe("useWebAnimations", () => {
   });
 
   it("should return workable ref", () => {
+    // @ts-expect-error
     const { result } = renderHelper({ ref: null });
     expect(result.current.ref).toStrictEqual({ current: null });
 
@@ -197,16 +200,19 @@ describe("useWebAnimations", () => {
   });
 
   it("should throw polyfill error", () => {
+    // @ts-expect-error
     el.animate = null;
     renderHelper();
     expect(console.error).toHaveBeenCalledWith(polyfillErr);
   });
 
   it("should throw event errors", () => {
+    // @ts-expect-error
     animation.ready = null;
     renderHelper({ onReady: () => null });
     expect(console.error).toHaveBeenCalledWith(eventErr("onReady"));
 
+    // @ts-expect-error
     animation.finished = null;
     renderHelper({ onFinish: () => null });
     expect(console.error).toHaveBeenLastCalledWith(eventErr("onFinish"));

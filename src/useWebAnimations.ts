@@ -36,7 +36,7 @@ export interface Options<T> extends AnimConf {
 interface Return<T> {
   ref: RefObject<T>;
   readonly playState: PlayState;
-  readonly getAnimation: () => Animation;
+  readonly getAnimation: () => Animation | undefined;
   readonly animate: Animate;
 }
 
@@ -55,9 +55,9 @@ const useWebAnimations = <T extends HTMLElement>({
   const animRef = useRef<Animation>();
   const prevPendingRef = useRef<boolean>();
   const prevPlayStateRef = useRef<string>();
-  const onReadyRef = useLatest<Callback>(onReady);
-  const onUpdateRef = useLatest<Callback>(onUpdate);
-  const onFinishRef = useLatest<Callback>(onFinish);
+  const onReadyRef = useLatest<Callback | undefined>(onReady);
+  const onUpdateRef = useLatest<Callback | undefined>(onUpdate);
+  const onFinishRef = useLatest<Callback | undefined>(onFinish);
   const refVar = useRef<T>(null);
   const ref = refOpt || refVar;
 
@@ -81,6 +81,7 @@ const useWebAnimations = <T extends HTMLElement>({
       if (onReadyRef.current) {
         if (anim.ready) {
           anim.ready.then((animation) => {
+            // @ts-expect-error
             onReadyRef.current({
               playState: animation.playState,
               animate,
@@ -95,6 +96,7 @@ const useWebAnimations = <T extends HTMLElement>({
       if (onFinishRef.current) {
         if (anim.finished) {
           anim.finished.then((animation) => {
+            // @ts-expect-error
             onFinishRef.current({
               playState: animation.playState,
               animate,
@@ -113,6 +115,7 @@ const useWebAnimations = <T extends HTMLElement>({
   );
 
   useDeepCompareEffect(() => {
+    // @ts-expect-error
     animate({ id, playbackRate, autoPlay, keyframes, timing });
   }, [id, playbackRate, autoPlay, keyframes, timing, animate]);
 

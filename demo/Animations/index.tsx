@@ -7,7 +7,7 @@ import { container, link, target, select } from "./styles";
 
 const Animations: FC = () => {
   const [val, setVal] = useState<string>("bounce");
-  // @ts-ignore
+  // @ts-expect-error
   const { keyframes, timing } = animations[val];
   const { ref, getAnimation } = useWebAnimations<HTMLDivElement>({
     keyframes,
@@ -15,6 +15,7 @@ const Animations: FC = () => {
   });
 
   const play = () => {
+    // @ts-expect-error
     getAnimation().play();
   };
 
