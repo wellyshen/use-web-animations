@@ -4,9 +4,9 @@ import useDeepCompareEffect from "use-deep-compare-effect";
 import useLatest from "./useLatest";
 
 export const polyfillErr =
-  "> 💡use-web-animations: please enable polyfill to use this hook. See https://github.com/wellyshen/use-web-animations#disable-polyfill";
+  "💡use-web-animations: please enable polyfill to use this hook. See https://github.com/wellyshen/use-web-animations#disable-polyfill";
 export const eventErr = (type: string): string =>
-  `> 💡use-web-animations: the browser doesn't support ${type} event, please use onUpdate to monitor the animation's state instead. See https://github.com/wellyshen/use-web-animations#basic-usage`;
+  `💡use-web-animations: the browser doesn't support ${type} event, please use onUpdate to monitor the animation's state instead. See https://github.com/wellyshen/use-web-animations#basic-usage`;
 
 type Keyframes = Keyframe[] | PropertyIndexedKeyframes;
 type PlayState = string | null;
