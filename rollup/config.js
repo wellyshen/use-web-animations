@@ -78,7 +78,7 @@ const plugins = [
         },
       ],
     }),
-];
+].filter(Boolean);
 
 export default {
   input: isDist ? src : "demo",
