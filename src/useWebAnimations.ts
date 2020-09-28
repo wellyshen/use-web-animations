@@ -35,9 +35,9 @@ export interface Options<T> extends AnimConf {
 }
 interface Return<T> {
   ref: RefObject<T>;
-  readonly playState: PlayState;
-  readonly getAnimation: () => Animation | undefined;
-  readonly animate: Animate;
+  playState: PlayState;
+  getAnimation: () => Animation | undefined;
+  animate: Animate;
 }
 
 const useWebAnimations = <T extends HTMLElement>({
