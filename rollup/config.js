@@ -31,6 +31,7 @@ const cjs = {
   format: "cjs",
   sourcemap: isDev,
   exports: "named",
+  plugins: !isDev && [terser()],
 };
 
 const esm = {
@@ -61,8 +62,6 @@ const plugins = [
   isDev && serve("demo/.dev"),
   isDev && livereload(),
   !isDev && sizeSnapshot(),
-  // Disable "module" to avoid the missing semicolon bug of .esm
-  !isDev && terser({ module: false }),
   isDemo &&
     copy({
       targets: [{ src: "demo/.dev", dest: ".", rename: "public" }],
