@@ -44,7 +44,7 @@ const extensions = [".js", ".ts", ".tsx", ".json"];
 const plugins = [
   resolve({ extensions }),
   commonjs(),
-  babel({ exclude: "node_modules/**", extensions }),
+  babel({ exclude: "node_modules/**", babelHelpers: "runtime", extensions }),
   replace({
     "process.env.NODE_ENV": JSON.stringify(
       isDev ? "development" : "production"
@@ -83,5 +83,7 @@ export default {
   input: isDist ? src : "demo",
   output: isDist ? [cjs, esm] : [cjs],
   plugins,
-  external: isDist ? Object.keys(pkg.peerDependencies) : [],
+  external: isDist
+    ? [...Object.keys(pkg.peerDependencies), /@babel\/runtime/]
+    : [],
 };
