@@ -20,6 +20,11 @@ const isDemo = BUILD === "demo";
 const isDist = BUILD === "full" || BUILD === "pure";
 let src = "src";
 
+const createExternalResolver = (external) =>
+  !external.length
+    ? () => false
+    : (id) => new RegExp(`^(${external.join("|")})($|/)`).test(id);
+
 if (BUILD === "pure") {
   src = "src/pure.ts";
   pkg.main = "dist/pure.js";
@@ -84,6 +89,9 @@ export default {
   output: isDist ? [cjs, esm] : [cjs],
   plugins,
   external: isDist
-    ? [...Object.keys(pkg.peerDependencies), /@babel\/runtime/]
+    ? createExternalResolver([
+        ...Object.keys(pkg.peerDependencies),
+        ...Object.keys(pkg.dependencies),
+      ])
     : [],
 };
