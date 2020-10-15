@@ -20,7 +20,7 @@ const isDemo = BUILD === "demo";
 const isDist = BUILD === "full" || BUILD === "pure";
 let src = "src";
 
-const createExternalResolver = (external) =>
+const makeExternalPredicate = (external) =>
   !external.length
     ? () => false
     : (id) => new RegExp(`^(${external.join("|")})($|/)`).test(id);
@@ -89,7 +89,7 @@ export default {
   output: isDist ? [cjs, esm] : [cjs],
   plugins,
   external: isDist
-    ? createExternalResolver([
+    ? makeExternalPredicate([
         ...Object.keys(pkg.peerDependencies),
         ...Object.keys(pkg.dependencies),
       ])
