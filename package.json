@@ -139,6 +139,10 @@
       "!src/*.d.ts"
     ]
   },
+  "dependencies": {
+    "@babel/runtime": "^7.12.0",
+    "use-deep-compare-effect": "^1.4.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.0",
     "@babel/plugin-transform-runtime": "^7.12.0",
@@ -185,10 +189,6 @@
     "ts-jest": "^26.4.1",
     "typescript": "^4.0.3",
     "web-animations-js": "^2.3.2"
-  },
-  "dependencies": {
-    "@babel/runtime": "^7.12.0",
-    "use-deep-compare-effect": "^1.4.0"
   },
   "peerDependencies": {
     "react": ">= 16.8.0"
