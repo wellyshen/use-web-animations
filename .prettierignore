@@ -1,4 +1,5 @@
 *.log
+src/polyfill.js
 demo/.dev
 public
 dist
