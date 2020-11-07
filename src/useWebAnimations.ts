@@ -55,9 +55,9 @@ const useWebAnimations = <T extends HTMLElement>({
   const animRef = useRef<Animation>();
   const prevPendingRef = useRef<boolean>();
   const prevPlayStateRef = useRef<string>();
-  const onReadyRef = useLatest<Callback | undefined>(onReady);
-  const onUpdateRef = useLatest<Callback | undefined>(onUpdate);
-  const onFinishRef = useLatest<Callback | undefined>(onFinish);
+  const onReadyRef = useLatest(onReady);
+  const onUpdateRef = useLatest(onUpdate);
+  const onFinishRef = useLatest(onFinish);
   const refVar = useRef<T>(null);
   const ref = refOpt || refVar;
 
