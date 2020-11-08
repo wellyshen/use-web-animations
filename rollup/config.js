@@ -20,6 +20,11 @@ const isDemo = BUILD === "demo";
 const isDist = BUILD === "full" || BUILD === "pure";
 let src = "src";
 
+const babelRuntimeVersion = pkg.dependencies["@babel/runtime"].replace(
+  /^[^0-9]*/,
+  ""
+);
+
 const makeExternalPredicate = (external) =>
   !external.length
     ? () => false
@@ -49,7 +54,14 @@ const extensions = [".js", ".ts", ".tsx", ".json"];
 const plugins = [
   resolve({ extensions }),
   commonjs(),
-  babel({ exclude: "node_modules/**", babelHelpers: "runtime", extensions }),
+  babel({
+    exclude: "node_modules/**",
+    plugins: [
+      ["@babel/plugin-transform-runtime", { version: babelRuntimeVersion }],
+    ],
+    babelHelpers: "runtime",
+    extensions,
+  }),
   replace({
     "process.env.NODE_ENV": JSON.stringify(
       isDev ? "development" : "production"

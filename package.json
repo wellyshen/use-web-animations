@@ -78,9 +78,6 @@
       "@babel/typescript",
       "@babel/react"
     ],
-    "plugins": [
-      "@babel/plugin-transform-runtime"
-    ],
     "env": {
       "development": {
         "presets": [
