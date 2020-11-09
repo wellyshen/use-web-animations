@@ -2,10 +2,13 @@ name: CI
 
 on:
   push:
-    branches: ["**"]
-    tags-ignore: ["**"]
+    branches:
+      - master
+    tags-ignore:
+      - "*.*"
   pull_request:
-    branches: ["**"]
+    branches:
+      - master
 
 jobs:
   build:
@@ -34,9 +37,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn install
-      - name: Run type check
-        run: yarn type-check
+        run: yarn install --frozen-lockfile
       - name: Run lint
         run: yarn lint
       - name: Run test
@@ -69,7 +70,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
       - name: Run build
         run: yarn build:demo
 
