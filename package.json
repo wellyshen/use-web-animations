@@ -156,7 +156,7 @@
     "@types/react-dom": "^16.9.9",
     "@types/resize-observer-browser": "^0.1.4",
     "animate.css": "^4.1.1",
-    "babel-plugin-emotion": "^10.0.33",
+    "babel-plugin-emotion": "^11.0.0",
     "eslint": "^7.2.0",
     "eslint-config-welly": "^1.7.0",
     "husky": "^4.3.0",
