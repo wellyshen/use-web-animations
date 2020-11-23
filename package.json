@@ -88,7 +88,7 @@
     "@testing-library/react-hooks": "^3.4.2",
     "@types/jest": "^26.0.15",
     "@types/react": "^16.9.56",
-    "@types/react-dom": "^16.9.9",
+    "@types/react-dom": "^17.0.0",
     "@types/resize-observer-browser": "^0.1.4",
     "animate.css": "^4.1.1",
     "eslint": "^7.2.0",
