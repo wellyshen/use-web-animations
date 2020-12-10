@@ -1,6 +1,6 @@
 {
   "name": "@wellyshen/use-web-animations",
-  "version": "0.5.10",
+  "version": "0.5.11",
   "description": "React hook for highly-performant and manipulable animations using Web Animations API.",
   "license": "MIT",
   "homepage": "https://use-web-animations.netlify.app",
