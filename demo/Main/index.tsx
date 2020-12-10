@@ -1,13 +1,14 @@
-import React, { FC, MouseEvent, ChangeEvent } from "react";
+import { FC, MouseEvent, ChangeEvent } from "react";
 
 import useWebAnimations from "../../src";
 import { container, title, subtitle } from "../theme";
 import { mask, block, txt, heart, btn, slider } from "./styles";
 
 const Main: FC = () => {
-  const { ref: blockRef, getAnimation: getBlockAnim } = useWebAnimations<
-    HTMLDivElement
-  >({
+  const {
+    ref: blockRef,
+    getAnimation: getBlockAnim,
+  } = useWebAnimations<HTMLDivElement>({
     keyframes: { width: ["0", "100%", "0"], left: ["0", "0", "100%"] },
     timing: {
       duration: 2000,
@@ -15,9 +16,10 @@ const Main: FC = () => {
       easing: "cubic-bezier(0.74, 0.06, 0.4, 0.92)",
     },
   });
-  const { ref: textRef, getAnimation: getTxtAnim } = useWebAnimations<
-    HTMLDivElement
-  >({
+  const {
+    ref: textRef,
+    getAnimation: getTxtAnim,
+  } = useWebAnimations<HTMLDivElement>({
     keyframes: { opacity: ["0", "1"] },
     timing: {
       delay: 1600,
@@ -25,9 +27,10 @@ const Main: FC = () => {
       fill: "forwards",
     },
   });
-  const { ref: heartRef, getAnimation: getHeartAnim } = useWebAnimations<
-    HTMLDivElement
-  >({
+  const {
+    ref: heartRef,
+    getAnimation: getHeartAnim,
+  } = useWebAnimations<HTMLDivElement>({
     keyframes: {
       transform: ["translate3d(0, 0, 0)", "translate3d(0, -100%, 0)"],
     },

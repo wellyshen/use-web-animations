@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, useState } from "react";
+import { FC, ChangeEvent, useState } from "react";
 
 import useWebAnimations from "../../src";
 import * as animations from "../../src/animations";

@@ -72,7 +72,6 @@ Create an animation by the `keyframes` ([formats](https://developer.mozilla.org/
 [![Edit useWebAnimations - basic](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/usewebanimations-basic-nf0kd?fontsize=14&hidenavigation=1&theme=dark)
 
 ```js
-import React from "react";
 import useWebAnimations from "@wellyshen/use-web-animations";
 
 const App = () => {
@@ -140,7 +139,6 @@ The shortcoming with existing technologies was the lack of playback control. The
 [![Edit useWebAnimations - controls](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/usewebanimations-controls-hst8v?fontsize=14&hidenavigation=1&theme=dark)
 
 ```js
-import React from "react";
 import useWebAnimations from "@wellyshen/use-web-animations";
 
 const App = () => {
@@ -201,7 +199,6 @@ const App = () => {
 When using the Web Animations API, we can get the information of an animation via the [properties](https://developer.mozilla.org/en-US/docs/Web/API/Animation#Properties) of the **Animation** interface. However, we can get the information of an animation by the `getAnimation()` return value as well.
 
 ```js
-import React from "react";
 import useWebAnimations from "@wellyshen/use-web-animations";
 
 const App = () => {
@@ -233,7 +230,7 @@ const App = () => {
 The animation instance isn't a part of [React state](https://reactjs.org/docs/hooks-state.html), which means we need to access it by the `getAnimation()` whenever we need. If you want to monitor an animation's information, here's the `onUpdate` event for you. The event is implemented by the [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) internally and the event callback is triggered when the animation enters `running` state or changes state.
 
 ```js
-import React, { useState } from "react";
+import { useState } from "react";
 import useWebAnimations from "@wellyshen/use-web-animations";
 
 const App = () => {
@@ -265,7 +262,7 @@ Let's create a mouse interaction effect:
 [![Edit useWebAnimations - interaction](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/usewebanimations-interaction-4jrs9?fontsize=14&hidenavigation=1&theme=dark)
 
 ```js
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import useWebAnimations from "@wellyshen/use-web-animations";
 
 const App = () => {
@@ -292,7 +289,6 @@ const App = () => {
 Create a bounce effect via lifecycle and composite mode:
 
 ```js
-import React from "react";
 import useWebAnimations from "@wellyshen/use-web-animations";
 
 const App = () => {
@@ -332,7 +328,6 @@ Too lazy to think about animation? We provide a collection of ready-to-use anima
 👉🏻 [Check out the demo](https://use-web-animations.netlify.app#animations).
 
 ```js
-import React from "react";
 import useWebAnimations, { bounce } from "@wellyshen/use-web-animations";
 
 const App = () => {
