@@ -9312,9 +9312,9 @@ url@^0.11.0:
     querystring "0.2.0"
 
 use-deep-compare-effect@^1.5.1:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/use-deep-compare-effect/-/use-deep-compare-effect-1.6.0.tgz#aeabb2e489bc4f21138b276f6fcfd9eefca23a93"
-  integrity sha512-Os5Hf9rpQHSd97l3v8gcqblayvJdOmPYR5qvwiHXRIn8o9ay0PNrzn2nfS5TdNLWzKtpYY+QZr8VBy+fk25xlw==
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/use-deep-compare-effect/-/use-deep-compare-effect-1.6.1.tgz#061a0ac5400aa0461e33dddfaa2a98bca873182a"
+  integrity sha512-VB3b+7tFI81dHm8buGyrpxi8yBhzYZdyMX9iBJra7SMFMZ4ci4FJ1vFc1nvChiB1iLv4GfjqaYfvbNEpTT1rFQ==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@types/react" "^17.0.0"
