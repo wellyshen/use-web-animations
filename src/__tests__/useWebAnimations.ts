@@ -157,7 +157,6 @@ describe("useWebAnimations", () => {
 
   it("should return workable getAnimation method", () => {
     const { result } = renderHelper();
-    // @ts-expect-error
     expect(result.current.getAnimation()).toStrictEqual(animation);
   });
 
