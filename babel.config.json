@@ -16,6 +16,5 @@
     "development": {
       "plugins": ["@emotion/babel-plugin"]
     }
-  },
-  "ignore": ["src/polyfill.js"]
+  }
 }

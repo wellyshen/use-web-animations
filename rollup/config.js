@@ -17,8 +17,7 @@ import template from "./template";
 const { BUILD } = process.env;
 const isDev = BUILD === "dev";
 const isDemo = BUILD === "demo";
-const isDist = BUILD === "full" || BUILD === "pure";
-let src = "src";
+const isDist = BUILD === "dist";
 
 const babelRuntimeVersion = pkg.dependencies["@babel/runtime"].replace(
   /^[^0-9]*/,
@@ -29,12 +28,6 @@ const makeExternalPredicate = (external) =>
   !external.length
     ? () => false
     : (id) => new RegExp(`^(${external.join("|")})($|/)`).test(id);
-
-if (BUILD === "pure") {
-  src = "src/pure.ts";
-  pkg.main = "dist/pure.js";
-  pkg.module = "dist/pure.esm.js";
-}
 
 const cjs = {
   file: isDist ? pkg.main : "demo/.dev/bundle.js",
@@ -97,7 +90,7 @@ const plugins = [
 ].filter(Boolean);
 
 export default {
-  input: isDist ? src : "demo",
+  input: isDist ? "src" : "demo",
   output: isDist ? [cjs, esm] : [cjs],
   plugins,
   external: isDist
