@@ -26,22 +26,12 @@ Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_
 
 - 🚀 Animate on the Web with highly-performant and manipulable way, using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API).
 - 🎣 Easy to use, based on React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook).
-- 🧸 Built-ins [polyfill](https://github.com/web-animations/web-animations-js) for better [browser compatibility](#browser-support).
 - 🎛 Super flexible [API](#api) design which can cover [all the cases](#usage) that you need.
 - 🎞 [Built-ins animations](#use-built-in-animations) for you, based on [Animate.css](https://animate.style).
 - 🔩 Supports custom `refs` for [some reasons](#use-your-own-ref).
 - 📜 Supports [TypeScript](https://www.typescriptlang.org) type definition.
 - 🗄️ Server-side rendering compatibility.
-
-## Browser Support
-
-The features of [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) still being [implemented by modern browsers](https://caniuse.com/#feat=web-animation), therefore we built-in a [handy polyfill](https://github.com/web-animations/web-animations-js) for you. The polyfill falls back to the native implementation when a feature is available. By the way, you can [disable the polyfill](#disable-polyfill) based on your needs.
-
-| <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="32px" height="32px" /><br/>Chrome | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="32px" height="32px" /><br/>Firefox | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="32px" height="32px" /><br/>IE / Edge | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="32px" height="32px" /><br/>Safari | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari-ios/safari-ios_48x48.png" alt="iOS Safari" width="32px" height="32px" /><br/>iOS Safari |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|                                                                            56+                                                                            |                                                                              27+                                                                              |                                                                         IE10+, Edge                                                                         |                                                                            9+                                                                             |                                                                                   7.1+                                                                                    |
-
-> ⚠️ Please note, some features aren't supported before Google Chrome v84, like partial keyframes, composite mode, ready and finished events etc. Read the [article](https://web.dev/web-animations) to learn more.
+- 🦔 Tiny size ([~ 854KB gzipped](https://bundlephobia.com/result?p=@wellyshen/use-web-animations)). No external dependencies, aside for the `react`.
 
 ## Requirement
 
@@ -64,6 +54,8 @@ With the Web Animations API, we can move interactive animations from stylesheets
 ## Usage
 
 The [API](#api) design of the hook not only inherits the DX of the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) but also provides useful features and sugar events to us. Here are some examples to show you how does it work.
+
+> ⚠️ [Most modern browsers support Web Animations API natively](https://caniuse.com/web-animation). You can also use [polyfill](#use-polyfill) for full browser support.
 
 ### Basic Usage
 
@@ -547,21 +539,25 @@ The `options` provides the following configurations and event callbacks for you.
 | `onUpdate`     | function         |         | It's invoked when an animation enters the `running` state or changes state. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object.                                                                                              |
 | `onFinish`     | function         |         | It's invoked when an animation enters the `finished` state. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object. (Google Chrome: [available in v84+](https://web.dev/web-animations/#orchestrating-animations-with-promises)) |
 
-## Disable Polyfill
+## Use Polyfill
 
-This hook built-ins the [polyfill](https://github.com/web-animations/web-animations-js) for your. If you don't need it or you want it exists at the application level, you can use `@wellyshen/use-web-animations/dist/pure` instead of the regular imports.
+[Web Animations API has good support amongst browsers](https://caniuse.com/web-animation), but it's not universal. You'll need to polyfill browsers that don't support it. Polyfills is something you should do consciously at the application level. Therefore `use-web-animations` doesn't include it.
 
-```diff
-- import useWebAnimations from "@wellyshen/use-web-animations";
-+ import useWebAnimations from "@wellyshen/use-web-animations/dist/pure";
+Install [web-animations-js](https://github.com/web-animations/web-animations-js):
+
+```sh
+$ yarn add web-animations-js
+# or
+$ npm install --save web-animations-js
 ```
 
-For [ES modules](https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive), use `@wellyshen/use-web-animations/dist/pure.esm` instead.
+Then import it at your app's entry point:
 
-```diff
-- import useWebAnimations from "@wellyshen/use-web-animations";
-+ import useWebAnimations from "@wellyshen/use-web-animations/dist/pure.esm";
+```js
+import "web-animations-js/web-animations.min";
 ```
+
+You can read the [document](https://github.com/web-animations/web-animations-js/blob/dev/docs/support.md) for more information.
 
 ## Contributors ✨
 

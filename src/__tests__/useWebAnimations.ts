@@ -2,11 +2,7 @@
 
 import { renderHook, act } from "@testing-library/react-hooks";
 
-import useWebAnimations, {
-  Options,
-  polyfillErr,
-  eventErr,
-} from "../useWebAnimations";
+import useWebAnimations, { Options, polyfillErr, eventErr } from "..";
 
 describe("useWebAnimations", () => {
   console.error = jest.fn();
@@ -161,7 +157,6 @@ describe("useWebAnimations", () => {
 
   it("should return workable getAnimation method", () => {
     const { result } = renderHelper();
-    // @ts-expect-error
     expect(result.current.getAnimation()).toStrictEqual(animation);
   });
 
