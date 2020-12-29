@@ -2,7 +2,11 @@
 
 import { renderHook, act } from "@testing-library/react-hooks";
 
-import useWebAnimations, { Options, polyfillErr, eventErr } from "..";
+import useWebAnimations, {
+  Options,
+  polyfillErr,
+  eventErr,
+} from "../useWebAnimations";
 
 describe("useWebAnimations", () => {
   console.error = jest.fn();

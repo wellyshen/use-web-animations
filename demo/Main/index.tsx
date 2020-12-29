@@ -1,6 +1,6 @@
 import { FC, MouseEvent, ChangeEvent } from "react";
 
-import useWebAnimations from "../../src";
+import useWebAnimations from "../../src/useWebAnimations";
 import { container, title, subtitle } from "../theme";
 import { mask, block, txt, heart, btn, slider } from "./styles";
 
