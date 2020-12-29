@@ -32,7 +32,7 @@ Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_
 - 🔩 Supports custom `refs` for [some reasons](#use-your-own-ref).
 - 📜 Supports [TypeScript](https://www.typescriptlang.org) type definition.
 - 🗄️ Server-side rendering compatibility.
-- 🦔 Tiny size ([~ 4KB gzipped](https://bundlephobia.com/result?p=@wellyshen/use-web-animations)). No external dependencies, aside for the `react`.
+- 🦔 Tiny size ([~ 4.7KB gzipped](https://bundlephobia.com/result?p=@wellyshen/use-web-animations)). No external dependencies, aside for the `react`.
 
 ## Requirement
 
