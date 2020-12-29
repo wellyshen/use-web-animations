@@ -1,6 +1,6 @@
 import { FC, ChangeEvent, useState } from "react";
 
-import useWebAnimations from "../../src";
+import useWebAnimations from "../../src/useWebAnimations";
 import * as animations from "../../src/animations";
 import { container as sharedContainer, title, subtitle } from "../theme";
 import { container, link, target, select } from "./styles";
