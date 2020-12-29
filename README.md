@@ -27,7 +27,7 @@ Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_
 
 - 🚀 Animate on the Web with highly-performant and manipulable way, using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API).
 - 🎣 Easy to use, based on React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook).
-- 🎛 Super flexible [API](#api) design which can cover [all the cases](#usage) that you need.
+- 🎛 Super flexible [API](#api) design that can cover [all the cases](#usage) that you need.
 - 🎞 [Built-ins animations](#use-built-in-animations) for you, based on [Animate.css](https://animate.style).
 - 🔩 Supports custom `refs` for [some reasons](#use-your-own-ref).
 - 📜 Supports [TypeScript](https://www.typescriptlang.org) type definition.
