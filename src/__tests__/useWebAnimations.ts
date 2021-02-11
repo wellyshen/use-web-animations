@@ -100,12 +100,13 @@ describe("useWebAnimations", () => {
       jest.advanceTimersByTime(1);
     });
     expect(onUpdate).toHaveBeenCalledTimes(1);
+    expect(onUpdate).toHaveBeenCalledWith(evt);
 
     animation.pending = false;
     act(() => {
       jest.advanceTimersByTime(2);
     });
-    expect(onUpdate).toHaveBeenNthCalledWith(2, evt);
+    expect(onUpdate).toHaveBeenCalledTimes(2);
 
     animation.playState = "running";
     evt = {
@@ -115,12 +116,13 @@ describe("useWebAnimations", () => {
     act(() => {
       jest.advanceTimersByTime(3);
     });
-    expect(onUpdate).toHaveBeenNthCalledWith(3, evt);
+    expect(onUpdate).toHaveBeenCalledTimes(3);
+    expect(onUpdate).toHaveBeenCalledWith(evt);
 
     act(() => {
       jest.advanceTimersByTime(4);
     });
-    expect(onUpdate).toHaveBeenNthCalledWith(4, evt);
+    expect(onUpdate).toHaveBeenCalledTimes(4);
   });
 
   it("shouldn't call animate if either ref or keyframes isn't set", () => {
