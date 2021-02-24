@@ -9,7 +9,6 @@ import useWebAnimations, {
 } from "../useWebAnimations";
 
 describe("useWebAnimations", () => {
-  console.error = jest.fn();
   jest.useFakeTimers();
 
   const el = document.createElement("div");
@@ -42,6 +41,7 @@ describe("useWebAnimations", () => {
   });
 
   it("should call onReady correctly", async () => {
+    console.error = jest.fn();
     const onReady = jest.fn();
     const { waitForNextUpdate } = renderHelper({ onReady });
     await waitForNextUpdate();
@@ -54,6 +54,7 @@ describe("useWebAnimations", () => {
   });
 
   it("should call onFinish correctly", async () => {
+    console.error = jest.fn();
     const onFinish = jest.fn();
     const { waitForNextUpdate } = renderHelper({ onFinish });
     await waitForNextUpdate();
@@ -202,6 +203,7 @@ describe("useWebAnimations", () => {
   });
 
   it("should throw polyfill error", () => {
+    console.error = jest.fn();
     // @ts-expect-error
     el.animate = null;
     renderHelper();
@@ -209,6 +211,7 @@ describe("useWebAnimations", () => {
   });
 
   it("should throw event errors", () => {
+    console.error = jest.fn();
     // @ts-expect-error
     animation.ready = null;
     renderHelper({ onReady: () => null });
