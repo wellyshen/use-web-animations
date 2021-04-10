@@ -17,5 +17,5 @@ export default {
     { ...frame3, offset: 0.9 },
     { ...frame1, offset: 1 },
   ],
-  timing: { duration: 1000, fill: "both" },
+  animationOptions: { duration: 1000, fill: "both" },
 };

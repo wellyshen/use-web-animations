@@ -8,10 +8,10 @@ import { container, link, target, select } from "./styles";
 const Animations: FC = () => {
   const [val, setVal] = useState<string>("bounce");
   // @ts-expect-error
-  const { keyframes, timing } = animations[val];
+  const { keyframes, animationOptions } = animations[val];
   const { ref, getAnimation } = useWebAnimations<HTMLDivElement>({
     keyframes,
-    timing: { ...timing, fill: "auto" },
+    animationOptions: { ...animationOptions, fill: "auto" },
   });
 
   const play = () => {

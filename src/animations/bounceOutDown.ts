@@ -8,5 +8,5 @@ export default {
     { ...frame, offset: 0.45 },
     { transform: "translate3d(0, 2000px, 0) scaleY(3)", opacity: 0, offset: 1 },
   ],
-  timing: { duration: 1000, fill: "both" },
+  animationOptions: { duration: 1000, fill: "both" },
 };

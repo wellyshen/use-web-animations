@@ -12,5 +12,5 @@ export default {
     { transform: "rotate(3deg)", transformOrigin, offset: 0.7 },
     { transform: "scale(1)", opacity: 1, transformOrigin, offset: 1 },
   ],
-  timing: { duration: 1000, fill: "both" },
+  animationOptions: { duration: 1000, fill: "both" },
 };

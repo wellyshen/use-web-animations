@@ -9,5 +9,5 @@ export default {
     { transform: "scale3d(0.97, 0.97, 0.97)", easing, offset: 0.8 },
     { transform: "scale3d(1, 1, 1)", opacity: 1, easing, offset: 1 },
   ],
-  timing: { duration: 750, fill: "both" },
+  animationOptions: { duration: 750, fill: "both" },
 };

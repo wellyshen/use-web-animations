@@ -4,5 +4,5 @@ export default {
     { transform: "translateX(0px) scale(0.7)", opacity: 0.7, offset: 0.8 },
     { transform: "scale(1)", opacity: 1, offset: 1 },
   ],
-  timing: { duration: 1000, fill: "both" },
+  animationOptions: { duration: 1000, fill: "both" },
 };

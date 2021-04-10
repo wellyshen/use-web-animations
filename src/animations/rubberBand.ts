@@ -8,5 +8,5 @@ export default {
     { transform: "scale3d(1.05, 0.95, 1)", offset: 0.75 },
     { transform: "scale3d(1, 1, 1)", offset: 1 },
   ],
-  timing: { duration: 1000, fill: "both" },
+  animationOptions: { duration: 1000, fill: "both" },
 };

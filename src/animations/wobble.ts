@@ -23,5 +23,5 @@ export default {
     },
     { transform: "translate3d(0, 0, 0)", offset: 1 },
   ],
-  timing: { duration: 1000, fill: "both" },
+  animationOptions: { duration: 1000, fill: "both" },
 };

@@ -21,10 +21,12 @@ describe("useWebAnimations", () => {
   const renderHelper = ({
     ref = target,
     keyframes = mockKeyframes,
-    timing = mockTiming,
+    animationOptions = mockTiming,
     ...rest
   }: Options<HTMLDivElement> = {}) =>
-    renderHook(() => useWebAnimations({ ref, keyframes, timing, ...rest }));
+    renderHook(() =>
+      useWebAnimations({ ref, keyframes, animationOptions, ...rest })
+    );
 
   const e = { playState: "pause" };
   const animation = {
@@ -174,7 +176,7 @@ describe("useWebAnimations", () => {
       autoPlay: false,
       playbackRate,
       keyframes: mockKeyframes,
-      timing: mockTiming,
+      animationOptions: mockTiming,
     });
     // @ts-expect-error
     const anim = el.animate.mock.results[0].value;

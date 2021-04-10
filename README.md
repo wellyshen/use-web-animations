@@ -62,7 +62,9 @@ The [API](#api) design of the hook not only inherits the DX of the [Web Animatio
 
 ### Basic Usage
 
-Create an animation by the `keyframes` ([formats](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Keyframe_Formats)) and `timing` ([properties](https://developer.mozilla.org/en-US/docs/Web/API/EffectTiming)) options.
+Create an animation by the `keyframes` and `animationOptions` options (these are the [parameters](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate#parameters) of the `Element.animate()`).
+
+> 💡 This hook supports the [pseudoElement](https://css-tricks.com/pseudo-elements-in-the-web-animations-api/) property via the `animationOptions` option.
 
 [![Edit useWebAnimations - basic](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/usewebanimations-basic-nf0kd?fontsize=14&hidenavigation=1&theme=dark)
 
@@ -75,7 +77,7 @@ const App = () => {
       transform: "translateX(500px)", // Move by 500px
       background: ["red", "blue", "green"], // Go through three colors
     },
-    timing: {
+    animationOptions: {
       delay: 500, // Start with a 500ms delay
       duration: 1000, // Run for 1000ms
       iterations: 2, // Repeat once
@@ -83,13 +85,13 @@ const App = () => {
       easing: "ease-in-out", // Use a fancy timing function
     },
     onReady: ({ playState, animate, animation }) => {
-      // Triggered when the animation is ready to play (Google Chrome: available in v84+)
+      // Triggered when the animation is ready to play
     },
     onUpdate: ({ playState, animate, animation }) => {
       // Triggered when the animation enters the running state or changes state
     },
     onFinish: ({ playState, animate, animation }) => {
-      // Triggered when the animation enters the finished state (Google Chrome: available in v84+)
+      // Triggered when the animation enters the finished state
     },
     // More useful options...
   });
@@ -141,7 +143,7 @@ const App = () => {
     playbackRate: 0.5, // Change playback rate, default is 1
     autoPlay: false, // Automatically starts the animation, default is true
     keyframes: { transform: "translateX(500px)" },
-    timing: { duration: 1000, fill: "forwards" },
+    animationOptions: { duration: 1000, fill: "forwards" },
   });
 
   const play = () => {
@@ -199,7 +201,7 @@ import useWebAnimations from "@wellyshen/use-web-animations";
 const App = () => {
   const { ref, getAnimation } = useWebAnimations({
     keyframes: { transform: "translateX(500px)" },
-    timing: { duration: 1000, fill: "forwards" },
+    animationOptions: { duration: 1000, fill: "forwards" },
   });
 
   const speedUp = () => {
@@ -232,7 +234,7 @@ const App = () => {
   const [showEl, setShowEl] = useState(false);
   const { ref } = useWebAnimations({
     keyframes: { transform: "translateX(500px)" },
-    timing: { duration: 1000, fill: "forwards" },
+    animationOptions: { duration: 1000, fill: "forwards" },
     onUpdate: ({ animation }) => {
       if (animation.currentTime > animation.effect.getTiming().duration / 2)
         setShowEl(true);
@@ -250,7 +252,7 @@ const App = () => {
 
 ### Dynamic Interactions with Animation
 
-We can create and play an animation at the timing we want by the `animate()` return value, which is implemented based on the [Element.animate()](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate). It's useful for interactions and the [composite modes](https://css-tricks.com/additive-animation-web-animations-api).
+We can create and play an animation at the `animationOptions` we want by the `animate` method, which is implemented based on the [Element.animate()](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate). It's useful for interactions and the [composite modes](https://css-tricks.com/additive-animation-web-animations-api).
 
 Let's create a mouse interaction effect:
 
@@ -268,7 +270,7 @@ const App = () => {
       // The target will follow the mouse cursor
       animate({
         keyframes: { transform: `translate(${e.clientX}px, ${e.clientY}px)` },
-        timing: { duration: 500, fill: "forwards" },
+        animationOptions: { duration: 500, fill: "forwards" },
       });
     });
   }, [animate]);
@@ -290,7 +292,7 @@ const App = () => {
   const { ref, animate } = useWebAnimations({
     id: "fall", // Set animation id, default is empty string
     keyframes: [{ top: 0, easing: "ease-in" }, { top: "500px" }],
-    timing: { duration: 300, fill: "forwards" },
+    animationOptions: { duration: 300, fill: "forwards" },
     onFinish: ({ animate, animation }) => {
       // Lifecycle is triggered by each animation, we can check the id to prevent animation from repeating
       if (animation.id === "bounce") return;
@@ -301,7 +303,7 @@ const App = () => {
           { top: "500px", easing: "ease-in" },
           { top: "10px", easing: "ease-out" },
         ],
-        timing: { duration: 300, composite: "add" },
+        animationOptions: { duration: 300, composite: "add" },
       });
     },
   });
@@ -340,13 +342,13 @@ const App = () => {
 We can customize the built-in animation by overriding its properties:
 
 ```js
-const { keyframes, timing } = bounce;
+const { keyframes, animationOptions } = bounce;
 const { ref } = useWebAnimations({
   keyframes,
-  timing: {
-    ...timing,
+  animationOptions: {
+    ...animationOptions,
     delay: 1000, // Delay 1s
-    duration: timing.duration * 0.75, // Speed up the animation
+    duration: animationOptions.duration * 0.75, // Speed up the animation
   },
 });
 ```
@@ -524,23 +526,23 @@ It's returned with the following properties.
 | `ref`          | object   |         | Used to set the target element for animating.                                                                                                                                                               |
 | `playState`    | string   |         | Describes the playback state of an animation.                                                                                                                                                               |
 | `getAnimation` | function |         | Access the [animation instance](https://developer.mozilla.org/en-US/docs/Web/API/Animation) for [playback control](#playback-control), [animation's information](#getting-animations-information) and more. |
-| `animate`      | function |         | Creates animation at the timing you want. Useful for [interactive animations and composite animations](#dynamic-interactions-with-animation).                                                               |
+| `animate`      | function |         | Creates animation at the `animationOptions` you want. Useful for [interactive animations and composite animations](#dynamic-interactions-with-animation).                                                   |
 
 ### Parameter
 
 The `options` provides the following configurations and event callbacks for you.
 
-| Key            | Type             | Default | Description                                                                                                                                                                                                                                                                                                                                    |
-| -------------- | ---------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ref`          | object           |         | For [some reasons](#use-your-own-ref), you can pass in your own ref instead of using the built-in.                                                                                                                                                                                                                                             |
-| `id`           | string           | `""`    | Sets the ID of an animation, implemented based on the [Animation.id](https://developer.mozilla.org/en-US/docs/Web/API/Animation/id).                                                                                                                                                                                                           |
-| `playbackRate` | number           | `1`     | Sets the playback rate of an animation, implemented based on the [Animation.playbackRate](https://developer.mozilla.org/en-US/docs/Web/API/Animation/playbackRate).                                                                                                                                                                            |
-| `autoPlay`     | boolean          | `true`  | Automatically starts the animation.                                                                                                                                                                                                                                                                                                            |
-| `keyframes`    | Array \| object  |         | Describes sets of animatable properties and values, similar to CSS [@keyframes](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes) but slightly different. See [Keyframe Formats](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Keyframe_Formats) for more details.                                            |
-| `timing`       | number \| object |         | Describes timing properties for animation effects. See [EffectTiming](https://developer.mozilla.org/en-US/docs/Web/API/EffectTiming) for more details.                                                                                                                                                                                         |
-| `onReady`      | function         |         | It's invoked when an animation is ready to play. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object. (Google Chrome: [available in v84+](https://web.dev/web-animations/#orchestrating-animations-with-promises))            |
-| `onUpdate`     | function         |         | It's invoked when an animation enters the `running` state or changes state. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object.                                                                                              |
-| `onFinish`     | function         |         | It's invoked when an animation enters the `finished` state. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object. (Google Chrome: [available in v84+](https://web.dev/web-animations/#orchestrating-animations-with-promises)) |
+| Key                | Type             | Default | Description                                                                                                                                                                                                                                       |
+| ------------------ | ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ref`              | object           |         | For [some reasons](#use-your-own-ref), you can pass in your own ref instead of using the built-in.                                                                                                                                                |
+| `id`               | string           | `""`    | Sets the ID of an animation, implemented based on the [Animation.id](https://developer.mozilla.org/en-US/docs/Web/API/Animation/id).                                                                                                              |
+| `playbackRate`     | number           | `1`     | Sets the playback rate of an animation, implemented based on the [Animation.playbackRate](https://developer.mozilla.org/en-US/docs/Web/API/Animation/playbackRate).                                                                               |
+| `autoPlay`         | boolean          | `true`  | Automatically starts the animation.                                                                                                                                                                                                               |
+| `keyframes`        | Array \| object  |         | An array of keyframe objects, or a keyframe object whose property are arrays of values to iterate over. See [basic usage](#basic-usage) for more details.                                                                                         |
+| `animationOptions` | number \| object |         | An **integer** representing the animation's duration (in milliseconds), or an **object** containing one or more timing properties. See [basic usage](#basic-usage) for more details.                                                              |
+| `onReady`          | function         |         | It's invoked when an animation is ready to play. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object.                            |
+| `onUpdate`         | function         |         | It's invoked when an animation enters the `running` state or changes state. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object. |
+| `onFinish`         | function         |         | It's invoked when an animation enters the `finished` state. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object.                 |
 
 ## Use Polyfill
 

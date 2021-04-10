@@ -14,7 +14,9 @@ interface AnimConf {
   id?: string;
   playbackRate?: number;
   autoPlay?: boolean;
-  timing?: number | KeyframeAnimationOptions;
+  animationOptions?:
+    | number
+    | (KeyframeAnimationOptions & { pseudoElement?: string });
 }
 interface Animate {
   (args: AnimConf & { keyframes: Keyframes }): void;
@@ -46,7 +48,7 @@ const useWebAnimations = <T extends HTMLElement>({
   playbackRate,
   autoPlay,
   keyframes,
-  timing,
+  animationOptions,
   onReady,
   onUpdate,
   onFinish,
@@ -71,7 +73,10 @@ const useWebAnimations = <T extends HTMLElement>({
         return;
       }
 
-      animRef.current = ref.current.animate(args.keyframes, args.timing);
+      animRef.current = ref.current.animate(
+        args.keyframes,
+        args.animationOptions
+      );
       const { current: anim } = animRef;
 
       if (args.autoPlay === false) anim.pause();
@@ -115,8 +120,8 @@ const useWebAnimations = <T extends HTMLElement>({
 
   useDeepCompareEffect(() => {
     // @ts-expect-error
-    animate({ id, playbackRate, autoPlay, keyframes, timing });
-  }, [id, playbackRate, autoPlay, keyframes, timing, animate]);
+    animate({ id, playbackRate, autoPlay, keyframes, animationOptions });
+  }, [id, playbackRate, autoPlay, keyframes, animationOptions, animate]);
 
   useEffect(() => {
     const update = () => {

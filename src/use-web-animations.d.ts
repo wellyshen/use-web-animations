@@ -9,7 +9,9 @@ declare module "@wellyshen/use-web-animations" {
     id?: string;
     playbackRate?: number;
     autoPlay?: boolean;
-    timing?: number | KeyframeAnimationOptions;
+    animationOptions?:
+      | number
+      | (KeyframeAnimationOptions & { pseudoElement?: string });
   }
 
   interface Animate {
@@ -49,7 +51,7 @@ declare module "@wellyshen/use-web-animations" {
 
   interface Anim {
     keyframes: Keyframe[];
-    timing: EffectTiming;
+    animationOptions: EffectTiming;
   }
 
   export const bounce: Anim;

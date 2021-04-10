@@ -10,7 +10,7 @@ const Main: FC = () => {
     getAnimation: getBlockAnim,
   } = useWebAnimations<HTMLDivElement>({
     keyframes: { width: ["0", "100%", "0"], left: ["0", "0", "100%"] },
-    timing: {
+    animationOptions: {
       duration: 2000,
       fill: "forwards",
       easing: "cubic-bezier(0.74, 0.06, 0.4, 0.92)",
@@ -21,7 +21,7 @@ const Main: FC = () => {
     getAnimation: getTxtAnim,
   } = useWebAnimations<HTMLDivElement>({
     keyframes: { opacity: ["0", "1"] },
-    timing: {
+    animationOptions: {
       delay: 1600,
       duration: 1000,
       fill: "forwards",
@@ -34,7 +34,7 @@ const Main: FC = () => {
     keyframes: {
       transform: ["translate3d(0, 0, 0)", "translate3d(0, -100%, 0)"],
     },
-    timing: {
+    animationOptions: {
       delay: 2000,
       duration: 250,
       fill: "forwards",

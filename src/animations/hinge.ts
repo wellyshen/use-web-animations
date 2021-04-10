@@ -32,5 +32,5 @@ export default {
       offset: 1,
     },
   ],
-  timing: { duration: 2000, fill: "both" },
+  animationOptions: { duration: 2000, fill: "both" },
 };

@@ -10,5 +10,5 @@ export default {
     { ...frame1, offset: 0.7 },
     { transform: "none", offset: 1 },
   ],
-  timing: { duration: 1300, fill: "both", easing: "ease-in-out" },
+  animationOptions: { duration: 1300, fill: "both", easing: "ease-in-out" },
 };

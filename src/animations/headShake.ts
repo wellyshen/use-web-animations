@@ -8,5 +8,5 @@ export default {
     { transform: "translateX(0)", offset: 0.5 },
     { transform: "none", offset: 1 },
   ],
-  timing: { duration: 1000, fill: "both", easing: "ease-in-out" },
+  animationOptions: { duration: 1000, fill: "both", easing: "ease-in-out" },
 };
