@@ -564,6 +564,13 @@ import "web-animations-js/web-animations.min";
 
 You can read the [document](https://github.com/web-animations/web-animations-js/blob/dev/docs/support.md) for more information.
 
+## Articles / Blog Posts
+
+> 💡 If you have written any blog post or article about `use-web-animations`, please open a PR to add it here.
+
+- Featured on [React Status #196](https://react.statuscode.com/issues/196).
+- Featured on [JavaScript Weekly #496](https://javascriptweekly.com/issues/496).
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
