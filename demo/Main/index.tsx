@@ -5,42 +5,36 @@ import { container, title, subtitle } from "../theme";
 import { mask, block, txt, heart, btn, slider } from "./styles";
 
 const Main: FC = () => {
-  const {
-    ref: blockRef,
-    getAnimation: getBlockAnim,
-  } = useWebAnimations<HTMLDivElement>({
-    keyframes: { width: ["0", "100%", "0"], left: ["0", "0", "100%"] },
-    animationOptions: {
-      duration: 2000,
-      fill: "forwards",
-      easing: "cubic-bezier(0.74, 0.06, 0.4, 0.92)",
-    },
-  });
-  const {
-    ref: textRef,
-    getAnimation: getTxtAnim,
-  } = useWebAnimations<HTMLDivElement>({
-    keyframes: { opacity: ["0", "1"] },
-    animationOptions: {
-      delay: 1600,
-      duration: 1000,
-      fill: "forwards",
-    },
-  });
-  const {
-    ref: heartRef,
-    getAnimation: getHeartAnim,
-  } = useWebAnimations<HTMLDivElement>({
-    keyframes: {
-      transform: ["translate3d(0, 0, 0)", "translate3d(0, -100%, 0)"],
-    },
-    animationOptions: {
-      delay: 2000,
-      duration: 250,
-      fill: "forwards",
-      easing: "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-    },
-  });
+  const { ref: blockRef, getAnimation: getBlockAnim } =
+    useWebAnimations<HTMLDivElement>({
+      keyframes: { width: ["0", "100%", "0"], left: ["0", "0", "100%"] },
+      animationOptions: {
+        duration: 2000,
+        fill: "forwards",
+        easing: "cubic-bezier(0.74, 0.06, 0.4, 0.92)",
+      },
+    });
+  const { ref: textRef, getAnimation: getTxtAnim } =
+    useWebAnimations<HTMLDivElement>({
+      keyframes: { opacity: ["0", "1"] },
+      animationOptions: {
+        delay: 1600,
+        duration: 1000,
+        fill: "forwards",
+      },
+    });
+  const { ref: heartRef, getAnimation: getHeartAnim } =
+    useWebAnimations<HTMLDivElement>({
+      keyframes: {
+        transform: ["translate3d(0, 0, 0)", "translate3d(0, -100%, 0)"],
+      },
+      animationOptions: {
+        delay: 2000,
+        duration: 250,
+        fill: "forwards",
+        easing: "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+      },
+    });
 
   const handlePlayback = (e: MouseEvent) => {
     const method = (e.target as HTMLButtonElement).id;
