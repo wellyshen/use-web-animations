@@ -54,6 +54,7 @@ const useWebAnimations = <T extends HTMLElement>({
   onFinish,
 }: Options<T> = {}): Return<T> => {
   const [playState, setPlayState] = useState<PlayState>(null);
+  const hasUnmountedRef = useRef(false);
   const animRef = useRef<Animation>();
   const prevPendingRef = useRef<boolean>();
   const prevPlayStateRef = useRef<string>();
@@ -101,12 +102,14 @@ const useWebAnimations = <T extends HTMLElement>({
       if (onFinishRef.current) {
         if (anim.finished) {
           anim.finished.then((animation) => {
-            // @ts-expect-error
-            onFinishRef.current({
-              playState: animation.playState,
-              animate,
-              animation,
-            });
+            if (!hasUnmountedRef.current) {
+              // @ts-expect-error
+              onFinishRef.current({
+                playState: animation.playState,
+                animate,
+                animation,
+              });
+            }
           });
         } else {
           console.error(eventErr("onFinish"));
@@ -124,6 +127,8 @@ const useWebAnimations = <T extends HTMLElement>({
   }, [id, playbackRate, autoPlay, keyframes, animationOptions, animate]);
 
   useEffect(() => {
+    let rafId: number;
+
     const update = () => {
       const animation = getAnimation();
 
@@ -145,10 +150,18 @@ const useWebAnimations = <T extends HTMLElement>({
         prevPlayStateRef.current = curPlayState;
       }
 
-      requestAnimationFrame(update);
+      rafId = requestAnimationFrame(update);
     };
 
-    requestAnimationFrame(update);
+    rafId = requestAnimationFrame(update);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+
+      hasUnmountedRef.current = true;
+      getAnimation()?.finish();
+      getAnimation()?.cancel();
+    };
   }, [animate, getAnimation, onUpdateRef]);
 
   return { ref, playState, getAnimation, animate };

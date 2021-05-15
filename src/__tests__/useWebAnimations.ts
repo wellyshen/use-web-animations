@@ -35,11 +35,22 @@ describe("useWebAnimations", () => {
     ready: Promise.resolve(e),
     finished: Promise.resolve(e),
     pause: jest.fn(),
+    finish: jest.fn(),
+    cancel: jest.fn(),
   };
 
   beforeEach(() => {
     // @ts-expect-error
     el.animate = jest.fn(() => animation);
+  });
+
+  it("should cancel animation", async () => {
+    const { unmount } = renderHelper();
+    unmount();
+    // @ts-expect-error
+    const anim = el.animate.mock.results[0].value;
+    expect(anim.finish).toHaveBeenCalled();
+    expect(anim.cancel).toHaveBeenCalled();
   });
 
   it("should call onReady correctly", async () => {
