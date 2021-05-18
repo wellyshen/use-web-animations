@@ -1,9 +1,9 @@
 declare module "@wellyshen/use-web-animations" {
   import { RefObject } from "react";
 
-  type Keyframes = Keyframe[] | PropertyIndexedKeyframes;
+  export type Keyframes = Keyframe[] | PropertyIndexedKeyframes;
 
-  type PlayState = string | null;
+  export type PlayState = string | null;
 
   interface AnimConf {
     id?: string;
@@ -14,7 +14,7 @@ declare module "@wellyshen/use-web-animations" {
       | (KeyframeAnimationOptions & { pseudoElement?: string });
   }
 
-  interface Animate {
+  export interface Animate {
     (args: AnimConf & { keyframes: Keyframes }): void;
   }
 
@@ -28,7 +28,7 @@ declare module "@wellyshen/use-web-animations" {
     (event: Event): void;
   }
 
-  interface Options<T> extends AnimConf {
+  export interface Options<T> extends AnimConf {
     ref?: RefObject<T>;
     keyframes?: Keyframes;
     onReady?: Callback;
@@ -36,7 +36,7 @@ declare module "@wellyshen/use-web-animations" {
     onFinish?: Callback;
   }
 
-  interface Return<T> {
+  export interface Return<T> {
     ref: RefObject<T>;
     playState: PlayState;
     getAnimation: () => Animation | undefined;
