@@ -23,9 +23,9 @@ interface Animate {
 }
 interface Callback {
   (event: {
-    playState: PlayState;
+    readonly playState: PlayState;
     animate: Animate;
-    animation: Animation;
+    readonly animation: Animation;
   }): void;
 }
 export interface Options<T> extends AnimConf {

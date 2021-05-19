@@ -19,9 +19,9 @@ declare module "@wellyshen/use-web-animations" {
   }
 
   export interface Event {
-    playState: PlayState;
+    readonly playState: PlayState;
     animate: Animate;
-    animation: Animation;
+    readonly animation: Animation;
   }
 
   export interface Callback {
