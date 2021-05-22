@@ -5,14 +5,14 @@ declare module "@wellyshen/use-web-animations" {
 
   export type PlayState = string | null;
 
-  interface AnimConf {
-    id?: string;
-    playbackRate?: number;
-    autoPlay?: boolean;
-    animationOptions?:
+  type AnimConf = Partial<{
+    id: string;
+    playbackRate: number;
+    autoPlay: boolean;
+    animationOptions:
       | number
       | (KeyframeAnimationOptions & { pseudoElement?: string });
-  }
+  }>;
 
   export interface Animate {
     (args: AnimConf & { keyframes: Keyframes }): void;
@@ -30,7 +30,7 @@ declare module "@wellyshen/use-web-animations" {
 
   export interface Options<T> extends AnimConf {
     ref?: RefObject<T>;
-    keyframes?: Keyframes;
+    keyframes: Keyframes;
     onReady?: Callback;
     onUpdate?: Callback;
     onFinish?: Callback;
