@@ -10,14 +10,14 @@ export const eventErr = (type: string): string =>
 
 type Keyframes = Keyframe[] | PropertyIndexedKeyframes;
 type PlayState = string | null;
-interface AnimConf {
-  id?: string;
-  playbackRate?: number;
-  autoPlay?: boolean;
-  animationOptions?:
+type AnimConf = Partial<{
+  id: string;
+  playbackRate: number;
+  autoPlay: boolean;
+  animationOptions:
     | number
     | (KeyframeAnimationOptions & { pseudoElement?: string });
-}
+}>;
 interface Animate {
   (args: AnimConf & { keyframes: Keyframes }): void;
 }
@@ -30,7 +30,7 @@ interface Callback {
 }
 export interface Options<T> extends AnimConf {
   ref?: RefObject<T>;
-  keyframes?: Keyframes;
+  keyframes: Keyframes;
   onReady?: Callback;
   onUpdate?: Callback;
   onFinish?: Callback;
@@ -52,7 +52,7 @@ const useWebAnimations = <T extends HTMLElement>({
   onReady,
   onUpdate,
   onFinish,
-}: Options<T> = {}): Return<T> => {
+}: Options<T>): Return<T> => {
   const [playState, setPlayState] = useState<PlayState>(null);
   const hasUnmountedRef = useRef(false);
   const animRef = useRef<Animation>();
@@ -122,7 +122,6 @@ const useWebAnimations = <T extends HTMLElement>({
   );
 
   useDeepCompareEffect(() => {
-    // @ts-expect-error
     animate({ id, playbackRate, autoPlay, keyframes, animationOptions });
   }, [id, playbackRate, autoPlay, keyframes, animationOptions, animate]);
 

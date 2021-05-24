@@ -23,7 +23,7 @@ describe("useWebAnimations", () => {
     keyframes = mockKeyframes,
     animationOptions = mockTiming,
     ...rest
-  }: Options<HTMLDivElement> = {}) =>
+  }: Partial<Options<HTMLDivElement>> = {}) =>
     renderHook(() =>
       useWebAnimations({ ref, keyframes, animationOptions, ...rest })
     );
