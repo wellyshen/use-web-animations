@@ -11,7 +11,7 @@ Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_
 [![npm version](https://img.shields.io/npm/v/@wellyshen/use-web-animations?style=flat-square)](https://www.npmjs.com/package/@wellyshen/use-web-animations)
 [![npm downloads](https://img.shields.io/npm/dm/@wellyshen/use-web-animations?style=flat-square)](https://www.npmtrends.com/@wellyshen/use-web-animations)
 [![npm downloads](https://img.shields.io/npm/dt/@wellyshen/use-web-animations?style=flat-square)](https://www.npmtrends.com/@wellyshen/use-web-animations)
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@wellyshen/use-web-animations?style=flat-square)](https://bundlephobia.com/result?p=@wellyshen/use-web-animations)
+[![gzip size](https://badgen.net/bundlephobia/minzip/use-web-animations?label=gzip%20size&style=flat-square)](https://bundlephobia.com/result?p=@wellyshen/use-web-animations)
 [![MIT licensed](https://img.shields.io/github/license/wellyshen/use-web-animations?style=flat-square)](https://raw.githubusercontent.com/wellyshen/use-web-animations/master/LICENSE)
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
