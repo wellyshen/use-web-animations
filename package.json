@@ -81,7 +81,6 @@
     "@types/jest": "^26.0.23",
     "@types/react": "^17.0.8",
     "@types/react-dom": "^17.0.5",
-    "@types/resize-observer-browser": "^0.1.5",
     "animate.css": "^4.1.1",
     "eslint": "^7.2.0",
     "eslint-config-welly": "^1.10.5",
