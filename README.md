@@ -34,7 +34,7 @@ Using [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_
 - 🔩 Supports custom `refs` for [some reasons](#use-your-own-ref).
 - 📜 Supports [TypeScript](https://www.typescriptlang.org) type definition.
 - 🗄️ Server-side rendering compatibility.
-- 🦔 Tiny size ([~ 4.8KB gzipped](https://bundlephobia.com/result?p=@wellyshen/use-web-animations)). No external dependencies, aside for the `react`.
+- 🦔 Tiny size ([~ 4.8KB gzipped](https://bundlephobia.com/result?p=@wellyshen/use-web-animations)).
 
 ## Requirement
 
@@ -128,6 +128,8 @@ const App = () => {
   // ...
 };
 ```
+
+> 💡 By default, the hook will be updated when options changed (i.e. keyframes, animationOptions etc.). However, you can disable this behavior by setting the `shouldUpdateAnimation` option to `false`.
 
 ### Playback Control
 
@@ -532,17 +534,18 @@ It's returned with the following properties.
 
 The `options` provides the following configurations and event callbacks for you.
 
-| Key                | Type             | Default | Description                                                                                                                                                                                                                                       |
-| ------------------ | ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ref`              | object           |         | For [some reasons](#use-your-own-ref), you can pass in your own ref instead of using the built-in.                                                                                                                                                |
-| `id`               | string           | `""`    | Sets the ID of an animation, implemented based on the [Animation.id](https://developer.mozilla.org/en-US/docs/Web/API/Animation/id).                                                                                                              |
-| `playbackRate`     | number           | `1`     | Sets the playback rate of an animation, implemented based on the [Animation.playbackRate](https://developer.mozilla.org/en-US/docs/Web/API/Animation/playbackRate).                                                                               |
-| `autoPlay`         | boolean          | `true`  | Automatically starts the animation.                                                                                                                                                                                                               |
-| `keyframes`        | Array \| object  |         | An array of keyframe objects, or a keyframe object whose property are arrays of values to iterate over. See [basic usage](#basic-usage) for more details.                                                                                         |
-| `animationOptions` | number \| object |         | An **integer** representing the animation's duration (in milliseconds), or an **object** containing one or more timing properties. See [basic usage](#basic-usage) for more details.                                                              |
-| `onReady`          | function         |         | It's invoked when an animation is ready to play. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object.                            |
-| `onUpdate`         | function         |         | It's invoked when an animation enters the `running` state or changes state. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object. |
-| `onFinish`         | function         |         | It's invoked when an animation enters the `finished` state. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object.                 |
+| Key                     | Type             | Default | Description                                                                                                                                                                                                                                       |
+| ----------------------- | ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ref`                   | object           |         | For [some reasons](#use-your-own-ref), you can pass in your own ref instead of using the built-in.                                                                                                                                                |
+| `id`                    | string           | `""`    | Sets the ID of an animation, implemented based on the [Animation.id](https://developer.mozilla.org/en-US/docs/Web/API/Animation/id).                                                                                                              |
+| `playbackRate`          | number           | `1`     | Sets the playback rate of an animation, implemented based on the [Animation.playbackRate](https://developer.mozilla.org/en-US/docs/Web/API/Animation/playbackRate).                                                                               |
+| `autoPlay`              | boolean          | `true`  | Automatically starts the animation.                                                                                                                                                                                                               |
+| `keyframes`             | Array \| object  |         | An array of keyframe objects, or a keyframe object whose property are arrays of values to iterate over. See [basic usage](#basic-usage) for more details.                                                                                         |
+| `animationOptions`      | number \| object |         | An **integer** representing the animation's duration (in milliseconds), or an **object** containing one or more timing properties. See [basic usage](#basic-usage) for more details.                                                              |
+| `shouldUpdateAnimation` | boolean          | `true`  | By default, the hook will be updated when options changed (i.e. keyframes, animationOptions etc.). However, you can disable this behavior by setting this option to `false`.                                                                      |
+| `onReady`               | function         |         | It's invoked when an animation is ready to play. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object.                            |
+| `onUpdate`              | function         |         | It's invoked when an animation enters the `running` state or changes state. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object. |
+| `onFinish`              | function         |         | It's invoked when an animation enters the `finished` state. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object.                 |
 
 ## Use Polyfill
 

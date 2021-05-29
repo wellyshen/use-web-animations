@@ -17,6 +17,7 @@ type AnimConf = Partial<{
   animationOptions:
     | number
     | (KeyframeAnimationOptions & { pseudoElement?: string });
+  shouldUpdateAnimation: boolean;
 }>;
 interface Animate {
   (args: AnimConf & { keyframes: Keyframes }): void;
@@ -49,6 +50,7 @@ const useWebAnimations = <T extends HTMLElement>({
   autoPlay,
   keyframes,
   animationOptions,
+  shouldUpdateAnimation = true,
   onReady,
   onUpdate,
   onFinish,
@@ -121,9 +123,14 @@ const useWebAnimations = <T extends HTMLElement>({
     [onFinishRef, onReadyRef, ref]
   );
 
-  useDeepCompareEffect(() => {
-    animate({ id, playbackRate, autoPlay, keyframes, animationOptions });
-  }, [id, playbackRate, autoPlay, keyframes, animationOptions, animate]);
+  useDeepCompareEffect(
+    () => {
+      animate({ id, playbackRate, autoPlay, keyframes, animationOptions });
+    },
+    shouldUpdateAnimation
+      ? [id, playbackRate, autoPlay, keyframes, animationOptions, animate]
+      : [{}]
+  );
 
   useEffect(() => {
     let rafId: number;

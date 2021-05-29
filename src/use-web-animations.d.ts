@@ -12,6 +12,7 @@ declare module "@wellyshen/use-web-animations" {
     animationOptions:
       | number
       | (KeyframeAnimationOptions & { pseudoElement?: string });
+    shouldUpdateAnimation: boolean;
   }>;
 
   export interface Animate {
