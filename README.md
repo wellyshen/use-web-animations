@@ -129,7 +129,7 @@ const App = () => {
 };
 ```
 
-> 💡 By default, the hook will be updated when options changed (i.e. keyframes, animationOptions etc.). However, you can disable this behavior by setting the `shouldUpdateAnimation` option to `false`.
+> 💡 By default, the hook will be updated when options changed (i.e. keyframes, animationOptions etc.). However, you can disable the behavior by setting the `shouldUpdateAnimation` option to `false`.
 
 ### Playback Control
 
