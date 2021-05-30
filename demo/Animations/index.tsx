@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState } from "react";
+import { FC, ChangeEvent } from "react";
 
 import useWebAnimations from "../../src";
 import * as animations from "../../src/animations";
@@ -6,12 +6,10 @@ import { container as sharedContainer, title, subtitle } from "../theme";
 import { container, link, target, select } from "./styles";
 
 const Animations: FC = () => {
-  const [val, setVal] = useState<string>("bounce");
-  // @ts-expect-error
-  const { keyframes, animationOptions } = animations[val];
-  const { ref, getAnimation } = useWebAnimations<HTMLDivElement>({
-    keyframes,
-    animationOptions: { ...animationOptions, fill: "auto" },
+  const { bounce } = animations;
+  const { ref, getAnimation, animate } = useWebAnimations<HTMLDivElement>({
+    keyframes: bounce.keyframes,
+    animationOptions: { ...bounce.animationOptions, fill: "auto" },
   });
 
   const play = () => {
@@ -19,8 +17,16 @@ const Animations: FC = () => {
     getAnimation().play();
   };
 
-  const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    setVal(e.currentTarget.value);
+  const handleChangeSelect = ({
+    currentTarget,
+  }: ChangeEvent<HTMLSelectElement>) => {
+    // @ts-expect-error
+    const { keyframes, animationOptions } = animations[currentTarget.value];
+
+    animate({
+      keyframes,
+      animationOptions: { ...animationOptions, fill: "auto" },
+    });
   };
 
   return (
