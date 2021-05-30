@@ -528,6 +528,20 @@ const ref = useRef();
 const { playState } = useWebAnimations({ ref });
 ```
 
+## Working in TypeScript
+
+This hook supports [TypeScript](https://www.typescriptlang.org), you can tell the hook what type of element you are going to animate through the [generic type](https://www.typescriptlang.org/docs/handbook/generics.html):
+
+```ts
+const App = () => {
+  const { ref } = useWebAnimations<HTMLDivElement>();
+
+  return <div ref={ref} />;
+};
+```
+
+> 💡 For more available types, please [check it out](src/use-web-animations.d.ts).
+
 ## API
 
 ```js
