@@ -1,5 +1,4 @@
 import { RefObject, useState, useRef, useCallback, useEffect } from "react";
-import useDeepCompareEffect from "use-deep-compare-effect";
 
 import useLatest from "./useLatest";
 
@@ -10,17 +9,16 @@ export const eventErr = (type: string): string =>
 
 type Keyframes = Keyframe[] | PropertyIndexedKeyframes;
 type PlayState = string | null;
-type AnimConf = Partial<{
+type BaseOptions = Partial<{
   id: string;
   playbackRate: number;
   autoPlay: boolean;
   animationOptions:
     | number
     | (KeyframeAnimationOptions & { pseudoElement?: string });
-  shouldUpdateAnimation: boolean;
 }>;
 interface Animate {
-  (args: AnimConf & { keyframes: Keyframes }): void;
+  (options: BaseOptions & { keyframes: Keyframes }): void;
 }
 interface Callback {
   (event: {
@@ -29,9 +27,9 @@ interface Callback {
     animation: Animation;
   }): void;
 }
-export interface Options<T> extends AnimConf {
+export interface Options<T> extends BaseOptions {
   ref?: RefObject<T>;
-  keyframes: Keyframes;
+  keyframes?: Keyframes;
   onReady?: Callback;
   onUpdate?: Callback;
   onFinish?: Callback;
@@ -50,16 +48,17 @@ const useWebAnimations = <T extends HTMLElement>({
   autoPlay,
   keyframes,
   animationOptions,
-  shouldUpdateAnimation = true,
   onReady,
   onUpdate,
   onFinish,
-}: Options<T>): Return<T> => {
+}: Options<T> = {}): Return<T> => {
   const [playState, setPlayState] = useState<PlayState>(null);
   const hasUnmountedRef = useRef(false);
   const animRef = useRef<Animation>();
   const prevPendingRef = useRef<boolean>();
   const prevPlayStateRef = useRef<string>();
+  const keyframesRef = useRef(keyframes);
+  const animationOptionsRef = useRef(animationOptions);
   const onReadyRef = useLatest(onReady);
   const onUpdateRef = useLatest(onUpdate);
   const onFinishRef = useLatest(onFinish);
@@ -123,14 +122,16 @@ const useWebAnimations = <T extends HTMLElement>({
     [onFinishRef, onReadyRef, ref]
   );
 
-  useDeepCompareEffect(
-    () => {
-      animate({ id, playbackRate, autoPlay, keyframes, animationOptions });
-    },
-    shouldUpdateAnimation
-      ? [id, playbackRate, autoPlay, keyframes, animationOptions, animate]
-      : [{}]
-  );
+  useEffect(() => {
+    if (keyframesRef.current)
+      animate({
+        id,
+        playbackRate,
+        autoPlay,
+        keyframes: keyframesRef.current,
+        animationOptions: animationOptionsRef.current,
+      });
+  }, [animate, autoPlay, id, playbackRate]);
 
   useEffect(() => {
     let rafId: number;

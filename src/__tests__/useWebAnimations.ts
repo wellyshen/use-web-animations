@@ -22,19 +22,10 @@ describe("useWebAnimations", () => {
     ref = target,
     keyframes = mockKeyframes,
     animationOptions = mockTiming,
-    shouldUpdateAnimation = true,
     ...rest
   }: Partial<Options<HTMLDivElement>> = {}) =>
-    renderHook(
-      (config) => useWebAnimations({ ...config, shouldUpdateAnimation }),
-      {
-        initialProps: {
-          ref,
-          keyframes,
-          animationOptions,
-          ...rest,
-        },
-      }
+    renderHook(() =>
+      useWebAnimations({ ref, keyframes, animationOptions, ...rest })
     );
 
   const e = { playState: "pause" };
@@ -51,32 +42,6 @@ describe("useWebAnimations", () => {
   beforeEach(() => {
     // @ts-expect-error
     el.animate = jest.fn(() => animation);
-  });
-
-  it("should update animation", () => {
-    const { rerender } = renderHelper();
-    expect(el.animate).toHaveBeenCalledWith(mockKeyframes, 3000);
-    const elm = document.createElement("div");
-    // @ts-expect-error
-    elm.animate = jest.fn(() => animation);
-    const keyframes = { transform: ["translateX(100px)"] };
-    const animationOptions = 5000;
-    rerender({ ref: { current: elm }, keyframes, animationOptions });
-    expect(elm.animate).toHaveBeenCalledWith(keyframes, animationOptions);
-  });
-
-  it("should not update animation", () => {
-    const { rerender } = renderHelper({ shouldUpdateAnimation: false });
-    expect(el.animate).toHaveBeenCalledWith(mockKeyframes, 3000);
-    const elm = document.createElement("div");
-    // @ts-expect-error
-    elm.animate = jest.fn(() => animation);
-    rerender({
-      ref: { current: elm },
-      keyframes: { transform: ["translateX(100px)"] },
-      animationOptions: 5000,
-    });
-    expect(elm.animate).not.toHaveBeenCalled();
   });
 
   it("should cancel animation", async () => {
@@ -192,10 +157,10 @@ describe("useWebAnimations", () => {
   it("should return workable ref", () => {
     // @ts-expect-error
     const { result } = renderHelper({ ref: null });
-    expect(result.current.ref).toStrictEqual({ current: null });
+    expect(result.current.ref).toEqual({ current: null });
 
     result.current.ref = target;
-    expect(result.current.ref).toStrictEqual(target);
+    expect(result.current.ref).toEqual(target);
   });
 
   it("should return playState correctly", () => {
@@ -212,7 +177,7 @@ describe("useWebAnimations", () => {
 
   it("should return workable getAnimation method", () => {
     const { result } = renderHelper();
-    expect(result.current.getAnimation()).toStrictEqual(animation);
+    expect(result.current.getAnimation()).toEqual(animation);
   });
 
   it("should return workable animate method", () => {
