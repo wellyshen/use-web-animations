@@ -49,7 +49,7 @@ declare module "@wellyshen/use-web-animations" {
     animate: Animate;
   }
 
-  const useWebAnimations: <T extends HTMLElement>(
+  const useWebAnimations: <T extends HTMLElement | null = HTMLElement>(
     options?: Options<T>
   ) => Return<T>;
 

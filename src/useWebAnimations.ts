@@ -41,7 +41,7 @@ interface Return<T> {
   animate: Animate;
 }
 
-const useWebAnimations = <T extends HTMLElement>({
+const useWebAnimations = <T extends HTMLElement | null>({
   ref: refOpt,
   id,
   playbackRate,
