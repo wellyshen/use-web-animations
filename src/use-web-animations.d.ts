@@ -3,7 +3,7 @@ declare module "@wellyshen/use-web-animations" {
 
   export type Keyframes = Keyframe[] | PropertyIndexedKeyframes;
 
-  export type PlayState = string | null;
+  export type PlayState = AnimationPlayState | undefined;
 
   type BaseOptions = Partial<{
     id: string;

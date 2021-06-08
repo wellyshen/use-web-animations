@@ -8,7 +8,7 @@ export const eventErr = (type: string): string =>
   `💡 use-web-animations: the browser doesn't support ${type} event, please use "onUpdate" to monitor the animation's state instead. See https://github.com/wellyshen/use-web-animations#basic-usage`;
 
 type Keyframes = Keyframe[] | PropertyIndexedKeyframes;
-type PlayState = string | null;
+type PlayState = AnimationPlayState | undefined;
 type BaseOptions = Partial<{
   id: string;
   playbackRate: number;
@@ -52,7 +52,7 @@ const useWebAnimations = <T extends HTMLElement | null>({
   onUpdate,
   onFinish,
 }: Options<T> = {}): Return<T> => {
-  const [playState, setPlayState] = useState<PlayState>(null);
+  const [playState, setPlayState] = useState<PlayState>();
   const hasUnmountedRef = useRef(false);
   const animRef = useRef<Animation>();
   const prevPendingRef = useRef<boolean>();

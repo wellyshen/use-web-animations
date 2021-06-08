@@ -552,12 +552,12 @@ const returnObj = useWebAnimations(options?: object);
 
 It's returned with the following properties.
 
-| Key            | Type     | Default | Description                                                                                                                                                                                                 |
-| -------------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ref`          | object   |         | Used to set the target element for animating.                                                                                                                                                               |
-| `playState`    | string   |         | Describes the playback state of an animation.                                                                                                                                                               |
-| `getAnimation` | function |         | Access the [animation instance](https://developer.mozilla.org/en-US/docs/Web/API/Animation) for [playback control](#playback-control), [animation's information](#getting-animations-information) and more. |
-| `animate`      | function |         | Imperatively [set/update the animation](#settingupdating-animation). Useful for [interactive animations and composite animations](#dynamic-interactions-with-animation).                                    |
+| Key            | Type                | Default | Description                                                                                                                                                                                                 |
+| -------------- | ------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ref`          | object              |         | Used to set the target element for animating.                                                                                                                                                               |
+| `playState`    | string \| undefined |         | Describes the [playback state](https://developer.mozilla.org/en-US/docs/Web/API/Animation/playState#value) of an animation.                                                                                 |
+| `getAnimation` | function            |         | Access the [animation instance](https://developer.mozilla.org/en-US/docs/Web/API/Animation) for [playback control](#playback-control), [animation's information](#getting-animations-information) and more. |
+| `animate`      | function            |         | Imperatively [set/update the animation](#settingupdating-animation). Useful for [interactive animations and composite animations](#dynamic-interactions-with-animation).                                    |
 
 ### Parameter
 
