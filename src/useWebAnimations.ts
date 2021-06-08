@@ -4,8 +4,7 @@ import useLatest from "./useLatest";
 
 export const polyfillErr =
   "💡 use-web-animations: please install polyfill to use this hook. See https://github.com/wellyshen/use-web-animations##use-polyfill";
-export const eventErr = (type: string): string =>
-  `💡 use-web-animations: the browser doesn't support ${type} event, please use "onUpdate" to monitor the animation's state instead. See https://github.com/wellyshen/use-web-animations#basic-usage`;
+export const eventErr = `💡 use-web-animations: the browser doesn't support "onReady" event, please use "onUpdate" to monitor the animation's state instead. See https://github.com/wellyshen/use-web-animations#basic-usage`;
 
 type Keyframes = Keyframe[] | PropertyIndexedKeyframes;
 type PlayState = AnimationPlayState | undefined;
@@ -96,25 +95,23 @@ const useWebAnimations = <T extends HTMLElement | null>({
             });
           });
         } else {
-          console.error(eventErr("onReady"));
+          console.error(eventErr);
         }
       }
 
       if (onFinishRef.current) {
-        if (anim.finished) {
-          anim.finished.then((animation) => {
-            if (!hasUnmountedRef.current) {
-              // @ts-expect-error
-              onFinishRef.current({
-                playState: animation.playState,
-                animate,
-                animation,
-              });
-            }
-          });
-        } else {
-          console.error(eventErr("onFinish"));
-        }
+        anim.onfinish = (e) => {
+          const animation = e.target as Animation;
+
+          if (!hasUnmountedRef.current) {
+            // @ts-expect-error
+            onFinishRef.current({
+              playState: animation.playState,
+              animate,
+              animation,
+            });
+          }
+        };
       }
 
       prevPlayStateRef.current = undefined;
