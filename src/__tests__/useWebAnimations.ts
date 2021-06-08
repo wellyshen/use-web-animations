@@ -33,7 +33,6 @@ describe("useWebAnimations", () => {
     pending: true,
     playState: "pause",
     ready: Promise.resolve(e),
-    finished: Promise.resolve(e),
     pause: jest.fn(),
     finish: jest.fn(),
     cancel: jest.fn(),
@@ -69,8 +68,9 @@ describe("useWebAnimations", () => {
   it("should call onFinish correctly", async () => {
     console.error = jest.fn();
     const onFinish = jest.fn();
-    const { waitForNextUpdate } = renderHelper({ onFinish });
-    await waitForNextUpdate();
+    renderHelper({ onFinish });
+    // @ts-expect-error
+    el.animate.mock.results[0].value.onfinish({ target: e });
     expect(onFinish).toHaveBeenCalledWith({
       playState: e.playState,
       animation: e,
@@ -228,11 +228,6 @@ describe("useWebAnimations", () => {
     // @ts-expect-error
     animation.ready = null;
     renderHelper({ onReady: () => null });
-    expect(console.error).toHaveBeenCalledWith(eventErr("onReady"));
-
-    // @ts-expect-error
-    animation.finished = null;
-    renderHelper({ onFinish: () => null });
-    expect(console.error).toHaveBeenLastCalledWith(eventErr("onFinish"));
+    expect(console.error).toHaveBeenCalledWith(eventErr);
   });
 });
