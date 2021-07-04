@@ -601,6 +601,7 @@ You can read the [document](https://github.com/web-animations/web-animations-js/
 
 - Featured on [React Status #196](https://react.statuscode.com/issues/196).
 - Featured on [JavaScript Weekly #496](https://javascriptweekly.com/issues/496).
+- Featured on [React Newsletter #218](https://reactnewsletter.com/issues/218).
 
 ## Contributors ✨
 
