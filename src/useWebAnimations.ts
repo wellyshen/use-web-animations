@@ -86,6 +86,7 @@ const useWebAnimations = <T extends HTMLElement | null>({
 
       if (onReadyRef.current) {
         if (anim.ready) {
+          // eslint-disable-next-line promise/catch-or-return, promise/always-return
           anim.ready.then((animation) => {
             // @ts-expect-error
             onReadyRef.current({
