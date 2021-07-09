@@ -55,8 +55,8 @@ describe("useWebAnimations", () => {
   it("should call onReady correctly", async () => {
     console.error = jest.fn();
     const onReady = jest.fn();
-    const { waitForNextUpdate } = renderHelper({ onReady });
-    await waitForNextUpdate();
+    renderHelper({ onReady });
+    await Promise.resolve();
     expect(onReady).toHaveBeenCalledWith({
       playState: e.playState,
       animation: e,
