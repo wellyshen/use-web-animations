@@ -1359,9 +1359,9 @@
   integrity sha512-efx8Ud1FWaHmj3Es5parp6uRt1DPyKq9A8t1GEZoNsYB4UTQQIL8PsjxcJOlH+P3QKRsSv1rIJhiMvuG4+kfwg==
 
 "@rollup/plugin-node-resolve@^13.0.0":
-  version "13.0.0"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-13.0.0.tgz#352f07e430ff377809ec8ec8a6fd636547162dc4"
-  integrity sha512-41X411HJ3oikIDivT5OKe9EZ6ud6DXudtfNrGbC4nniaxx2esiWjkLOzgnZsWq1IM8YIeL2rzRGLZLBjlhnZtQ==
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-13.2.0.tgz#ac516c4649b7133273a944778df439d3081dc3d1"
+  integrity sha512-GuUIUyIKq7EjQxB51XSn6zPHYo+cILQQBYOGYvFFNxws2OVOqCBShAoof2hFrV8bAZzZGDBDQ8m2iUt8SLOUkg==
   dependencies:
     "@rollup/pluginutils" "^3.1.0"
     "@types/resolve" "1.17.1"
