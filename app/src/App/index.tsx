@@ -1,20 +1,12 @@
-import { FC } from "react";
-import { Global, css } from "@emotion/react";
-import normalize from "normalize.css";
+import type { FC } from "react";
 
 import GitHubCorner from "../GitHubCorner";
 import Main from "../Main";
 import Animate from "../Animations";
-import { root } from "./styles";
+import "./styles.scss";
 
 const App: FC = () => (
   <>
-    <Global
-      styles={css`
-        ${normalize}
-        ${root}
-      `}
-    />
     <GitHubCorner url="https://github.com/wellyshen/use-web-animations" />
     <Main />
     <Animate />

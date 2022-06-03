@@ -1,9 +1,7 @@
-import { FC, ChangeEvent } from "react";
+import type { FC, ChangeEvent } from "react";
+import useWebAnimations, * as animations from "@wellyshen/use-web-animations";
 
-import useWebAnimations from "../../src";
-import * as animations from "../../src/animations";
-import { container as sharedContainer, title, subtitle } from "../theme";
-import { container, link, target, select } from "./styles";
+import styles from "./styles.module.scss";
 
 const Animations: FC = () => {
   const { bounce } = animations;
@@ -13,14 +11,13 @@ const Animations: FC = () => {
   });
 
   const play = () => {
-    // @ts-expect-error
-    getAnimation().play();
+    getAnimation()?.play();
   };
 
   const handleChangeSelect = ({
     currentTarget,
   }: ChangeEvent<HTMLSelectElement>) => {
-    // @ts-expect-error
+    // @ts-ignore
     const { keyframes, animationOptions } = animations[currentTarget.value];
 
     animate({
@@ -30,24 +27,24 @@ const Animations: FC = () => {
   };
 
   return (
-    <div css={[sharedContainer, container]}>
-      <h2 id="animations" css={title}>
+    <div className={styles.container}>
+      <h2 id="animations" className={styles.title}>
         ANIMATIONS
       </h2>
-      <p css={subtitle}>
+      <p className={styles.subtitle}>
         A collection of animations for Web Animations API, based on{" "}
         <a
-          css={link}
+          className={styles.link}
           href="https://animate.style"
           target="_blank"
           rel="noreferrer"
         >
-          Animate.css
+          Animate.className
         </a>
         .
       </p>
       <div
-        css={target}
+        className={styles.target}
         ref={ref}
         onClick={play}
         onKeyPress={play}
@@ -58,7 +55,7 @@ const Animations: FC = () => {
           🍿
         </span>
       </div>
-      <select css={select} onChange={handleChangeSelect}>
+      <select className={styles.select} onChange={handleChangeSelect}>
         <optgroup label="Attention Seekers">
           <option value="bounce">bounce</option>
           <option value="flash">flash</option>

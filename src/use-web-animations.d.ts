@@ -1,5 +1,5 @@
 declare module "@wellyshen/use-web-animations" {
-  import { RefObject } from "react";
+  import type { RefObject } from "react";
 
   export type Keyframes = Keyframe[] | PropertyIndexedKeyframes;
 

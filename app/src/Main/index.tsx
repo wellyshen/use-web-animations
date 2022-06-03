@@ -1,8 +1,7 @@
-import { FC, MouseEvent, ChangeEvent } from "react";
+import type { FC, MouseEvent, ChangeEvent } from "react";
+import useWebAnimations from "@wellyshen/use-web-animations";
 
-import useWebAnimations from "../../src/useWebAnimations";
-import { container, title, subtitle } from "../theme";
-import { mask, block, txt, heart, btn, slider } from "./styles";
+import styles from "./styles.module.scss";
 
 const Main: FC = () => {
   const { ref: blockRef, getAnimation: getBlockAnim } =
@@ -48,67 +47,81 @@ const Main: FC = () => {
     const value = parseInt((e.target as HTMLInputElement).value, 10);
 
     const blockAnim = getBlockAnim();
-    // @ts-expect-error
-    const blockTiming = blockAnim.effect.getTiming();
-    // @ts-expect-error
-    if (blockAnim.playState === "running") blockAnim.pause();
-    // @ts-expect-error
-    blockAnim.currentTime = ((blockTiming.duration as number) / 100) * value;
+    const blockTiming = blockAnim?.effect?.getTiming();
+    if (blockAnim?.playState === "running") blockAnim.pause();
+    // @ts-ignore
+    blockAnim.currentTime = ((blockTiming?.duration as number) / 100) * value;
 
     const txtAnim = getTxtAnim();
-    // @ts-expect-error
-    const txtTiming = txtAnim.effect.getTiming();
-    // @ts-expect-error
-    if (txtAnim.playState === "running") txtAnim.pause();
-    // @ts-expect-error
+    const txtTiming = txtAnim?.effect?.getTiming();
+    if (txtAnim?.playState === "running") txtAnim.pause();
+    // @ts-ignore
     txtAnim.currentTime =
-      // @ts-expect-error
+      // @ts-ignore
       ((txtTiming.delay + (txtTiming.duration as number)) / 100) * value;
 
     const heartAnim = getHeartAnim();
-    // @ts-expect-error
-    const heartTiming = heartAnim.effect.getTiming();
-    // @ts-expect-error
-    if (heartAnim.playState === "running") heartAnim.pause();
-    // @ts-expect-error
+    const heartTiming = heartAnim?.effect?.getTiming();
+    if (heartAnim?.playState === "running") heartAnim.pause();
+    // @ts-ignore
     heartAnim.currentTime =
-      // @ts-expect-error
+      // @ts-ignore
       ((heartTiming.delay + (heartTiming.duration as number)) / 100) * value;
   };
 
   return (
-    <div css={container}>
-      <h1 css={title}>USE-WEB-ANIMATIONS</h1>
-      <p css={subtitle}>
+    <div className={styles.container}>
+      <h1 className={styles.title}>USE-WEB-ANIMATIONS</h1>
+      <p className={styles.subtitle}>
         React hook for highly-performant and manipulable animations using Web
         Animations API.
       </p>
-      <div css={mask}>
-        <div css={block} ref={blockRef} />
-        <span css={txt} ref={textRef}>
+      <div className={styles.mask}>
+        <div className={styles.block} ref={blockRef} />
+        <span className={styles.txt} ref={textRef}>
           BLACK LIVES MATTER
         </span>
-        <span css={heart} ref={heartRef}>
+        <span className={styles.heart} ref={heartRef}>
           ❤
         </span>
       </div>
       <div>
         <div>
-          <button id="play" css={btn} type="button" onClick={handlePlayback}>
+          <button
+            id="play"
+            className={styles.btn}
+            type="button"
+            onClick={handlePlayback}
+          >
             PLAY
           </button>
-          <button id="pause" css={btn} type="button" onClick={handlePlayback}>
+          <button
+            id="pause"
+            className={styles.btn}
+            type="button"
+            onClick={handlePlayback}
+          >
             PAUSE
           </button>
-          <button id="reverse" css={btn} type="button" onClick={handlePlayback}>
+          <button
+            id="reverse"
+            className={styles.btn}
+            type="button"
+            onClick={handlePlayback}
+          >
             REVERSE
           </button>
-          <button id="finish" css={btn} type="button" onClick={handlePlayback}>
+          <button
+            id="finish"
+            className={styles.btn}
+            type="button"
+            onClick={handlePlayback}
+          >
             FINISH
           </button>
         </div>
         <input
-          css={slider}
+          className={styles.slider}
           type="range"
           defaultValue="0"
           onChange={handleSeek}

@@ -2,11 +2,8 @@
 
 import { renderHook, act } from "@testing-library/react-hooks";
 
-import useWebAnimations, {
-  Options,
-  polyfillErr,
-  eventErr,
-} from "../useWebAnimations";
+import type { Options } from "../useWebAnimations";
+import useWebAnimations, { polyfillErr, eventErr } from "../useWebAnimations";
 
 describe("useWebAnimations", () => {
   jest.useFakeTimers();
@@ -39,14 +36,14 @@ describe("useWebAnimations", () => {
   };
 
   beforeEach(() => {
-    // @ts-expect-error
+    // @ts-ignore
     el.animate = jest.fn(() => animation);
   });
 
   it("should cancel animation", async () => {
     const { unmount } = renderHelper();
     unmount();
-    // @ts-expect-error
+    // @ts-ignore
     const anim = el.animate.mock.results[0].value;
     expect(anim.finish).toHaveBeenCalled();
     expect(anim.cancel).toHaveBeenCalled();
@@ -69,7 +66,7 @@ describe("useWebAnimations", () => {
     console.error = jest.fn();
     const onFinish = jest.fn();
     renderHelper({ onFinish });
-    // @ts-expect-error
+    // @ts-ignore
     el.animate.mock.results[0].value.onfinish({ target: e });
     expect(onFinish).toHaveBeenCalledWith({
       playState: e.playState,
@@ -140,11 +137,11 @@ describe("useWebAnimations", () => {
   });
 
   it("shouldn't call animate if either ref or keyframes isn't set", () => {
-    // @ts-expect-error
+    // @ts-ignore
     renderHelper({ ref: null });
     expect(el.animate).not.toHaveBeenCalled();
 
-    // @ts-expect-error
+    // @ts-ignore
     renderHelper({ keyframes: null });
     expect(el.animate).not.toHaveBeenCalled();
   });
@@ -155,7 +152,7 @@ describe("useWebAnimations", () => {
   });
 
   it("should return workable ref", () => {
-    // @ts-expect-error
+    // @ts-ignore
     const { result } = renderHelper({ ref: null });
     expect(result.current.ref).toEqual({ current: null });
 
@@ -189,7 +186,7 @@ describe("useWebAnimations", () => {
       keyframes: mockKeyframes,
       animationOptions: mockTiming,
     });
-    // @ts-expect-error
+    // @ts-ignore
     const anim = el.animate.mock.results[0].value;
     expect(anim.pause).toHaveBeenCalled();
     expect(anim.playbackRate).toBe(playbackRate);
@@ -199,25 +196,25 @@ describe("useWebAnimations", () => {
 
   it("should set animation id correctly", () => {
     renderHelper({ id });
-    // @ts-expect-error
+    // @ts-ignore
     expect(el.animate.mock.results[0].value.id).toBe(id);
   });
 
   it("should pause animation at start", () => {
     renderHelper({ autoPlay: false });
-    // @ts-expect-error
+    // @ts-ignore
     expect(el.animate.mock.results[0].value.pause).toHaveBeenCalled();
   });
 
   it("should update playback rate correctly", () => {
     renderHelper({ playbackRate });
-    // @ts-expect-error
+    // @ts-ignore
     expect(el.animate.mock.results[0].value.playbackRate).toBe(playbackRate);
   });
 
   it("should throw polyfill error", () => {
     console.error = jest.fn();
-    // @ts-expect-error
+    // @ts-ignore
     el.animate = null;
     renderHelper();
     expect(console.error).toHaveBeenCalledWith(polyfillErr);
@@ -225,7 +222,7 @@ describe("useWebAnimations", () => {
 
   it("should throw event errors", () => {
     console.error = jest.fn();
-    // @ts-expect-error
+    // @ts-ignore
     animation.ready = null;
     renderHelper({ onReady: () => null });
     expect(console.error).toHaveBeenCalledWith(eventErr);

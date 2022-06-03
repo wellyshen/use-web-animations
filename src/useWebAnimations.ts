@@ -1,4 +1,5 @@
-import { RefObject, useState, useRef, useCallback, useEffect } from "react";
+import type { RefObject } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 
 import useLatest from "./useLatest";
 
@@ -88,7 +89,7 @@ const useWebAnimations = <T extends HTMLElement | null>({
         if (anim.ready) {
           // eslint-disable-next-line promise/catch-or-return, promise/always-return
           anim.ready.then((animation) => {
-            // @ts-expect-error
+            // @ts-ignore
             onReadyRef.current({
               playState: animation.playState,
               animate,
@@ -105,7 +106,7 @@ const useWebAnimations = <T extends HTMLElement | null>({
           const animation = e.target as Animation;
 
           if (!hasUnmountedRef.current) {
-            // @ts-expect-error
+            // @ts-ignore
             onFinishRef.current({
               playState: animation.playState,
               animate,
