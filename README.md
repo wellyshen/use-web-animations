@@ -568,7 +568,6 @@ The `options` provides the following configurations and event callbacks for you.
 | `autoPlay`         | boolean          | `true`  | Automatically starts the animation.                                                                                                                                                  |
 | `keyframes`        | Array \| object  |         | An array of keyframe objects, or a keyframe object whose property are arrays of values to iterate over. See [basic usage](#basic-usage) for more details.                            |
 | `animationOptions` | number \| object |         | An **integer** representing the animation's duration (in milliseconds), or an **object** containing one or more timing properties. See [basic usage](#basic-usage) for more details. |
-
 | `onReady` | function | | It's invoked when an animation is ready to play. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object. |
 | `onUpdate` | function | | It's invoked when an animation enters the `running` state or changes state. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object. |
 | `onFinish` | function | | It's invoked when an animation enters the `finished` state. You can access the [playState](#basic-usage), [animate](#dynamic-interactions-with-animation) and [animation](#getting-animations-information) from the event object. |
